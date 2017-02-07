@@ -36,25 +36,22 @@ angular.module('dailydish', ['ionic', 'dailydish.controllers', 'dailydish.servic
     }
   })
   .state('tabs.articles', {
-      url: '/articles',
-      views: {
-        'articles-tab': {
-          templateUrl: 'templates/articles.html',
-          controller: 'ArticlesCtrl'
-        }
+    url: '/articles',
+    views: {
+      'articles-tab': {
+        templateUrl: 'templates/articles.html',
+        controller: 'ArticlesCtrl'
       }
-    })
-    .state('tabs.questions', {
-      url: '/questions',
-      views: {
-        'questions-tab': {
-          templateUrl: 'templates/questions.html',
-          controller: 'QuestionsCtrl'
-        }
+    }
+  })
+  .state('tabs.questions', {
+    url: '/questions',
+    views: {
+      'questions-tab': {
+        templateUrl: 'templates/questions.html',
+        controller: 'QuestionsCtrl'
       }
-    })
+    }
   });
-
   $urlRouterProvider.otherwise('/login');
-
 });
