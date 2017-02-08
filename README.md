@@ -21,7 +21,9 @@ Frameworks:
 Web Application: Angular, NodeJS
 Mobile Application: Ionic/Cordova
 
+JIRA project Name: DailyDish - Fantasy Sports StackOverflow
 
+Github: https://github.com/ccates1/DailyDish
 
 
 
