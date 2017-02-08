@@ -1,8 +1,7 @@
 # DailyDish
 Fantasy Sports StackOverflow
 
-Christopher Cates
-Vimal Darji
+Team:Christopher Cates, Vimal Darji
 
 Project Tools:JIRA, Mongo, Ionic
 
