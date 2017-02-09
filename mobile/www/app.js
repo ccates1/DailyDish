@@ -1,4 +1,4 @@
-angular.module('dailydish', ['ionic', 'dailydish.controllers', 'dailydish.services'])
+angular.module('dailydish', ['ionic', 'dailydish.controllers', 'dailydish.services', 'ui.router', 'satellizer'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,7 +19,10 @@ angular.module('dailydish', ['ionic', 'dailydish.controllers', 'dailydish.servic
   $stateProvider
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html',
+    resolve: {
+      verifyLoginState: verifyLoginState
+    }
   })
   .state('tabs', {
     url: '/tab',
@@ -53,5 +56,16 @@ angular.module('dailydish', ['ionic', 'dailydish.controllers', 'dailydish.servic
       }
     }
   });
+
   $urlRouterProvider.otherwise('/login');
+
+  function verifyLoginState($q, $auth) {
+    var deferred = $q.defer();
+    if($auth.isAuthenticated()) {
+      deferred.reject();
+    } else {
+      deferred.resolve();
+    }
+    return deferred.promise;
+  }
 });
