@@ -1,29 +1,30 @@
-angular.module('dailydish', ['dailydish.controllers', 'dailydish.services', 'ui.router', 'satellizer'])
-.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
+  'ui.router', 'satellizer', 'ngAnimate', 'toastr'])
+.config(function($stateProvider, $urlRouterProvider, $authProvider, toastrConfig) {
   $stateProvider
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl',
-    resolve: {
-      verifyLoginState: verifyLoginState
-    }
-  })
-  .state('dashboard', {
-    url: '/dashboard',
-    templateUrl: 'templates/dashboard.html',
-    controller: 'DashboardCtrl'
-  })
-  .state('articles', {
-    url: '/articles',
-    templateUrl: 'templates/articles.html',
-    controller: 'ArticlesCtrl'
-  })
-  .state('questions', {
-    url: '/questions',
-    templateUrl: 'templates/questions.html',
-    controller: 'QuestionsCtrl'
-  });
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl',
+      resolve: {
+        verifyLoginState: verifyLoginState
+      }
+    })
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: 'templates/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .state('articles', {
+      url: '/articles',
+      templateUrl: 'templates/articles.html',
+      controller: 'ArticlesCtrl'
+    })
+    .state('questions', {
+      url: '/questions',
+      templateUrl: 'templates/questions.html',
+      controller: 'QuestionsCtrl'
+    });
 
   $urlRouterProvider.otherwise('/login');
 
@@ -36,4 +37,15 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services', 'ui.
     }
     return deferred.promise;
   }
+
+  angular.extend(toastrConfig, {
+    autoDismiss: true,
+    containerId: 'toast-container',
+    maxOpened: 0,
+    newestOnTop: true,
+    positionClass: 'toast-top-right',
+    preventDuplicates: true,
+    preventOpenDuplicates: true,
+    target: 'body'
+  });
 });
