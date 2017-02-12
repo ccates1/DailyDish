@@ -24,9 +24,14 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
       url: '/questions',
       templateUrl: 'templates/questions.html',
       controller: 'QuestionsCtrl'
+    })
+    .state('articleTemplate', {
+      url: '/articleTemplate',
+      templateUrl: 'templates/articleTemplate.html',
+      controller: 'ArticleTemplateCtrl'
     });
 
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/');
 
   function verifyLoginState($q, $auth) {
     var deferred = $q.defer();

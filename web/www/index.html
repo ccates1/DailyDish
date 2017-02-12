@@ -5,11 +5,14 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>The Daily Dish</title>
     <link href="css/style.css" rel="stylesheet">
+    <link href="lib/bootcards/dist/css/bootcards-desktop.min.css" rel="stylesheet">
     <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/isteven-angular-multiselect/isteven-multi-select.css" rel="stylesheet">
     <link href="lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
   </head>
-  <body ng-app="dailydish">
+  <body ng-app="dailydish" ng-controller="NavCtrl">
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -20,13 +23,13 @@
             <span class="icon-bar"></span>
           </button>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
+        <div class="collapse navbar-collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
               <a ui-sref="dashboard">Dashboard</a>
             </li>
             <li>
-              <a ui-sref="questions">Questions</a>
+              <a ui-sref="questions">Fantasy Questions</a>
             </li>
             <li>
               <a ui-sref="articles">Articles</a>
@@ -48,6 +51,7 @@
     <script src="lib/satellizer/dist/satellizer.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="lib/angular-animate/angular-animate.min.js"></script>
+    <script src="lib/isteven-angular-multiselect/isteven-multi-select.js"></script>
     <script src="lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="app.js"></script>
     <script src="scripts/controllers.js"></script>

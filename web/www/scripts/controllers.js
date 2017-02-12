@@ -1,4 +1,15 @@
-angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr'])
+angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr', 'isteven-multi-select'])
+.controller('NavCtrl', function($scope) {
+  $scope.toggleCategories = function() {
+    var toggleAtribute = document.getElementById('category-icon').className;
+    if(toggleAtribute === 'fa fa-arrow-circle-o-down fa-lg') {
+      document.getElementById('category-icon').className = 'fa fa-arrow-circle-o-up fa-lg';
+    } else {
+      $scope.showCategories = false;
+      document.getElementById('category-icon').className = 'fa fa-arrow-circle-o-down fa-lg';
+    }
+  };
+})
 .controller('LoginCtrl', function($scope, $auth, toastr, $state, $timeout) {
 
   $(function() {
@@ -20,32 +31,32 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr'])
 
   $scope.login = function() {
     $auth.login($scope.user)
-      .then(function() {
-        toastr.success('Login Success');
-        $timeout(function() {
-          $state.go('dashboard');
-        });
-      })
-      .catch(function(err) {
-        toastr.error(err.data.message, err.status);
-        console.log(err);
+    .then(function() {
+      toastr.success('Login Success');
+      $timeout(function() {
+        $state.go('dashboard');
       });
+    })
+    .catch(function(err) {
+      toastr.error(err.data.message, err.status);
+      console.log(err);
+    });
   };
 
   $scope.register = function() {
     console.log('test');
     $auth.signup($scope.user)
-      .then(function(res) {
-        toastr.success('Login Success');
-        $auth.setToken(res);
-        $timeout(function() {
-          $state.go('dashboard');
-        });
-      })
-      .catch(function(err) {
-        toastr.error(err.data.message, err.status);
-        console.log(err.data.message);
+    .then(function(res) {
+      toastr.success('Login Success');
+      $auth.setToken(res);
+      $timeout(function() {
+        $state.go('dashboard');
       });
+    })
+    .catch(function(err) {
+      toastr.error(err.data.message, err.status);
+      console.log(err.data.message);
+    });
   };
 
 })
@@ -56,5 +67,22 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr'])
 
 })
 .controller('QuestionsCtrl', function($scope) {
+
+})
+.controller('ArticleTemplateCtrl', function($scope) {
+  $scope.tags = [
+    { main: 'NBA', teams: ['ATL', 'BOS'] },
+    { main: 'MLB', teams: ['ATL', 'BOS'] },
+    { main: 'NFL', teams: ['ATL', 'BOS'] },
+  ];
+
+  $scope.test = [];
+
+  $scope.categories = [
+    {icon: "<img src='./img/nba.png'>",	name: "NBA",	ticked: false},
+    {icon: "<img src='./img/mlb.png'>",	name: "MLB",	ticked: false},
+    {icon: "<img src='./img/nfl.png'>",	name: "NFL",	ticked: false}
+  ];
+
 
 });
