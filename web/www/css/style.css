@@ -4,24 +4,40 @@ body {
 * {
   font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
 }
+legend {
+  padding-bottom: 8px;
+  margin-bottom: 10px !important;
+}
+.vertical-align {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+.h4 {
+  font-size: 22px !important;
+}
+.custom-padding {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
 .multiSelect > button:hover,
 .multiSelect > button:focus {
   outline: 0 !important;
 }
-.multiSelect > button {
-  width: 100%;
+.checkboxLayer.show {
+  overflow-x: scroll;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: auto;
+  display: block;
 }
-#multiSelect-row {
-  display:flex;
-  align-items:center;
-  float: none;
+.page-header {
+  margin-bottom: 18px !important;
 }
 .multiSelect .helperButton, .multiSelect .helperButton:active,
 .multiSelect .helperButton:checked  {
-  color: #fff !important;
-  background-color: #eb6864 !important;
   width: 100% !important;
-  height: 100% !important;
 }
 .navbar-default .navbar-nav > li > a:active,
 .navbar-default .navbar-nav > li > a:focus,
@@ -36,7 +52,7 @@ body {
   padding: .2em .6em .3em;
   font-size: 20px;
   font-weight: normal;
-  line-height: 1;
+  line-height: 1.5;
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
@@ -48,14 +64,13 @@ body {
   justify-content:center;
 }
 .multiSelect .checkboxLayer {
-  width: 90%;
   position: fixed;
 }
 #article-first {
   padding-bottom: 8px;
 }
 .page-header h1 {
-    font-size: 3.5em;
+  font-size: 3.5em;
 }
 .panel-login {
 	border-color: #ccc;

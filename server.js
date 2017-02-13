@@ -66,7 +66,9 @@ var articleSchema = new mongoose.Schema ({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }
-  }]
+  }],
+  sports: [String],
+  teams: [String]
 });
 var Article = mongoose.model('Article', articleSchema);
 
@@ -264,7 +266,6 @@ app.get('/articles', function(req, res, next) {
 });
 
 app.post('/auth/login', function(req, res) {
-  console.log(req.body);
   User.findOne({
     username: req.body.username
   }, '+password', function(err, user) {
@@ -282,6 +283,20 @@ app.post('/auth/login', function(req, res) {
       res.send({
         token: createJWT(user)
       });
+    });
+  });
+});
+
+app.post('/articles', function(req, res) {
+  var article = new Article(req.body);
+  article.save(function(err, article) {
+    if(err) {
+      return next(err);
+    }
+    req.article.save(function(err, article) {
+      if(err) {
+        return next(err);
+      }
     });
   });
 });

@@ -53,4 +53,5 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
     preventOpenDuplicates: true,
     target: 'body'
   });
+
 });
