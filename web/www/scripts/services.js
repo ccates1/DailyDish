@@ -6,4 +6,7 @@ angular.module('dailydish.services', [])
     this.getUser = function() {
       return $http.get('/api/me');
     };
+    this.getArticle = function(id) {
+      return $http.get('/articles/' + id);
+    }
   });

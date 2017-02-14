@@ -1,8 +1,24 @@
 angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
-  'isteven-multi-select', 'ui.select'])
-  .controller('NavCtrl', function($scope) {
+  'isteven-multi-select', 'ui.select', 'ui.router'])
+  .controller('NavCtrl', function($scope, $auth) {
+    $scope.authenticated = false;
+    if($auth.isAuthenticated()) {
+      $scope.authenticated = true;
+    }
   })
-  .controller('LoginCtrl', function($scope, $auth, toastr, $state, $timeout) {
+  .controller('LoginCtrl', function($scope, $auth, $timeout, $state) {
+    $(function() {
+      document.getElementById('login').parentElement.className = 'activated';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+    $scope.$on('$destroy', function() {
+      document.getElementById('login').parentElement.className = '';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
 
     $(function() {
       $('#login-form-link').click(function(e) {
@@ -38,7 +54,7 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
     $scope.register = function() {
       $auth.signup($scope.user)
       .then(function(res) {
-        toastr.success('Login Success');
+        toastr.success('You have been registered!', 'Success');
         $auth.setToken(res);
         $timeout(function() {
           $state.go('dashboard');
@@ -51,18 +67,114 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
     };
 
   })
-  .controller('DashboardCtrl', function($scope) {
+  .controller('DashboardCtrl', function($scope, $auth, $service, $timeout,
+    toastr, $state) {
+    $scope.userArticles = [];
+    $(function() {
+      document.getElementById('dashboard').parentElement.className = 'activated';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+    $scope.$on('$destroy', function() {
+      document.getElementById('dashboard').parentElement.className = '';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+    var getUser = function() {
+      $service.getUser()
+        .then(function(res) {
+          $scope.user = res.data;
+          retrieveArticles($scope.user.articles);
+        })
+        .catch(function(err) {
+          $timeout(function() {
+            $state.go('login');
+          });
+          console.log(err);
+        });
+    };
+    getUser();
+
+    var retrieveArticles = function(articles) {
+      articles.forEach(function(article) {
+        $service.getArticle(article)
+          .then(function(res) {
+            $scope.userArticles.push(res.data);
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
+      });
+    };
 
   })
-  .controller('ArticlesCtrl', function($scope) {
+  .controller('ArticlesCtrl', function($scope, $auth, $service, $timeout,
+    toastr, $state) {
+    $(function() {
+      document.getElementById('articles').parentElement.className = 'activated';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+    $scope.$on('$destroy', function() {
+      document.getElementById('articles').parentElement.className = '';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+
+    var getUser = function() {
+      $service.getUser()
+        .then(function(res) {
+          $scope.user = res.data;
+        })
+        .catch(function(err) {
+          $timeout(function() {
+            $state.go('login');
+          });
+          console.log(err);
+        });
+    };
+    getUser();
 
   })
-  .controller('QuestionsCtrl', function($scope) {
+  .controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
+    toastr, $state) {
+    $(function() {
+      document.getElementById('questions').parentElement.className = 'activated';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+    $scope.$on('$destroy', function() {
+      document.getElementById('questions').parentElement.className = '';
+      $timeout(function() {
+        $scope.$apply();
+      });
+    });
+
+    var getUser = function() {
+      $service.getUser()
+        .then(function(res) {
+          $scope.user = res.data;
+        })
+        .catch(function(err) {
+          $timeout(function() {
+            $state.go('login');
+          });
+          console.log(err);
+        });
+    };
+    getUser();
 
   })
-  .controller('ArticleTemplateCtrl', function($scope, $timeout, $service) {
+  .controller('ArticleTemplateCtrl', function($scope, $timeout, $service,
+    toastr, $state) {
     $scope.article = {
       content: '',
+      title: '',
       author: {},
       comments: [],
       sports: [],
@@ -92,6 +204,7 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
           console.log(err);
         });
     };
+    getUser();
 
     $scope.clicked = function(data) {
       if(data.ticked === true) {
@@ -147,11 +260,14 @@ angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
         $scope.article.teams.push(item);
       });
       $scope.article.author = $scope.user._id;
-      console.log($scope.article);
 
       $service.submitArticle($scope.article)
         .then(function() {
-          toastr.success('Your article has been posted!', 'Success')
+          toastr.success('Your article has been posted!', 'Success');
+          $state.go('dashboard');
+          $timeout(function() {
+            $state.go('dashboard');
+          });
         })
         .catch(function(err) {
           console.log(err);

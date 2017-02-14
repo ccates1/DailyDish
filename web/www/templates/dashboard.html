@@ -1,38 +1,85 @@
 <div class="container">
-  <div class="col-md-3 col-xs-4">
-    <div class="list-group">
-      <div class="list-group-item media">
-        <div class="media-left">
-          <img class="media-object" src="./img/christmas.jpg" />
+  <div class="row">
+    <div class="col-sm-6" id="top-panel">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Profile Information
         </div>
-        <div class="media-body">
-          <div class="list">
-            <div class="item">
-              <span class="fa fa-user-o fa-fw"></span> <strong>Cody Cates</strong>
+        <div class="list-group-item media" style="margin-top: 0px; border: none">
+          <div class="pull-left">
+            <img class="media-object" src="./img/christmas.jpg" />
+          </div>
+          <div class="media-body">
+            <div class="list">
+              <div class="item">
+                <span class="fa fa-user-o fa-fw"></span>{{user.username}}
+              </div>
+              <div class="item">
+                <span class="fa fa-at fa-fw"></span>{{user.email}}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6 col-xs-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Test
-      </div>
-      <div class="panel-body">
-        Test
+    <div class="col-sm-6" id="top-panel">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Link Social Accounts
+        </div>
+        <div class="list-group-item" style="margin-top: 0px; border: none">
+          <ul class="list-inline">
+            <li>
+              <a class="btn btn-social-icon btn-twitter">
+                <span class="fa fa-twitter"></span>
+              </a>
+            </li>
+            <li>
+              <a class="btn btn-social-icon btn-facebook">
+                <span class="fa fa-facebook"></span>
+              </a>
+            </li>
+            <li>
+              <a class="btn btn-social-icon btn-instagram">
+                <span class="fa fa-instagram"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-xs-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Test
+  <div class="row">
+    <section class="col-sm-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Recent Articles
+        </div>
+        <div class="panel-body">
+          <div class="list-group">
+            <div class="list-group-item" ng-repeat="article in userArticles">
+              <div class="media-left">
+                <img class="media-object" src="" />
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">{{article.title}}</h4>
+                
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="panel-body">
-        Test
+    </section>
+  </div>
+  <div class="row">
+    <section class="col-sm-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Recent Questions
+        </div>
+        <div class="panel-body">
+        </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

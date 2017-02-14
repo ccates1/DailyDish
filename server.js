@@ -13,6 +13,7 @@ var request = require('request');
 
 var userSchema = new mongoose.Schema ({
   username: String,
+  email: String,
   password: {
     type: String,
     select: false
@@ -56,6 +57,7 @@ var User = mongoose.model('User', userSchema);
 
 var articleSchema = new mongoose.Schema ({
   content: String,
+  title: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -262,6 +264,13 @@ app.get('/articles', function(req, res, next) {
   });
 });
 
+app.get('/articles/:article', function(req, res, next) {
+  console.log(req.article);
+  Article.findById(req.article, function(err, article) {
+    res.send(article);
+  });
+});
+
 app.post('/auth/login', function(req, res) {
   User.findOne({
     username: req.body.username
@@ -302,6 +311,7 @@ app.post('/articles', function(req, res, next) {
       return next(err);
     }
   });
+  res.sendStatus('200');
 });
 
 app.listen(app.get('port'), function() {

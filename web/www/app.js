@@ -7,8 +7,13 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl',
       resolve: {
-        skipIfLoggedIn: skipIfLoggedIn
+        verifyLogin: verifyLogin
       }
+    })
+    .state('logout', {
+      url: '/logout',
+      templateUrl: 'null',
+      controller: 'LogoutCtrl'
     })
     .state('dashboard', {
       url: '/dashboard',
@@ -33,14 +38,12 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
 
   $urlRouterProvider.otherwise('/login');
 
-  function skipIfLoggedIn($q, $auth) {
-    var deferred = $q.defer();
+  function verifyLogin($q, $auth, $state, $timeout) {
     if ($auth.isAuthenticated()) {
-      deferred.reject();
-    } else {
-      deferred.resolve();
+      $timeout(function() {
+        $state.go('dashboard');
+      });
     }
-    return deferred.promise;
   }
 
   angular.extend(toastrConfig, {

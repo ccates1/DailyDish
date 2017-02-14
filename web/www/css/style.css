@@ -4,6 +4,9 @@ body {
 * {
   font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
 }
+.list-group-item {
+  margin-left: 0px !important;
+}
 legend {
   padding-bottom: 8px;
   margin-bottom: 10px !important;
@@ -11,8 +14,16 @@ legend {
 .vertical-align {
   display: flex;
   align-items: center;
+}
+.article-divider {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
+  padding-bottom: 10px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.article-label {
+  color: #000000;
 }
 .h4 {
   font-size: 22px !important;
@@ -39,20 +50,24 @@ legend {
 .multiSelect .helperButton:checked  {
   width: 100% !important;
 }
-.navbar-default .navbar-nav > li > a:active,
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-brand:active,
+.navbar-default .navbar-nav > li > a:active,
 .navbar-default .navbar-brand:focus,
-.navbar-default .navbar-brand:hover {
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li:active {
   background-color: #fff !important;
+}
+.activated {
+  background-color: #fff !important;
+  border-bottom: 2px solid #eb6864;
 }
 #select-label {
   display: inline;
   padding: .2em .6em .3em;
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 17px;
   line-height: 1.5;
+  margin-bottom: 0px !important;
   color: #ffffff;
   text-align: center;
   white-space: nowrap;
@@ -62,6 +77,7 @@ legend {
   display:flex;
   align-items:center;
   justify-content:center;
+  color: #000000;
 }
 .multiSelect .checkboxLayer {
   position: fixed;
@@ -150,7 +166,9 @@ legend {
 	text-decoration: underline;
 	color: #666;
 }
-
+#top-panel {
+  max-height: 126.45px !important;
+}
 .btn-register {
 	background-color: #1CB94E;
 	outline: none;
@@ -170,4 +188,11 @@ legend {
 }
 .collapsing {
   transition: height 0.6s;
+}
+.navbar {
+  border-top: 3px solid #eb6864 !important;
+  box-shadow: 0 1px 0 rgba(12,13,14,0.15) !important;
+}
+.media-heading {
+  font-size: 1.1em;
 }

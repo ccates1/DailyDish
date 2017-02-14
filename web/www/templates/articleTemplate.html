@@ -7,10 +7,10 @@
     <form class="" ng-submit="submit()" method="post" name="articleForm">
       <fieldset>
         <legend class="text-center"><h3>Article Creation Template:</h3></legend>
-        <div class="row vertical-align" style="margin-left:0px; margin-right:0px;">
+        <div class="row vertical-align article-divider">
           <div class="col-lg-6 col-sm-6 col-xs-6">
             <label for="select" id="select-label" class="pull-right control-label">
-              <h3 class="h4">Sports Included:</h3>
+              Sports Included:
             </label>
           </div>
           <div class="col-lg-6 col-sm-6 col-xs-6">
@@ -21,36 +21,33 @@
             </div>
           </div>
         </div>
-        <div class="row" style="margin-left:0px; margin-right:0px;" ng-show="showAdditionalTagInput">
+        <div class="row article-divider" ng-show="showAdditionalTagInput">
           <div ng-repeat="a in selectedTags">
-            <div class="form-group col-lg-4 col-md-4 col-xs-4">
+            <div class="form-group col-lg-4 col-xs-4">
               <div class="control-label text-center">
-                <strong>{{a.main}} Teams:</strong>
+                <strong class="article-label">{{a.main}} Teams:</strong>
               </div>
               <div class="text-center center-block">
-                <div isteven-multi-select
-                    input-model="a.teams"
-                    output-model="teamOutput"
-                    on-item-click="teamClicked(data, a)"
-                    button-label="icon name"
-                    item-label="icon name maker"
-                    tick-property="ticked">
+                <div isteven-multi-select input-model="a.teams" output-model="teamOutput"
+                  helper-elements="all" button-label="icon name"
+                  item-label="icon name maker" tick-property="ticked"
+                  on-item-click="teamClicked(data, a)" required>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
-        <!--<div class="row" ng-show="showAdditionalTagInput">
-          <div class="col-lg-3 col-xs-3" ng-repeat="tag in selectedTags track by $index">
-            <ui-select multiple ng-model="teamOutput" theme="bootstrap" append-to-body="true" close-on-select="false">
-                <ui-select-match allow-clear="true" placeholder="Choose {{tag.main}} Team(s) Included:">{{$item}}</ui-select-match>
-                <ui-select-choices repeat="team in tag.teams | filter:$select.search">
-                  {{team}}
-                </ui-select-choices>
-              </ui-select>
+        <div class="row vertical-align article-divider">
+          <div class="col-lg-4 col-xs-4">
+            <label for="select" id="select-label" class="pull-right control-label">
+              Title for Article:
+            </label>
           </div>
-        </div>-->
+          <div class="col-lg-8 col-xs-8">
+            <input type="text" class="form-control" placeholder="Insert title here" id="title"
+              ng-model="article.title" required>
+          </div>
+        </div>
         <div class="form-group">
           <div class="col-lg-12">
             <textarea class="form-control" rows="15" id="textArea" ng-model="article.content" required></textarea>
