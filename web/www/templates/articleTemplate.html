@@ -25,12 +25,13 @@
           <div ng-repeat="a in selectedTags">
             <div class="form-group col-lg-4 col-md-4 col-xs-4">
               <div class="control-label text-center">
-                <p>{{a.main}} Teams:</p>
+                <strong>{{a.main}} Teams:</strong>
               </div>
               <div class="text-center center-block">
-                <div isteven-multi-select id="a.main"
+                <div isteven-multi-select
                     input-model="a.teams"
-                    output-model="a.selectedAnswers"
+                    output-model="teamOutput"
+                    on-item-click="teamClicked(data, a)"
                     button-label="icon name"
                     item-label="icon name maker"
                     tick-property="ticked">

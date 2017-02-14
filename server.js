@@ -118,9 +118,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static(path.join(__dirname, 'web/www')));
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -287,16 +284,26 @@ app.post('/auth/login', function(req, res) {
   });
 });
 
-app.post('/articles', function(req, res) {
+app.post('/articles', function(req, res, next) {
   var article = new Article(req.body);
-  article.save(function(err, article) {
+  User.findById(article.author, function(err, user) {
     if(err) {
       return next(err);
     }
-    req.article.save(function(err, article) {
+    user.articles.push(article);
+    user.save(function(err, user) {
       if(err) {
         return next(err);
       }
     });
   });
+  article.save(function(err, article) {
+    if(err) {
+      return next(err);
+    }
+  });
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
 });

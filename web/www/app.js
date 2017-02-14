@@ -7,7 +7,7 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl',
       resolve: {
-        verifyLoginState: verifyLoginState
+        skipIfLoggedIn: skipIfLoggedIn
       }
     })
     .state('dashboard', {
@@ -31,11 +31,11 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
       controller: 'ArticleTemplateCtrl'
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 
-  function verifyLoginState($q, $auth) {
+  function skipIfLoggedIn($q, $auth) {
     var deferred = $q.defer();
-    if($auth.isAuthenticated()) {
+    if ($auth.isAuthenticated()) {
       deferred.reject();
     } else {
       deferred.resolve();
