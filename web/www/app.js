@@ -12,7 +12,7 @@ angular.module('dailydish', ['dailydish.controllers', 'dailydish.services',
     })
     .state('logout', {
       url: '/logout',
-      templateUrl: 'null',
+      templateUrl: null,
       controller: 'LogoutCtrl'
     })
     .state('dashboard', {

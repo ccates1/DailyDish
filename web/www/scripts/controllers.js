@@ -1,12 +1,28 @@
 angular.module('dailydish.controllers', ['satellizer', 'ngAnimate', 'toastr',
   'isteven-multi-select', 'ui.select', 'ui.router'])
-  .controller('NavCtrl', function($scope, $auth) {
-    $scope.authenticated = false;
-    if($auth.isAuthenticated()) {
-      $scope.authenticated = true;
-    }
+  .controller('NavCtrl', function($scope, $auth, toastr, $state) {
+    $scope.isAuthenticated = function() {
+      return $auth.isAuthenticated();
+    };
+    $scope.check = function(state) {
+      if(!$auth.isAuthenticated()) {
+        toastr.info('Need to sign in to access this application!');
+        return;
+      } else {
+        $state.go(state);
+      }
+    };
   })
-  .controller('LoginCtrl', function($scope, $auth, $timeout, $state) {
+  .controller('LogoutCtrl', function($scope, $auth, $timeout, $state) {
+    $auth.logout()
+      .then(function() {
+        $state.go('login');
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  })
+  .controller('LoginCtrl', function($scope, $auth, $timeout, $state, toastr) {
     $(function() {
       document.getElementById('login').parentElement.className = 'activated';
       $timeout(function() {
