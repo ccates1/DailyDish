@@ -265,7 +265,6 @@ app.get('/articles', function(req, res, next) {
 });
 
 app.get('/articles/:article', function(req, res, next) {
-  console.log(req.article);
   Article.findById(req.article, function(err, article) {
     res.send(article);
   });

@@ -14,7 +14,7 @@
     <link href="lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
     <link href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
   </head>
-  <body ng-app="dailydish" ng-controller="NavCtrl">
+  <body ng-app="dailydish" ng-controller="NavCtrl" ng-cloak>
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -28,18 +28,23 @@
         <div class="collapse navbar-collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
-              <a ui-sref="dashboard" id="dashboard">Dashboard</a>
+              <a href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">Dashboard</a>
             </li>
             <li>
-              <a ui-sref="questions" id="questions">Fantasy Questions</a>
+              <a href="javascript:void(0)" ng-click="check('questions')" id="questions">Fantasy Questions</a>
             </li>
             <li>
-              <a ui-sref="articles" id="articles">Articles</a>
+              <a href="javascript:void(0)" ng-click="check('articles')" id="articles">Articles</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li>
+
+            <li ng-show="!isAuthenticated()">
               <a ui-sref="login" id="login">Login</a>
+            </li>
+            <li ng-show="isAuthenticated()">
+              <a ui-sref="logout" >Logout</a>
+
             </li>
           </ul>
         </div>
