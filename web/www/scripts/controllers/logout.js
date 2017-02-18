@@ -1,0 +1,11 @@
+var app = angular.module('dailydish');
+
+app.controller('LogoutCtrl', function($scope, $auth, $timeout, $state) {
+    $auth.logout()
+        .then(function() {
+            $state.go('login');
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+});

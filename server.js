@@ -1,9 +1,11 @@
 var aync = require('async');
 var bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser');
+var cloudinary = require('cloudinary');
 var config = require('./config.js');
 var cors = require('cors');
 var express = require('express');
+var fs = require('fs');
 var jwt = require('jwt-simple');
 var morgan = require('morgan');
 var moment = require('moment');
@@ -70,7 +72,8 @@ var articleSchema = new mongoose.Schema ({
     }
   }],
   sports: [String],
-  teams: [String]
+  teams: [String],
+  picture: {type: mongoose.Schema.Types.Mixed}
 });
 var Article = mongoose.model('Article', articleSchema);
 
@@ -199,8 +202,12 @@ app.param('question', function(req, res, next, id) {
   });
 });
 
+
 app.get('/api/me', ensureAuthenticated, function(req, res) {
-  User.findById(req.user, function(err, user) {
+  User.findById(req.user).populate('articles').exec(function(err, user) {
+    if(err) {
+      return next(err);
+    }
     res.send(user);
   });
 });
@@ -254,14 +261,31 @@ app.get('/questions', function(req, res, next) {
   });
 });
 
-app.get('/articles', function(req, res, next) {
-  Article.find({}, function(err, articles) {
-    Article.populate(req.article, {
-      path: 'author comments'
-    }).then(function() {
-      res.json(articles);
+app.post('/file-upload', function(req, res) {
+    // get the temporary location of the file
+    var tmp_path = req.files.thumbnail.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var target_path = '/images/' + req.files.thumbnail.name;
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) throw err;
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            res.send('File uploaded to: ' + target_path + ' - ' + req.files.thumbnail.size + ' bytes');
+        });
     });
-  });
+});
+
+app.get('/articles', function(req, res, next) {
+  var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
+  Article.find({}, function(err, articles) {
+    Article.populate(articles, q)
+      .then(function() {
+        console.log(articles);
+        res.json(articles);
+      });
+    });
 });
 
 app.get('/articles/:article', function(req, res, next) {
@@ -293,6 +317,8 @@ app.post('/auth/login', function(req, res) {
 });
 
 app.post('/articles', function(req, res, next) {
+  console.log(req.body);
+
   var article = new Article(req.body);
   User.findById(article.author, function(err, user) {
     if(err) {
@@ -309,9 +335,14 @@ app.post('/articles', function(req, res, next) {
     if(err) {
       return next(err);
     }
+    res.send(article);
   });
-  res.sendStatus('200');
 });
+
+app.get('/test', function(req, res, next) {
+  var result = config.FILESTACK_API;
+  res.send(result);
+})
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

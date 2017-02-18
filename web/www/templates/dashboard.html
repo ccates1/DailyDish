@@ -56,14 +56,41 @@
           Recent Articles
         </div>
         <div class="panel-body">
-          <div class="list-group">
-            <div class="list-group-item" ng-repeat="article in userArticles">
-              <div class="media-left">
-                <img class="media-object" src="" />
-              </div>
-              <div class="media-body">
-                <h4 class="media-heading">{{article.title}}</h4>
-                
+          <div class="home-well well" ng-show="!user.articles.length">
+            No articles to display.
+          </div>
+          <div class="row row-horizon" ng-show="user.articles.length">
+            <div class="col-xs-6 text-center" ng-repeat="article in user.articles">
+              <div class="thumbnail">
+                <img ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" class="img-responsive">
+                <div class="caption" style="padding: 0">
+                  <h4>{{article.title}}</h4>
+                  <div class="list-group">
+                    <div class="list-group-item offset-padding">
+                      <ul class="list-inline">
+                        <li>
+                          Sports:
+                        </li>
+                        <li ng-repeat="sport in article.sports">
+                          <span class="label label-default">{{sport}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group-item offset-padding">
+                      <ul class="list-inline">
+                        <li>
+                          Teams:
+                        </li>
+                        <li ng-repeat="team in article.teams">
+                          <span class="label label-default">{{team}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group-item">
+                      <button type="button" class="btn btn-primary">Go</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -78,6 +105,9 @@
           Recent Questions
         </div>
         <div class="panel-body">
+          <div class="home-well well" ng-show="!user.questions.length">
+            No questions to display.
+          </div>
         </div>
       </div>
     </section>

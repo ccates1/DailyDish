@@ -8,5 +8,11 @@ angular.module('dailydish.services', [])
     };
     this.getArticle = function(id) {
       return $http.get('/articles/' + id);
+    };
+    this.articlesList = function() {
+      return $http.get('/articles');
+    };
+    this.getSecret = function() {
+      return $http.get('/test');
     }
   });
