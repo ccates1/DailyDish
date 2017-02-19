@@ -1,16 +1,17 @@
 <div class="container">
+
   <ul class="nav nav-tabs text-center">
     <li class="active">
-      <a href="#all" data-toggle="tab">All</a>
+      <a data-target="#all" data-toggle="tab">All</a>
     </li>
     <li class="">
-      <a href="#nba" data-toggle="tab">NBA</a>
+      <a data-target="#nba" data-toggle="tab">NBA</a>
     </li>
     <li class="">
-      <a href="#mlb" data-toggle="tab">MLB</a>
+      <a data-target="#mlb" data-toggle="tab">MLB</a>
     </li>
     <li class="">
-      <a href="#nfl" data-toggle="tab">NFL</a>
+      <a data-target="#nfl" data-toggle="tab">NFL</a>
     </li>
     <li class="pull-right">
       <button class="btn btn-primary" ui-sref="articleTemplate"
@@ -20,18 +21,30 @@
   <div class="tab-content">
     <div class="tab-pane fade active in" id="all">
       <div class="list-group">
+        <div class="list-group-item" ng-repeat="article in articles">
+          {{article}}
+        </div>
       </div>
     </div>
     <div class="tab-pane fade" id="nba">
       <div class="list-group">
+        <div class="list-group-item" ng-repeat="article in nba">
+          {{article}}
+        </div>
       </div>
     </div>
     <div class="tab-pane fade" id="mlb">
       <div class="list-group">
+        <div class="list-group-item" ng-repeat="article in mlb">
+          {{article}}
+        </div>
       </div>
     </div>
     <div class="tab-pane fade" id="nfl">
       <div class="list-group">
+        <div class="list-group-item" ng-repeat="article in nfl">
+          {{article}}
+        </div>
       </div>
     </div>
   </div>

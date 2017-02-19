@@ -1,5 +1,5 @@
 angular.module('dailydish', ['dailydish.services', 'isteven-multi-select',
-        'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker'
+        'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker', 'angularMoment'
     ])
     .config(function($stateProvider, $urlRouterProvider, $authProvider, toastrConfig, filepickerProvider) {
         $stateProvider

@@ -73,7 +73,8 @@ var articleSchema = new mongoose.Schema ({
   }],
   sports: [String],
   teams: [String],
-  picture: {type: mongoose.Schema.Types.Mixed}
+  picture: {type: mongoose.Schema.Types.Mixed},
+  date: String
 });
 var Article = mongoose.model('Article', articleSchema);
 

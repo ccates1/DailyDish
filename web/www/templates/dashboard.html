@@ -1,13 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-6" id="top-panel">
+    <div class="col-sm-8" id="top-panel">
       <div class="panel panel-primary">
         <div class="panel-heading">
           Profile Information
+          <div class="pull-right">
+            <a href="javascript:void(0)" ng-click="" id="edit">
+              <i class="fa fa-pencil-square-o fa-lg"></i>
+            </a>
+          </div>
         </div>
         <div class="list-group-item media" style="margin-top: 0px; border: none">
           <div class="pull-left">
-            <img class="media-object" src="./img/christmas.jpg" />
+            <img class="img-rounded" src="./img/christmas.jpg" style="width: 75px; height: 75px;" />
           </div>
           <div class="media-body">
             <div class="list">
@@ -22,29 +27,27 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6" id="top-panel">
+    <div class="col-sm-4" id="top-panel">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          Link Social Accounts
+          Social Accounts
         </div>
-        <div class="list-group-item" style="margin-top: 0px; border: none">
-          <ul class="list-inline">
-            <li>
-              <a class="btn btn-social-icon btn-twitter">
-                <span class="fa fa-twitter"></span>
-              </a>
-            </li>
-            <li>
-              <a class="btn btn-social-icon btn-facebook">
-                <span class="fa fa-facebook"></span>
-              </a>
-            </li>
-            <li>
-              <a class="btn btn-social-icon btn-instagram">
-                <span class="fa fa-instagram"></span>
-              </a>
-            </li>
-          </ul>
+        <div class="list-group" style="margin-top: 0px; border: none">
+          <div class="list-group-item">
+            <a class="btn btn-block btn-social btn-twitter">
+              <span class="fa fa-twitter"></span> Link Twitter
+            </a>
+          </div>
+          <div class="list-group-item">
+            <a class="btn btn-block btn-social btn-facebook">
+              <span class="fa fa-facebook"></span> Link Facebook
+            </a>
+          </div>
+          <div class="list-group-item">
+            <a class="btn btn-block btn-social btn-instagram">
+              <span class="fa fa-instagram"></span> Link Instagram
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -59,41 +62,56 @@
           <div class="home-well well" ng-show="!user.articles.length">
             No articles to display.
           </div>
-          <div class="row row-horizon" ng-show="user.articles.length">
-            <div class="col-xs-6 text-center" ng-repeat="article in user.articles">
-              <div class="thumbnail">
-                <img ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" class="img-responsive">
-                <div class="caption" style="padding: 0">
-                  <h4>{{article.title}}</h4>
-                  <div class="list-group">
-                    <div class="list-group-item offset-padding">
-                      <ul class="list-inline">
-                        <li>
-                          Sports:
-                        </li>
-                        <li ng-repeat="sport in article.sports">
-                          <span class="label label-default">{{sport}}</span>
-                        </li>
-                      </ul>
+          <div class="well" ng-show="user.articles.length" id="article-dashboard">
+            <div class="row row-horizon" >
+              <div class="col-xs-5 text-center" ng-repeat="article in user.articles">
+                <div class="info-card">
+                  <div class="front">
+                    <div class="card-image-background">
+                      <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
                     </div>
-                    <div class="list-group-item offset-padding">
-                      <ul class="list-inline">
-                        <li>
-                          Teams:
-                        </li>
-                        <li ng-repeat="team in article.teams">
-                          <span class="label label-default">{{team}}</span>
-                        </li>
-                      </ul>
+                    <div class="list-group">
+                      <div class="list-group-item">
+                        Title: {{article.title}}
+                      </div>
+                      <div class="list-group-item">
+                        Date: {{article.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}}
+                      </div>
                     </div>
-                    <div class="list-group-item">
-                      <button type="button" class="btn btn-primary">Go</button>
+                  </div>
+                  <div class="back">
+                    <div class="list-group">
+                      <div class="list-group-item offset-padding">
+                        <ul class="list-inline">
+                          <li>
+                            Sports:
+                          </li>
+                          <li ng-repeat="sport in article.sports">
+                            <span class="label label-success">{{sport}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="list-group-item offset-padding">
+                        <ul class="list-inline">
+                          <li>
+                            Teams:
+                          </li>
+                          <li ng-repeat="team in article.teams">
+                            <span class="label label-success">{{team}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="list-group-item">
+                        <button type="button" class="btn btn-block btn-primary">Review</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
