@@ -74,7 +74,8 @@ var articleSchema = new mongoose.Schema ({
   sports: [String],
   teams: [String],
   picture: {type: mongoose.Schema.Types.Mixed},
-  date: String
+  date: String,
+  ratings: [Number]
 });
 var Article = mongoose.model('Article', articleSchema);
 
@@ -283,15 +284,24 @@ app.get('/articles', function(req, res, next) {
   Article.find({}, function(err, articles) {
     Article.populate(articles, q)
       .then(function() {
-        console.log(articles);
         res.json(articles);
+      })
+      .catch(function(err) {
+        throw(err);
       });
     });
 });
 
 app.get('/articles/:article', function(req, res, next) {
+  var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
   Article.findById(req.article, function(err, article) {
-    res.send(article);
+    Article.populate(article, q)
+      .then(function() {
+        res.json(article);
+      })
+      .catch(function(err) {
+        throw(err);
+      });
   });
 });
 
@@ -339,11 +349,6 @@ app.post('/articles', function(req, res, next) {
     res.send(article);
   });
 });
-
-app.get('/test', function(req, res, next) {
-  var result = config.FILESTACK_API;
-  res.send(result);
-})
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

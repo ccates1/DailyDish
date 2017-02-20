@@ -29,4 +29,6 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
     };
     getUser();
 
-})
+    
+
+});

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="well">
+    <div class="page-header text-center" style="padding-bottom: 0px;">
+      <h2>{{article.title}}</h2>
+      <p class="lead">
+        Posted: {{article.date | amCalendar}} <br />
+        By: {{article.author.username}}
+      </p>
+
+    </div>
+    <div class="row">
+      <div class="col-xs-12 border-photo">
+        <img class="img-responsive center-block img-rounded"
+        ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:400, h:200} }}"
+        alt="{{article.title}}" />
+      </div>
+      <div class="col-xs-12" style="margin-top: 20px; border-bottom: 2px groove #2c3e50;">
+        <div class="list-group" style="font-size: 1.2em">
+          <div class="list-group-item">
+            <ul class="list-inline">
+              <li>
+                <i class="fa ion-ios-basketball-outline fa-fw"></i> Sports:
+              </li>
+              <li ng-repeat="sport in article.sports">
+                <span class="label label-primary">{{sport}}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="list-group-item">
+            <ul class="list-inline">
+              <li>
+                <i class="fa fa-users fa-fw"></i> Teams:
+              </li>
+              <li ng-repeat="team in article.teams">
+                <span class="label label-primary">{{team}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 20px;">
+      {{article.content}}dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe vdfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe v
+    </div>
+
+  </div>
+</div>

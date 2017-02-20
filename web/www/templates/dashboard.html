@@ -54,17 +54,20 @@
   </div>
   <div class="row">
     <section class="col-sm-12">
-      <div class="panel panel-primary">
+      <div class="panel panel-primary" >
         <div class="panel-heading">
-          Recent Articles
+          Your Articles
+          <span class="badge badge-default pull-right"
+            style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" style="padding: 0px;">
           <div class="home-well well" ng-show="!user.articles.length">
             No articles to display.
           </div>
-          <div class="well" ng-show="user.articles.length" id="article-dashboard">
-            <div class="row row-horizon" >
-              <div class="col-xs-5 text-center" ng-repeat="article in user.articles">
+          <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
+            <div class="row row-horizon">
+              <div class="col-md-5 text-center"
+                ng-repeat="article in user.articles track by $index">
                 <div class="info-card">
                   <div class="front">
                     <div class="card-image-background">
@@ -75,7 +78,7 @@
                         Title: {{article.title}}
                       </div>
                       <div class="list-group-item">
-                        Date: {{article.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a'}}
+                        Date: {{article.date | amCalendar}}
                       </div>
                     </div>
                   </div>
@@ -86,8 +89,8 @@
                           <li>
                             Sports:
                           </li>
-                          <li ng-repeat="sport in article.sports">
-                            <span class="label label-success">{{sport}}</span>
+                          <li ng-repeat="sport in article.sports track by $index">
+                            <span class="label label-primary">{{sport}}</span>
                           </li>
                         </ul>
                       </div>
@@ -96,13 +99,13 @@
                           <li>
                             Teams:
                           </li>
-                          <li ng-repeat="team in article.teams">
-                            <span class="label label-success">{{team}}</span>
+                          <li ng-repeat="team in article.teams track by $index">
+                            <span class="label label-primary">{{team}}</span>
                           </li>
                         </ul>
                       </div>
                       <div class="list-group-item">
-                        <button type="button" class="btn btn-block btn-primary">Review</button>
+                        <button type="button" class="btn btn-block btn-primary" ui-sref="article({id: article._id})">Review</button>
                       </div>
                     </div>
                   </div>
@@ -120,7 +123,7 @@
     <section class="col-sm-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          Recent Questions
+          Your Questions
         </div>
         <div class="panel-body">
           <div class="home-well well" ng-show="!user.questions.length">

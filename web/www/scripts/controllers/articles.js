@@ -6,6 +6,7 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
     $scope.nba = [];
     $scope.mlb = [];
     $scope.nfl = [];
+    $scope.loading = true;
   $(function () {
     document.getElementById('articles').parentElement.className = 'activated';
     $timeout(function () {
@@ -47,7 +48,13 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
               $scope.mlb.push(article);
             }
           });
+          $scope.loading = false;
+        } else {
+          $scope.loading = false;
         }
+        $timeout(function() {
+          $scope.$apply();
+        });
       })
       .catch(function (err) {
         console.log(err);
@@ -55,5 +62,9 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   };
   getUser();
   getArticles();
+
+  $scope.testFun = function() {
+    console.log('test');
+  }
 
 });
