@@ -4,7 +4,7 @@
   </div>
   <div ng-show="!loading">
     <div class="row">
-      <div class="col-sm-8" id="top-panel">
+      <div class="col-sm-12" id="top-panel">
         <div class="panel panel-primary">
           <div class="panel-heading">
             Profile Information
@@ -14,24 +14,62 @@
               </a>
             </div>
           </div>
-          <div class="list-group-item media" style="margin-top: 0px; border: none">
-            <div class="pull-left">
-              <img class="img-circle" src="./img/christmas.jpg" style="width: 75px; height: 75px;" />
+          <div class="panel-body" style="background-color: #f5f5f5">
+            <div class="well" id="image-dash">
+              <div class="text-center">
+                <img class="img-circle img-profile" ng-src="{{user.picture}}" alt="{{user.username}}" />
+              </div>
             </div>
-            <div class="media-body">
-              <div class="list">
-                <div class="item">
-                  <span class="fa fa-user-o fa-fw"></span>{{user.username}}
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="list-group home-list" id="card">
+                  <div class="list-group-item">
+                    <span class="fa fa-user fa-fw"></span>{{user.username}}
+                  </div>
+                  <div class="list-group-item">
+                    <span class="fa fa-at fa-fw"></span>{{user.email}}
+                  </div>
                 </div>
-                <div class="item">
-                  <span class="fa fa-at fa-fw"></span>{{user.email}}
+              </div>
+              <div class="col-xs-6">
+                <div class="list-group home-list" id="card">
+                  <div class="list-group-item">
+                    <span class="fa fa-user-o fa-fw"></span>{{user.username}}
+                  </div>
+                  <div class="list-group-item">
+                    <span class="fa fa-at fa-fw"></span>{{user.email}}
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer text-center">
+            <div class="row">
+              <div class="col-xs-6 text-center" ng-show="!user.twitter">
+                <a class="btn btn-block btn-social btn-twitter" ng-click="link('twitter')" href="javascript:void(0)">
+                  <span class="fa fa-twitter" ></span> Link Twitter
+                </a>
+              </div>
+              <div class="col-xs-6 text-center" ng-show="user.twitter">
+                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('twitter')" href="javascript:void(0)" >
+                  <span class="fa fa-twitter" ></span> Unlink Twitter
+                </a>
+              </div>
+              <div class="col-xs-6 text-center" ng-show="!user.facebook">
+                <a class="btn btn-block btn-social btn-facebook" ng-click="link('facebook')" href="javascript:void(0)">
+                  <span class="fa fa-facebook" ></span> Link Facebook
+                </a>
+              </div>
+              <div class="col-xs-6 text-center" ng-show="user.facebook">
+                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('facebook')" href="javascript:void(0)" ng-show="user.facebook">
+                  <span class="fa fa-facebook" ></span> Unlink Facebook
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-4" id="top-panel">
+      <!--<div class="col-sm-4" id="top-panel">
         <div class="panel panel-primary">
           <div class="panel-heading">
             Social Accounts
@@ -63,7 +101,7 @@
           </div>
         </div>
 
-      </div>
+      </div>-->
     </div>
     <div class="row">
       <section class="col-sm-12">
@@ -155,7 +193,6 @@
     <div class="modal-body">
       <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
           <div class="col-md-3">
             <div class="text-center">
               <img src="//placehold.it/100" class="avatar img-circle" alt="" ng-show="!user.picture">
@@ -163,8 +200,6 @@
               <button type="button" class="btn btn-primary form-control" ng-click="upload()" id="filePickerBtn">Upload</button>
             </div>
           </div>
-
-          <!-- edit form column -->
           <div class="col-md-9 personal-info">
             <h3>Account Information</h3>
 

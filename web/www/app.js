@@ -63,6 +63,10 @@ angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.b
             }
         }
 
+        $authProvider.facebook({
+          clientId: '289121131435901'
+        });
+
         angular.extend(toastrConfig, {
             autoDismiss: true,
             containerId: 'toast-container',

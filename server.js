@@ -15,6 +15,8 @@ var request = require('request');
 
 var userSchema = new mongoose.Schema ({
   username: String,
+  facebook: String,
+  picture: {type: mongoose.Schema.Types.Mixed},
   email: String,
   password: {
     type: String,
@@ -420,7 +422,7 @@ app.post('/auth/facebook', function(req, res) {
             }
             user.facebook = profile.id;
             user.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
-            user.username = user.username || profile.name;
+            //user.username = user.username || profile.name;
             user.save(function() {
               var token = createJWT(user);
               res.send({

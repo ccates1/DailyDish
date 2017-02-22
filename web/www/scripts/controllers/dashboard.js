@@ -50,14 +50,22 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
     };
 
     $scope.link = function(provider) {
-      $auth.link(provider)
-      .then(function() {
-        toastr.success('You have successfully linked a ' + provider + ' account');
-        getUser();
-      })
-      .catch(function(response) {
-        toastr.error(response.data.message, response.status);
-      });
+      $auth.authenticate(provider)
+        .then(function() {
+          toastr.success('You have successfully signed in with ' + provider + '!');
+          $location.path('/');
+        })
+        .catch(function(error) {
+          if (error.error) {
+            // Popup error - invalid redirect_uri, pressed cancel button, etc.
+            toastr.error(error.error);
+          } else if (error.data) {
+            // HTTP response error from server
+            toastr.error(error.data.message, error.status);
+          } else {
+            toastr.error(error);
+          }
+        });
     };
     $scope.unlink = function(provider) {
       $auth.unlink(provider)

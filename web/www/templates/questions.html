@@ -19,13 +19,25 @@
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="all">
       <div class="list-group">
+        <div class="well" id="questions-well">
+            <div class="card">
+              <img src="//placehold.it/75" class="avatar img-circle" />
+            </div>
+        </div>
+      </div>
+      <a type="button" class="list-group-item" ng-repeat="article in articles track by $index" id="testRow" ui-sref="article({id: article._id})">
+        <div class="well" id="article-well" >
+        </div>
+      </a>
+      </div>
+      <div class="list-group">
         <div class="list-group-item">
             <div class="col-xs-4 group-item">
               <img src="//placehold.it/75" class="avatar img-circle" />
             </div>
             <div class="col-xs-8">
               <div class="well">
-                
+
               </div>
             </div>
         </div>
