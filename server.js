@@ -95,7 +95,8 @@ var questionSchema = new mongoose.Schema ({
       ref: 'User'
     }
   }],
-  sport: String
+  sport: String,
+    date: String
 });
 var Question = mongoose.model('Question', questionSchema);
 
@@ -256,16 +257,6 @@ app.post('/auth/signup', function(req, res) {
   });
 });
 
-app.get('/questions', function(req, res, next) {
-  Question.find({}, function(err, questions) {
-    Question.populate(req.question, {
-      path: 'author answers'
-    }).then(function() {
-      res.json(questions);
-    });
-  });
-});
-
 app.get('/articles', function(req, res, next) {
   var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
   Article.find({}, function(err, articles) {
@@ -292,9 +283,23 @@ app.get('/articles/:article', function(req, res, next) {
   });
 });
 
+
+app.get('/questions', function(req, res, next) {
+  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
+  Question.find({}, function(err, questions) {
+    Question.populate(questions, q)
+      .then(function() {
+        res.json(questions);
+      })
+      .catch(function(err) {
+        throw(err);
+      });
+  });
+});
+
 app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
-  Questions.findById(req.question, function(err, question) {
+  var q = [{ path: 'author', select: 'username' }, { path: 'answers' }];
+  Question.findById(req.question, function(err, question) {
     Question.populate(question, q)
       .then(function() {
         res.json(question);

@@ -18,10 +18,36 @@
   </ul>
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="all">
+      <ul class="chat list-group">
+        <li class="left clearfix list-group-item" id="question-list" ng-repeat="question in questions track by $index">
+          <span class="chat-img pull-left">
+            <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
+          </span>
+          <div class="chat-body clearfix">
+            <div class="header">
+              <strong class="primary-font">{{question.author.username}}</strong>
+              <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+              </small>
+              </div>
+              <p class="text-wrap question-p">
+                {{question.content}}
+              </p>
+              <small class="pull-right text-muted">
+                Answers:
+              </small>
+            </div>
+        </li>
+      </ul>
       <div class="list-group">
         <div class="well" id="questions-well">
             <div class="card">
-              <img src="//placehold.it/75" class="avatar img-circle" />
+              <div class="media pull-left">
+                <img src="//placehold.it/75" class="avatar img-circle" />
+              </div>
+              <div class="media-body">
+                test
+              </div>
             </div>
         </div>
       </div>

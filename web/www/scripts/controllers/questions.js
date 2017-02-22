@@ -94,7 +94,7 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
     };
 });
 
-app.controller('QuestionModalInstanceCtrl', function($scope, $uibModalInstance, $service, toastr) {
+app.controller('QuestionModalInstanceCtrl', function($scope, $uibModalInstance, $service, toastr, $state, moment) {
   $scope.tagOutput = [];
   $scope.error = false;
 
@@ -105,11 +105,12 @@ app.controller('QuestionModalInstanceCtrl', function($scope, $uibModalInstance, 
     if($scope.tagOutput.length > 0) {
       $scope.question.sport = $scope.tagOutput[0].name;
       $scope.question.author = $scope.user._id;
+      $scope.question.date = moment.now();
       $service.submitQuestion($scope.question)
         .then(function(res) {
           $uibModalInstance.dismiss('cancel');
           toastr.success('Your question has been posted!', 'Success');
-          $state.go('questions');
+          $state.reload();
         })
         .catch(function(err) {
           $uibModalInstance.dismiss('cancel');
