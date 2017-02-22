@@ -1,136 +1,207 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8" id="top-panel">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Profile Information
-          <div class="pull-right">
-            <a href="javascript:void(0)" ng-click="" id="edit">
-              <i class="fa fa-pencil-square-o fa-lg"></i>
-            </a>
-          </div>
-        </div>
-        <div class="list-group-item media" style="margin-top: 0px; border: none">
-          <div class="pull-left">
-            <img class="img-rounded" src="./img/christmas.jpg" style="width: 75px; height: 75px;" />
-          </div>
-          <div class="media-body">
-            <div class="list">
-              <div class="item">
-                <span class="fa fa-user-o fa-fw"></span>{{user.username}}
-              </div>
-              <div class="item">
-                <span class="fa fa-at fa-fw"></span>{{user.email}}
-              </div>
+<div class="container page-content-wrapper">
+  <div ng-show="loading">
+    <div class="loader"></div>
+  </div>
+  <div ng-show="!loading">
+    <div class="row">
+      <div class="col-sm-8" id="top-panel">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Profile Information
+            <div class="pull-right">
+              <a href="javascript:void(0)" ng-click="open()" id="edit">
+                <i class="fa fa-pencil-square-o fa-lg"></i>
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4" id="top-panel">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Social Accounts
-        </div>
-        <div class="list-group" style="margin-top: 0px; border: none">
-          <div class="list-group-item">
-            <a class="btn btn-block btn-social btn-twitter">
-              <span class="fa fa-twitter"></span> Link Twitter
-            </a>
-          </div>
-          <div class="list-group-item">
-            <a class="btn btn-block btn-social btn-facebook">
-              <span class="fa fa-facebook"></span> Link Facebook
-            </a>
-          </div>
-          <div class="list-group-item">
-            <a class="btn btn-block btn-social btn-instagram">
-              <span class="fa fa-instagram"></span> Link Instagram
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <section class="col-sm-12">
-      <div class="panel panel-primary" >
-        <div class="panel-heading">
-          Your Articles
-          <span class="badge badge-default pull-right"
-            style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
-        </div>
-        <div class="panel-body" style="padding: 0px;">
-          <div class="home-well well" ng-show="!user.articles.length">
-            No articles to display.
-          </div>
-          <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
-            <div class="row row-horizon">
-              <div class="col-md-5 text-center"
-                ng-repeat="article in user.articles track by $index">
-                <div class="info-card">
-                  <div class="front">
-                    <div class="card-image-background">
-                      <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-                    </div>
-                    <div class="list-group">
-                      <div class="list-group-item">
-                        Title: {{article.title}}
-                      </div>
-                      <div class="list-group-item">
-                        Date: {{article.date | amCalendar}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="back">
-                    <div class="list-group">
-                      <div class="list-group-item offset-padding">
-                        <ul class="list-inline">
-                          <li>
-                            Sports:
-                          </li>
-                          <li ng-repeat="sport in article.sports track by $index">
-                            <span class="label label-primary">{{sport}}</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="list-group-item offset-padding">
-                        <ul class="list-inline">
-                          <li>
-                            Teams:
-                          </li>
-                          <li ng-repeat="team in article.teams track by $index">
-                            <span class="label label-primary">{{team}}</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="list-group-item">
-                        <button type="button" class="btn btn-block btn-primary" ui-sref="article({id: article._id})">Review</button>
-                      </div>
-                    </div>
-                  </div>
+          <div class="list-group-item media" style="margin-top: 0px; border: none">
+            <div class="pull-left">
+              <img class="img-circle" src="./img/christmas.jpg" style="width: 75px; height: 75px;" />
+            </div>
+            <div class="media-body">
+              <div class="list">
+                <div class="item">
+                  <span class="fa fa-user-o fa-fw"></span>{{user.username}}
                 </div>
-
+                <div class="item">
+                  <span class="fa fa-at fa-fw"></span>{{user.email}}
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-    </section>
-  </div>
-  <div class="row">
-    <section class="col-sm-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Your Questions
-        </div>
-        <div class="panel-body">
-          <div class="home-well well" ng-show="!user.questions.length">
-            No questions to display.
+      <div class="col-sm-4" id="top-panel">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Social Accounts
+          </div>
+          <div class="panel-body">
+            <div class="list-group" style="margin-top: 0px; border: none">
+              <div class="list-group-item" ng-show="!user.twitter">
+                <a class="btn btn-block btn-social btn-twitter" ng-click="link('twitter')" href="javascript:void(0)">
+                  <span class="fa fa-twitter" ></span> Link Twitter
+                </a>
+              </div>
+              <div class="list-group-item" ng-show="user.twitter">>
+                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('twitter')" href="javascript:void(0)" ng-show="user.twitter">
+                  <span class="fa fa-twitter"></span> Unlink Twitter
+                </a>
+              </div>
+              <div class="list-group-item" ng-show="!user.facebook">
+                <a class="btn btn-block btn-social btn-facebook" ng-click="link('facebook')" href="javascript:void(0)">
+                  <span class="fa fa-facebook"></span> Link Facebook
+                </a>
+              </div>
+              <div class="list-group-item" ng-show="user.facebook">
+                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('facebook')" href="javascript:void(0)">
+                  <span class="fa fa-facebook"></span> Unlink Facebook
+                </a>
+              </div>
+
+            </div>
           </div>
         </div>
+
       </div>
-    </section>
+    </div>
+    <div class="row">
+      <section class="col-sm-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Your Articles
+            <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
+          </div>
+          <div class="panel-body" style="padding: 0px;">
+            <div class="home-well well" ng-show="!user.articles.length">
+              No articles to display.
+            </div>
+            <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
+              <div class="row row-horizon">
+                <div class="col-md-5 text-center" ng-repeat="article in user.articles track by $index">
+                  <div class="info-card">
+                    <div id="front">
+                      <div class="card-image-background">
+                        <img class="img-rounded card-dash" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                      </div>
+                      <div class="list-group list-group-dash">
+                        <div class="list-group-item">
+                          Title: {{article.title}}
+                        </div>
+                        <div class="list-group-item">
+                          Date: {{article.date | amCalendar}}
+                        </div>
+                      </div>
+                    </div>
+                    <div id="back">
+                      <div class="list-group">
+                        <div class="list-group-item offset-padding">
+                          <ul class="list-inline">
+                            <li>
+                              Sports:
+                            </li>
+                            <li ng-repeat="sport in article.sports track by $index">
+                              <span class="label label-primary">{{sport}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="list-group-item offset-padding">
+                          <ul class="list-inline">
+                            <li>
+                              Teams:
+                            </li>
+                            <li ng-repeat="team in article.teams track by $index">
+                              <span class="label label-primary">{{team}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="list-group-item">
+                          <button type="button" class="btn btn-block btn-primary" ui-sref="article({id: article._id})">Review</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="row">
+      <section class="col-sm-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Your Questions
+          </div>
+          <div class="panel-body">
+            <div class="home-well well" ng-show="!user.questions.length">
+              No questions to display.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="modalEdit.html">
+  <div close="cancel()">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Edit Profile <i class="fa ion-close-round fa-2w pull-right" ng-click="cancel()"></i></h3>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+              <img src="//placehold.it/100" class="avatar img-circle" alt="" ng-show="!user.picture">
+              <h6>Update Profile Picture</h6>
+              <button type="button" class="btn btn-primary form-control" ng-click="upload()" id="filePickerBtn">Upload</button>
+            </div>
+          </div>
+
+          <!-- edit form column -->
+          <div class="col-md-9 personal-info">
+            <h3>Account Information</h3>
+
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Username:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="user.username">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Email:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="text" ng-model="user.email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Password:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="password" ng-model="user.password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Confirm password:</label>
+                <div class="col-lg-8">
+                  <input class="form-control" type="password" ng-model="user.confirmPassword">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-lg">Submit</button>
+      <button class="btn btn-deafult btn-lg" ng-click="cancel()">Close</button>
+    </div>
+  </div>
+  </div>
+</script>

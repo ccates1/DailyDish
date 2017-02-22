@@ -2,13 +2,15 @@
   <div class="well">
     <div class="page-header text-center" style="padding-bottom: 0px;">
       <h2>{{article.title}}</h2>
-      <p class="lead">
+      <p style="font-style: italic">
         Posted: {{article.date | amCalendar}} <br />
-        By: {{article.author.username}}
       </p>
-
+      <p class="lead">
+        Author: {{article.author.username}}
+      </p>
     </div>
     <div class="row">
+
       <div class="col-xs-12 border-photo">
         <img class="img-responsive center-block img-rounded"
         ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:400, h:200} }}"
@@ -40,8 +42,7 @@
       </div>
     </div>
     <div class="container-fluid" style="margin-top: 20px;">
-      {{article.content}}dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe vdfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe dfnweqfn,jqrf eweowjfwkelfjwlkef ekjfweklf jewkfjewklf jewkfj weklfj klewj fklewjf klewj fklewj flkew jfklewjf klew jfklew jfklew jfklew jfklewfj klwe jfklweq jflkqew jflkqwe jfklqwe fjklew fjlkwe jflkeqw jfkleqw fjweqkfj lkqwejf lkwe jflkweq jflkqwej flkwqej flkewj fklewqj flke wqjfkl jweqklfjweqlkfj lqkwe v
+      {{article.content}}
     </div>
-
   </div>
 </div>

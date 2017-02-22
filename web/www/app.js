@@ -1,7 +1,8 @@
-angular.module('dailydish', ['dailydish.services', 'isteven-multi-select',
+angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.bootstrap',
         'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker', 'angularMoment'
     ])
-    .config(function($stateProvider, $urlRouterProvider, $authProvider, toastrConfig, filepickerProvider) {
+    .config(function($stateProvider, $urlRouterProvider, $authProvider, toastrConfig, filepickerProvider, $qProvider) {
+      $qProvider.errorOnUnhandledRejections(false);
         $stateProvider
             .state('login', {
                 url: '/login',

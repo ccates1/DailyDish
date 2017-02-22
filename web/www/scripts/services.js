@@ -12,7 +12,10 @@ angular.module('dailydish.services', [])
     this.articlesList = function() {
       return $http.get('/articles');
     };
-    this.getSecret = function() {
-      return $http.get('/test');
-    }
+    this.submitQuestion = function(question) {
+      return $http.post('/questions', question);
+    };
+    this.questionsList = function() {
+      return $http.get('/questions');
+    };
   });

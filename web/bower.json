@@ -14,7 +14,8 @@
     "Ionicons": "ionicons#^2.0.1",
     "moment": "^2.17.1",
     "angular-moment": "^1.0.1",
-    "angular-filepicker": "1.1.4"
+    "angular-filepicker": "1.1.4",
+    "angular-bootstrap": "^2.5.0"
   },
   "resolutions": {
     "angular": "^1.6.2",
