@@ -22,22 +22,36 @@
             </div>
             <div class="row">
               <div class="col-xs-6">
-                <div class="list-group home-list" id="card">
+                <div class="list-group home-list" id="home-card">
                   <div class="list-group-item">
-                    <span class="fa fa-user fa-fw"></span>{{user.username}}
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-user fa-stack-1x"></i>
+                    </span>
+                    {{user.username}}
                   </div>
                   <div class="list-group-item">
-                    <span class="fa fa-at fa-fw"></span>{{user.email}}
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-at fa-stack-1x"></i>
+                    </span>
+                    {{user.email}}
                   </div>
                 </div>
               </div>
               <div class="col-xs-6">
-                <div class="list-group home-list" id="card">
+                <div class="list-group home-list" id="home-card">
                   <div class="list-group-item">
-                    <span class="fa fa-user-o fa-fw"></span>{{user.username}}
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-university fa-stack-1x"></i>
+                    </span> Guru Rating: {{user.rating || 0}}
                   </div>
                   <div class="list-group-item">
-                    <span class="fa fa-at fa-fw"></span>{{user.email}}
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-line-chart fa-stack-1x"></i>
+                    </span> Questions Answered: {{user.answers.length || 0}}
                   </div>
                 </div>
               </div>
@@ -175,7 +189,7 @@
             Your Questions
           </div>
           <div class="panel-body">
-            <div class="home-well well" ng-show="!user.questions.length">
+            <div class="home-well well" ng-if="!user.questions">
               No questions to display.
             </div>
           </div>

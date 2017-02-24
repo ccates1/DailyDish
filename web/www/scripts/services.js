@@ -18,4 +18,7 @@ angular.module('dailydish.services', [])
     this.questionsList = function() {
       return $http.get('/questions');
     };
+    this.getQuestion = function(id) {
+      return $http.get('/questions/' + id);
+    };
   });

@@ -47,6 +47,21 @@ angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.b
                 templateUrl: 'templates/questions.html',
                 controller: 'QuestionsCtrl'
             })
+            .state('question', {
+              url: '/questions/{id}',
+              templateUrl: 'templates/question.html',
+              controller: 'QuestionCtrl',
+              resolve: {
+                question: [
+                  '$stateParams', '$service', '$q',
+                  function($stateParams, $service, $q) {
+                    return $service.getQuestion($stateParams.id).then(function(res) {
+                      return res.data;
+                    });
+                  }
+                ]
+              }
+            })
             .state('articleTemplate', {
                 url: '/articleTemplate',
                 templateUrl: 'templates/articleTemplate.html',

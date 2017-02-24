@@ -71,7 +71,9 @@ var articleSchema = new mongoose.Schema ({
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
+    likes: Number,
+    dislikes: Number
   }],
   sports: [String],
   teams: [String],
@@ -93,10 +95,13 @@ var questionSchema = new mongoose.Schema ({
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
-    }
+    },
+    likes: Number,
+    dislikes: Number,
+    date: String
   }],
   sport: String,
-    date: String
+  date: String
 });
 var Question = mongoose.model('Question', questionSchema);
 
@@ -200,7 +205,7 @@ app.param('question', function(req, res, next, id) {
     if(err) {
       return next(err);
     }
-    if(!article) {
+    if(!question) {
       return next(new Error('Error - the question requested could not be found.'));
     }
     req.question = question;
@@ -298,7 +303,7 @@ app.get('/questions', function(req, res, next) {
 });
 
 app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username' }, { path: 'answers' }];
+  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
   Question.findById(req.question, function(err, question) {
     Question.populate(question, q)
       .then(function() {

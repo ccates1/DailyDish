@@ -5,23 +5,56 @@ body {
     padding-top: 90px;
 }
 
+.media {
+  padding-top: 10px;
+}
+
+#no-articles {
+  margin-top: 6.5px;
+
+}
+
+.list-group-dash .list-group-item {
+  font-size: 15px;
+}
+
+.well-lg {
+  margin-right: 10px;
+}
+.no-q {
+  font-size: 15px !important;
+}
+
+
 .logo {
     width: 100px;
     height: 100px;
     margin-top: -20px;
 }
 
+#q-image {
+  width: 150px !important;
+  height: 120px !important;
+}
+
 .navbar-brand {
     padding: 0px !important;
+}
+
+.title {
+  margin: 5px 0px !important;
 }
 
 .avatar {
     padding: 10px 10px !important;
 }
 
+.form-fa {
+  color: #FFFFFF !important;
+}
+
 .home-list {
     margin-bottom: 0px !important;
-    text-align: center !important;
 }
 
 #image-dash {
@@ -40,14 +73,11 @@ body {
     padding-bottom: 5px;
 }
 
-#questions-well {
-    padding: 0px !important;
-}
-
 .list-group-item {
     padding: 8px 10px ;
     font-weight: bold !important;
     color: #000;
+    font-size: 18px;
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
@@ -364,19 +394,49 @@ legend {
     padding-right: 0px !important;
 }
 
-#testRow {
-    border: 2px groove #2c3e50;
+#articles-container {
+  padding: 0px !important;
+  margin-top: 6.5px !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+
+}
+
+#question-row {
+    border-bottom: 2px groove #2c3e50;
+    border-left: 2px groove #2c3e50;
+    border-right: 2px groove #2c3e50;
     padding: 0px !important;
     margin: 0px !important;
 }
 
+#question-row-parent:first-child {
+  border-top: 2px groove #2c3e50;
+}
+
 #question-list {
-    border: 2px groove #2c3e50 !important;
+  margin-top: 6.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  padding: 8px 10px !important;
+}
+
+#question-well {
+  padding: 4px 8px !important;
+  border-top: 2px groove #2c3e50 !important;
 }
 
 #card>.list-group-item {
     font-size: 15px;
+    padding: 5px 0px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.h4 {
+  margin-top: 5.5px !important;
+  margin-bottom: 1.5px !important;
+}
+
+small {
+  font-size: 70% !important;
 }
 
 #card {
@@ -384,9 +444,21 @@ legend {
     margin-bottom: 12px !important;
 }
 
+#home-card {
+  margin-top: 0px !important;
+  margin-bottom: 12px !important;
+}
+
+#home-card > .list-group-item {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-size: 15px;
+}
+
 #article-well {
     margin-bottom: 0px;
     padding: 0px 10px !important;
+    border: 0px;
+    border-radius: 0px;
 }
 
 #header-card {
@@ -402,9 +474,8 @@ input {
 }
 
 .fa {
-    font-size: 24px !important;
-    vertical-align: middle !important;
-    color: #2c3e50 !important;
+  line-height: inherit;
+    color: #2c3e50;
 }
 
 .row.vdivide [class*='col-']:not(:last-child):after {
@@ -607,6 +678,10 @@ input {
     -webkit-perspective: 600px;
 }
 
+.fa-sm {
+  font-size: 12px;
+}
+
 #front, #back {
     border-radius: 10px;
     transition: -webkit-transform 1s;
@@ -635,8 +710,12 @@ input {
     -webkit-transform: rotateY(-180deg);
 }
 
+.item-articles {
+  line-height: 1;
+}
+
 .card-image {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .info-card:hover #back {
@@ -669,10 +748,20 @@ input {
     border-top: 0;
 }
 
+.pull-custom {
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   margin-bottom: -8px;
+}
+
 .card .list-group-item:last-child {
     border-bottom: 0;
 }
 
+.card .chat {
+  padding: 10px 10px;
+}
 .card, h4 {
     margin-left: 15px;
     margin-right: 15px;
@@ -781,12 +870,6 @@ input {
     padding: 0;
 }
 
-.chat li {
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
-}
-
 .chat li.left .chat-body {
     padding-left: 25px !important;
     margin-left: 60px;
@@ -807,10 +890,19 @@ input {
 }
 
 .question-p {
-  line-height: 1.1 !important;
+  font-size: 13px;
+  line-height: 1.2 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
 }
 
 .next-line {
   text-align: center;
   padding-top: 2px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #2c3e50 !important;
 }

@@ -1,5 +1,6 @@
 <div class="container">
   <div class="well">
+    <i class="fa ion-close-round fa-2x pull-right"></i>
     <div class="page-header text-center" style="padding-bottom: 0px;">
       <h2>{{article.title}}</h2>
       <p style="font-style: italic">
@@ -21,7 +22,10 @@
           <div class="list-group-item">
             <ul class="list-inline">
               <li>
-                <i class="fa ion-ios-basketball fa-fw"></i> Sports:
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                </span> Sports:
               </li>
               <li ng-repeat="sport in article.sports">
                 <span class="label label-primary">{{sport}}</span>
@@ -31,7 +35,10 @@
           <div class="list-group-item">
             <ul class="list-inline">
               <li>
-                <i class="fa fa-users fa-fw"></i> Teams:
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-users fa-stack-1x"></i>
+                </span> Teams:
               </li>
               <li ng-repeat="team in article.teams">
                 <span class="label label-primary">{{team}}</span>
@@ -43,6 +50,21 @@
     </div>
     <div class="container-fluid" style="margin-top: 20px;">
       {{article.content}}
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Comments
+    </div>
+    <div class="panel-body">
+      <ul class="chat list-group">
+        <li class="left clearfix list-group-item" ng-repeat="comment in article.comments">
+          <div ng-show="!article.comments" class="well">
+            No comments to show here.
+          </div>
+          <
+        </li>
+      </ul>
     </div>
   </div>
 </div>
