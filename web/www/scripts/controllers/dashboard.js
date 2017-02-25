@@ -26,6 +26,12 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
         if($scope.user.articles.length > 0) {
           $scope.emptyArticleFeed = true;
         }
+        if($scope.user.questions.length === 0) {
+          $scope.emptyQuestionFeed = true;
+        }
+        if(!$scope.user.picture) {
+          $scope.user.picture = '../img/default.png';
+        }
         $scope.loading = false;
       })
       .catch(function(err) {

@@ -22,13 +22,16 @@
   <div class="tab-content clearfix" ng-hide="loading">
     <div class="tab-pane active" id="all">
       <div ng-if="!questions.length">
-        <div class="well" id="question-row-parent">
+        <div class="well" >
           <div class="no-q list-group-item">
               No questions to display.
           </div>
         </div>
       </div>
       <div ng-if="questions.length">
+        <div class="question-row-parent">
+          
+        </div>
         <div class="well" id="question-well">
           <ul class="chat list-group">
             <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in questions track by $index" id="question-list">

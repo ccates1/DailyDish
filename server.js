@@ -11,6 +11,7 @@ var morgan = require('morgan');
 var moment = require('moment');
 var mongoose = require('mongoose');
 var path = require('path');
+var qs = require('querystring');
 var request = require('request');
 
 var userSchema = new mongoose.Schema ({
@@ -245,7 +246,8 @@ app.post('/auth/signup', function(req, res) {
     var user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      picture: 'web/www/img/default.png'
       //picture: 'stylesheets/images/profilepic.jpg'--------------------------<<
     });
     console.log(user);

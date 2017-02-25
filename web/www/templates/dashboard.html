@@ -124,13 +124,13 @@
             Your Articles
             <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
           </div>
-          <div class="panel-body" style="padding: 0px;">
+          <div class="panel-body">
             <div class="home-well well" ng-show="!user.articles.length">
               No articles to display.
             </div>
             <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
               <div class="row row-horizon">
-                <div class="col-md-5 text-center" ng-repeat="article in user.articles track by $index">
+                <div class="col-md-4 text-center" ng-repeat="article in user.articles track by $index">
                   <div class="info-card">
                     <div id="front">
                       <div class="card-image-background">
@@ -189,7 +189,7 @@
             Your Questions
           </div>
           <div class="panel-body">
-            <div class="home-well well" ng-if="!user.questions">
+            <div class="home-well well" ng-show="!emptyQuestionFeed">
               No questions to display.
             </div>
           </div>
