@@ -21,4 +21,8 @@ angular.module('dailydish.services', [])
     this.getQuestion = function(id) {
       return $http.get('/questions/' + id);
     };
+    this.addAnswer = function(question, answer) {
+      console.log(question);
+      return $http.put('/questions/' + question._id, answer);
+    }
   });

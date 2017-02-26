@@ -5,6 +5,7 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
     $scope.userArticles = [];
     $scope.emptyArticleFeed = false;
     $scope.emptyQuestionFeed = false;
+    $scope.comment = '';
     $scope.loading = true;
     $(function() {
       document.getElementById('dashboard').parentElement.className = 'activated';
@@ -82,6 +83,11 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
       .catch(function(response) {
         toastr.error(response.data ? response.data.message : 'Could not unlink ' + provider + ' account', response.status);
       });
+    };
+
+    $scope.postComment = function(content) {
+      console.log(content);
+
     };
 
   });

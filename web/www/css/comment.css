@@ -107,7 +107,7 @@
 .img-q {
   width: 64px;
   height: 64px;
-  padding-right: 10px;
+  margin-right: 10px;
 }
 .post .post-footer .comments-list .comment .comment-heading .time {
   font-size: 12px;

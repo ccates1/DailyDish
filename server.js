@@ -36,8 +36,13 @@ var userSchema = new mongoose.Schema ({
     ref: 'Article'
   }],
   answers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Question'
+    content: String,
+    rating: Number,
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    date: String
   }]
 });
 userSchema.pre('save', function(next) {
@@ -305,7 +310,7 @@ app.get('/questions', function(req, res, next) {
 });
 
 app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
+  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers.author', select: 'username, picture'}];
   Question.findById(req.question, function(err, question) {
     Question.populate(question, q)
       .then(function() {
@@ -357,6 +362,25 @@ app.post('/articles', function(req, res, next) {
       return next(err);
     }
     res.send(article);
+  });
+});
+
+app.put('/questions/:question', function(req, res, next) {
+  var answer = req.body;
+  User.findById(req.body.author, function(err, user) {
+    user.answers.push(answer);
+    user.save(function(err) {
+      if(err) {
+        return next(err);
+      }
+    });
+  });
+  req.question.answers.push(answer);
+  req.question.save(function(err, question) {
+    if(err) {
+      return next(err);
+    }
+    res.send(question);
   });
 });
 

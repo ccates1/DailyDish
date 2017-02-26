@@ -120,5 +120,5 @@ app.controller('QuestionModalInstanceCtrl', function($scope, $uibModalInstance, 
     } else {
       $scope.error = true;
     }
-  }
+  };
 });
