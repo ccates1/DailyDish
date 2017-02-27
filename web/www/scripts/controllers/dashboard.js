@@ -74,6 +74,7 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
           }
         });
     };
+
     $scope.unlink = function(provider) {
       $auth.unlink(provider)
       .then(function() {
@@ -85,17 +86,27 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
       });
     };
 
-    $scope.postComment = function(content) {
-      console.log(content);
-
-    };
-
   });
 
-  app.controller('DashboardModalInstanceCtrl', function($scope, $uibModalInstance) {
-    console.log($scope.user);
-
+  app.controller('DashboardModalInstanceCtrl', function($scope, $uibModalInstance, filepickerService) {
     $scope.cancel = function () {
       $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.upload = function () {
+      filepickerService.pick({
+          mimetype: 'image/*',
+          language: 'en',
+          services: ['COMPUTER', 'FACEBOOK'],
+          openTo: 'COMPUTER',
+          container: 'window',
+          maxSize: '1048576'
+        },
+        function (Blob) {
+          console.log(JSON.stringify(Blob));
+          $scope.user.picture = Blob;
+          $scope.$apply();
+        }
+      );
     };
   });

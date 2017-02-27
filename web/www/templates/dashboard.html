@@ -202,20 +202,20 @@
 <script type="text/ng-template" id="modalEdit.html">
   <div close="cancel()">
     <div class="modal-header">
-      <h3 class="modal-title text-center">Edit Profile <i class="fa ion-close-round fa-2w pull-right" ng-click="cancel()"></i></h3>
+      <h3 class="modal-title text-center">Edit Profile:</h3>
     </div>
     <div class="modal-body">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
             <div class="text-center">
-              <img src="//placehold.it/100" class="avatar img-circle" alt="" ng-show="!user.picture">
+              <img ng-src="{{user.picture}}" class="edit-picture avatar img-circle" alt="">
               <h6>Update Profile Picture</h6>
               <button type="button" class="btn btn-primary form-control" ng-click="upload()" id="filePickerBtn">Upload</button>
             </div>
           </div>
           <div class="col-md-9 personal-info">
-            <h3>Account Information</h3>
+            <h3 class="text-center">Account Information:</h3>
 
             <form class="form-horizontal" role="form">
               <div class="form-group">
@@ -248,8 +248,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary btn-lg">Submit</button>
-      <button class="btn btn-deafult btn-lg" ng-click="cancel()">Close</button>
+      <button class="btn btn-info btn-lg">Submit</button>
+      <button class="btn btn-danger btn-lg" ng-click="cancel()">Close</button>
     </div>
   </div>
   </div>

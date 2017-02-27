@@ -5,8 +5,38 @@ body {
     padding-top: 90px;
 }
 
+.text-date {
+  font-size: 50% !important;
+}
+
+.answer-media {
+  padding-top: 0px !important;
+  margin-top: 0px;
+  border-top: 2px groove #2c3e50;
+  border-bottom: 2px groove #2c3e50;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 8px 6px -9px black;
+   -moz-box-shadow: 0 8px 6px -9px black;
+        box-shadow: 0 8px 6px -9px black;
+}
+
+
+
+.modal-header, .modal-footer {
+  background-color: #2c3e50;
+}
+
+.modal-title {
+  color: #FFFFFF;
+}
+
 .media {
   padding-top: 10px;
+}
+
+.btn-sm {
+  border-radius: 20px !important;
+  font-weight: bold !important;
 }
 
 #no-articles {
@@ -58,6 +88,11 @@ body {
 
 .avatar {
     padding: 10px 10px !important;
+}
+
+.edit-picture {
+  max-height: 75px;
+  max-width: 75px;
 }
 
 .form-fa {
@@ -450,11 +485,18 @@ legend {
 
 .h4 {
   margin-top: 5.5px !important;
-  margin-bottom: 1.5px !important;
+  margin-bottom: 1.5px ;
+}
+
+.card-shadow {
+  -webkit-box-shadow: 0 8px 6px -6px black;
+-moz-box-shadow: 0 8px 6px -6px black;
+box-shadow: 0 8px 6px -6px black;
 }
 
 small {
   font-size: 70% !important;
+  color: #2c3e50 !important;
 }
 
 #card {
@@ -914,6 +956,7 @@ input {
 }
 
 .question-p {
+  min-height: 33px;
   font-size: 13px;
   line-height: 1.2 !important;
   overflow: hidden !important;

@@ -1,103 +1,117 @@
+
 <div class="container">
-  <div class="col-xs-12">
-    <div class="panel-q panel-q-white post panel-q-shadow" id="image-dash">
-      <div class="text-center">
-        <div class="image">
-          <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" id="q-image" class="img-circle avatar" />
-        </div>
-        <div class="meta">
-          <div class="title h5">
-            <b>Posted By: {{question.author.username}}</b>
+  <div class="text-left" style="margin-bottom: 10px;">
+    <a type="button" class="btn btn-sm btn-primary" ui-sref="questions"><i class="form-fa fa fa-chevron-circle-left fa-fw"></i> Back</a>
+  </div>
+  <div ng-show="loading">
+    <div class="loader"></div>
+  </div>
+  <div ng-show="!loading">
+    <div class="col-xs-12">
+      <div class="panel-q panel-q-white post panel-q-shadow" id="image-dash">
+        <div class="text-center">
+          <div class="image">
+            <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" id="q-image" class="img-circle avatar" />
           </div>
-          <small class="text-muted time" style="">
-              <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
-            </small>
-        </div>
-        <div class="post-description">
-          <p>
-            {{question.content}}
-          </p>
+          <div class="meta">
+            <div class="title h5">
+              <b>Posted By: {{question.author.username}}</b>
+            </div>
+            <small class="text-muted time" style="">
+                <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+              </small>
+          </div>
+          <div class="post-description">
+            <p>
+              {{question.content}}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-xs-12" style="padding-top: 10px;">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        Answers
-        <div class="pull-right">
-          <a type="button" class="btn btn-sm btn-default" ng-click="openAnswerModal()" style="margin-top: -5px;">Add New</a>
+    <div class="col-xs-12" style="padding-top: 10px;">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Answers
+          <div class="pull-right">
+            <a type="button" class="btn btn-sm btn-default" ng-click="openAnswerModal()" style="margin-top: -5px;">Add New</a>
+          </div>
         </div>
-      </div>
-      <div class="panel-body">
-        <ul class="media-list">
-          <li class="media" ng-repeat="answer in question.answers">
-            <div class="well" style="padding: 5px 10px;">
-              <a class="pull-left" href="#">
-                <img class="img-q img-circle" ng-src="{{answer.author.picture}}" alt="profile">
-              </a>
-              <div class="media-body">
-                <span class="text-muted pull-right">
-                  <small class="text-muted"><span class="glyphicon glyphicon-time"></span> {{answer.date | amCalendar}}</small>
-                </span>
-                <strong class="text-success">{{answer.author.username}}</strong>
-                <small class=""><i class="fa fa-star fa-fw"></i> Guru Rating: {{answer.author.rating || 0}}</small>
-                <p>
-                  {{answer.content}}
-                </p>
-                <div class="panel-footer" style="padding: 5px 5px;">
-                  <ul class="list-inline hidden-xs">
-                    <button type="button" class="btn btn-sm btn-primary">
-                      <span class="badge">{{answer.likes || 0}}</span>
-                      <span class="form-fa fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-primary">
-                      <span class="badge">{{answer.dislikes || 0}}</span>
-                      <span class="form-fa fa fa-thumbs-o-down fa-lg glyphicon-align-right"></span>
-                    </button>
-                  </ul>
-                  <ul class="list-inline hidden-lg hidden-md hidden-sm">
-                    <button type="button" class="btn btn-sm btn-primary">
-                      <span class="badge">{{answer.likes || 0}}</span>
-                      <span class="form-fa fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-primary">
-                      <span class="badge">{{answer.dislikes || 0}}</span>
-                      <span class="form-fa fa fa-thumbs-o-down fa-fw glyphicon-align-right"></span>
-                    </button>
-                  </ul>
+        <div class="panel-body">
+          <ul class="media-list">
+            <li class="answer-media media" ng-repeat="answer in question.answers">
+              <div class="well" style="padding: 5px 10px; margin-bottom: 0px;">
+                <figure>
+                  <a class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
+                    <img class="thumbnail-q img-circle" ng-src="{{answer.author.picture}}" alt="profile">
+                    <figcaption class="text-center">
+                      <strong class="text-success">{{answer.author.username}}</strong>
+                    </figcaption>
+                  </a>
+                </figure>
+                <div class="media-body">
+                  <span class="text-muted pull-right">
+                    <small class="text-muted"><span class="glyphicon glyphicon-time"></span> {{answer.date | amCalendar}}</small>
+                  </span>
+                  <small><i class="fa fa-star fa-fw"></i> Guru Rating: {{answer.author.rating || 0}}</small>
+                  <p>
+                    {{answer.content}}
+                  </p>
+                  <div class="panel-footer" style="padding: 5px 5px;">
+                    <ul class="list-inline hidden-xs">
+                      <button type="button" class="btn btn-sm btn-primary">
+                        <span class="badge">{{answer.likes || 0}}</span>
+                        <span class="form-fa fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary">
+                        <span class="badge">{{answer.dislikes || 0}}</span>
+                        <span class="form-fa fa fa-thumbs-o-down fa-lg glyphicon-align-right"></span>
+                      </button>
+                    </ul>
+                    <ul class="list-inline hidden-lg hidden-md hidden-sm">
+                      <button type="button" class="btn btn-sm btn-primary">
+                        <span class="badge">{{answer.likes || 0}}</span>
+                        <span class="form-fa fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-primary">
+                        <span class="badge">{{answer.dislikes || 0}}</span>
+                        <span class="form-fa fa fa-thumbs-o-down fa-fw glyphicon-align-right"></span>
+                      </button>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
 <script type="text/ng-template" id="answerModal.html">
   <div class="modal-header">
-    <h3 class="modal-title text-center">Submit an Answer: <i class="fa ion-close-round fa-2w pull-right" ng-click="cancel()"></i></h3>
+    <h3 class="modal-title text-center">Submit an Answer:</h3>
   </div>
   <div class="modal-body">
-    <div class="col-xs-12 text-center">
+    <div class="text-center">
       <h4>Question:</h4>
-      <p class="test-muted">
+      <p class="lead">
         {{question.content}}
       </p>
     </div>
     <form class="form-horizontal" method="post" name="answerForm">
       <div class="form-group">
-        <label class="col-lg-3 control-label" style="font-size: 1.2em;">Answer:</label>
+        <label class="text-center" style="font-size: 1.2em;">Answer:</label>
         <div class="col-xs-12">
-          <textarea class="form-control" rows="3" id="question" ng-model="answer.content" required></textarea>
+          <textarea class="form-control" draggable="false" rows="3" id="question" ng-model="answer.content" required></textarea>
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" ng-click="submitAnswer()" ng-disabled="answerForm.$invalid" class="btn btn-primary btn-lg">Submit</button>
-    <button class="btn btn-deafult btn-lg" ng-click="cancel()">Close</button>
+    <button type="button" ng-click="submitAnswer()" ng-disabled="answerForm.$invalid" class="btn btn-info btn-lg">Submit</button>
+    <button class="btn btn-danger btn-lg" ng-click="cancel()">Cancel</button>
   </div>
   </div>
 </script>

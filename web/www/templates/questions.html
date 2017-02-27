@@ -30,7 +30,7 @@
       </div>
       <div ng-if="questions.length">
         <div class="question-row-parent">
-          
+
         </div>
         <div class="well" id="question-well">
           <ul class="chat list-group">
@@ -41,9 +41,9 @@
               </span>
               <div class="chat-body clearfix">
                 <div class="header">
-                  <strong class="primary-font">{{question.author.username}}</strong>
-                  <small class="pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+                  <strong class="text-success">{{question.author.username}}</strong>
+                  <small class="text-date pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                   </small>
                   </div>
                   <p class="text-wrap question-p">
@@ -78,8 +78,8 @@
               <div class="chat-body clearfix">
                 <div class="header">
                   <strong class="primary-font">{{question.author.username}}</strong>
-                  <small class="pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+                  <small class="text-date pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                   </small>
                   </div>
                   <p class="text-wrap question-p">
@@ -114,8 +114,8 @@
               <div class="chat-body clearfix">
                 <div class="header">
                   <strong class="primary-font">{{question.author.username}}</strong>
-                  <small class="pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+                  <small class="text-date pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                   </small>
                   </div>
                   <p class="text-wrap question-p">
@@ -151,8 +151,8 @@
               <div class="chat-body clearfix">
                 <div class="header">
                   <strong class="primary-font">{{question.author.username}}</strong>
-                  <small class="pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amCalendar}}
+                  <small class="text-date pull-right text-muted">
+                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                   </small>
                   </div>
                   <p class="text-wrap question-p">
@@ -171,14 +171,14 @@
 </div>
 <script type="text/ng-template" id="questionModal.html">
   <div class="modal-header">
-    <h3 class="modal-title text-center">Fantasy Question Post <i class="fa ion-close-round fa-2w pull-right" ng-click="cancel()"></i></h3>
+    <h3 class="modal-title text-center">Fantasy Question Post:</h3>
   </div>
   <div class="modal-body">
     <form class="form-horizontal" method="post" name="questionForm">
       <div class="form-group">
         <label class="col-lg-3 control-label" style="font-size: 1.2em;">Question:</label>
         <div class="col-xs-12">
-          <textarea class="form-control" rows="4" id="question" ng-model="question.content" required></textarea>
+          <textarea draggable="false" class="form-control" rows="4" id="question" ng-model="question.content" required></textarea>
         </div>
       </div>
       <div class="form-group">
@@ -197,8 +197,8 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" ng-click="submit(question)" ng-disabled="questionForm.$invalid" class="btn btn-primary btn-lg">Submit</button>
-    <button class="btn btn-deafult btn-lg" ng-click="cancel()">Close</button>
+    <button type="button" ng-click="submit(question)" ng-disabled="questionForm.$invalid" class="btn btn-info btn-lg">Submit</button>
+    <button class="btn btn-danger btn-lg" ng-click="cancel()">Cancel</button>
   </div>
   </div>
 </script>

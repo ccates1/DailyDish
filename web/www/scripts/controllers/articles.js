@@ -1,7 +1,7 @@
 var app = angular.module('dailydish');
 
 app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
-  toastr, $state) {
+  toastr, $state, moment) {
     $scope.articles = [];
     $scope.nba = [];
     $scope.mlb = [];
@@ -62,9 +62,5 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   };
   getUser();
   getArticles();
-
-  $scope.testFun = function() {
-    console.log('test');
-  }
 
 });

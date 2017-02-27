@@ -310,7 +310,7 @@ app.get('/questions', function(req, res, next) {
 });
 
 app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers.author', select: 'username, picture'}];
+  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers.author', select: 'username picture'}];
   Question.findById(req.question, function(err, question) {
     Question.populate(question, q)
       .then(function() {

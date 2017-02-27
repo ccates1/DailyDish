@@ -103,6 +103,10 @@
   margin-top: 0;
   margin-right: 10px;
 }
+.thumbnail-q {
+  width: 64px;
+  height: 64px;
+}
 
 .img-q {
   width: 64px;

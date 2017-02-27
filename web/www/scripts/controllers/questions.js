@@ -1,7 +1,7 @@
 var app = angular.module('dailydish');
 
 app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
-    toastr, $state, $uibModal) {
+    toastr, $state, $uibModal, moment) {
       $scope.articles = [];
       $scope.nba = [];
       $scope.mlb = [];
@@ -49,8 +49,6 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
                 console.log(err);
             });
     };
-    getUser();
-
     var getQuestions = function() {
       $service.questionsList()
         .then(function(res) {
@@ -67,6 +65,9 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
               } else {
                 console.log('WTF?');
               }
+              if(!question.author.picture) {
+                question.author.picture = '../img/default.png';
+              }
             });
             $scope.loading = false;
           }
@@ -79,6 +80,7 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
           $scope.$apply();
         });
     };
+    getUser();
     getQuestions();
 
     $scope.openQuestionModal = function() {
@@ -87,7 +89,7 @@ app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
         ariaDescribedBy: 'mobal-body',
         templateUrl: 'questionModal.html',
         controller: 'QuestionModalInstanceCtrl',
-        size: 'sm',
+        size: 'lg',
         scope: $scope,
         backdrop: 'static'
       });

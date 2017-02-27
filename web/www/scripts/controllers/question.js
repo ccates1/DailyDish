@@ -3,29 +3,42 @@ var app = angular.module('dailydish');
 app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   question, toastr, $state, moment, $uibModal) {
   $scope.question = question;
-  console.log(question);
-  var getUser = function() {
+  $scope.loading = true;
+  var getUser = function () {
     $service.getUser()
-    .then(function(res) {
-      $scope.user = res.data;
-      $scope.loading = false;
-    })
-    .catch(function(err) {
-      $timeout(function() {
-        $state.go('login');
+      .then(function (res) {
+        $scope.user = res.data;
+        if ($scope.question.answers.length > 0) {
+          listQuestions();
+        } else {
+          $scope.loading = false;
+        }
+      })
+      .catch(function (err) {
+        $timeout(function () {
+          $state.go('login');
+        });
+        console.log(err);
       });
-      console.log(err);
+  };
+  var listQuestions = function () {
+    $scope.question.answers.forEach(function (answer) {
+      if (!answer.author.picture) {
+        answer.author.picture = '../img/default.png';
+      }
     });
+    $scope.loading = false;
   };
   getUser();
+  listQuestions();
 
-  $scope.openAnswerModal = function() {
+  $scope.openAnswerModal = function () {
     $uibModal.open({
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'mobal-body',
       templateUrl: 'answerModal.html',
       controller: 'AnswerModalInstanceCtrl',
-      size: 'sm',
+      size: 'lg',
       scope: $scope,
       backdrop: 'static'
     });
@@ -33,11 +46,15 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
 
 });
 
-app.controller('AnswerModalInstanceCtrl', function($scope, $uibModalInstance, $service, toastr, $state, moment) {
+app.controller('AnswerModalInstanceCtrl', function ($scope, $uibModalInstance, $service, toastr, $state, moment) {
   $scope.answer = {};
 
-  $scope.submitAnswer = function() {
-    if($scope.answer.content === '') {
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $scope.submitAnswer = function () {
+    if ($scope.answer.content === '') {
       toastr.err("Answer is blank.");
       return;
     } else {
@@ -47,11 +64,11 @@ app.controller('AnswerModalInstanceCtrl', function($scope, $uibModalInstance, $s
       $scope.answer.likes = 0;
       $scope.answer.dislikes = 0;
       $service.addAnswer($scope.question, $scope.answer)
-        .then(function(res) {
+        .then(function (res) {
           $state.reload();
           toastr.success('Your answer has been posted!', 'Success');
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           toastr.error('There was an error when submitting your comment.');
         });
