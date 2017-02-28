@@ -58,25 +58,18 @@
                     {{answer.content}}
                   </p>
                   <div class="panel-footer" style="padding: 5px 5px;">
-                    <ul class="list-inline hidden-xs">
-                      <button type="button" class="btn btn-sm btn-primary">
+                    <ul class="list-inline">
+                      <li>
                         <span class="badge">{{answer.likes || 0}}</span>
-                        <span class="form-fa fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">{{answer.dislikes || 0}}</span>
-                        <span class="form-fa fa fa-thumbs-o-down fa-lg glyphicon-align-right"></span>
-                      </button>
-                    </ul>
-                    <ul class="list-inline hidden-lg hidden-md hidden-sm">
-                      <button type="button" class="btn btn-sm btn-primary">
+                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
+                      </li>
+                      <li>
                         <span class="badge">{{answer.likes || 0}}</span>
-                        <span class="form-fa fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">{{answer.dislikes || 0}}</span>
-                        <span class="form-fa fa fa-thumbs-o-down fa-fw glyphicon-align-right"></span>
-                      </button>
+                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
+                      </li>
+                      <li style="font-weight: bold;">
+                        Rating: <span class="badge">{{answer.rating || 'N/A'}}</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -87,7 +80,6 @@
       </div>
     </div>
   </div>
-
 </div>
 <script type="text/ng-template" id="answerModal.html">
   <div class="modal-header">

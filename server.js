@@ -78,8 +78,17 @@ var articleSchema = new mongoose.Schema ({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
+    date: String,
     likes: Number,
-    dislikes: Number
+    usersWhoLiked: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    dislikes: Number,
+    usersWhoDisliked: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }]
   }],
   sports: [String],
   teams: [String],
@@ -100,10 +109,18 @@ var questionSchema = new mongoose.Schema ({
     rating: Number,
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
     },
     likes: Number,
+    usersWhoLiked: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     dislikes: Number,
+    usersWhoDisliked: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     date: String
   }],
   sport: String,
