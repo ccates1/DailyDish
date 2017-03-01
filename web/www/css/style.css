@@ -9,6 +9,18 @@ body {
   font-size: 50% !important;
 }
 
+.text-small {
+  font-size: 12px !important;
+}
+
+.dash-text-date {
+  font-size: 70% !important;
+}
+
+.dash-text-date2 {
+  font-size: 50% !important;
+}
+
 .answer-media {
   padding-top: 0px !important;
   margin-top: 0px;
@@ -166,6 +178,12 @@ body {
 .card-dash {
     width: 100%;
     height: 100%;
+}
+
+.card-img {
+  max-width: 50%;
+max-height: 50%;
+margin-top: 10px;
 }
 
 .list-group-dash {
@@ -474,6 +492,10 @@ legend {
      -moz-box-shadow: 0 8px 6px -8px black;
           box-shadow: 0 8px 6px -8px black;
   padding: 8px 10px !important;
+}
+
+textarea {
+  resize: none;
 }
 
 #question-well {
@@ -966,9 +988,37 @@ input {
     width: 75px;
 }
 
+.btn-create {
+  font-size: 8px !important;
+  font-weight: bolder;
+}
+
+.row-horizon > .col-md-4:first-child {
+  padding-left: 0px !important;
+}
+
+.label-dash-q {
+  font-size: 10px !important;
+}
+
+.dash-q-list > li {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+
+}
+
 .question-p {
   min-height: 33px;
   font-size: 13px;
+  line-height: 1.2 !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+.dash-question-p {
+  font-size: 15px;
   line-height: 1.2 !important;
   overflow: hidden !important;
   display: -webkit-box !important;

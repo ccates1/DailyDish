@@ -22,7 +22,6 @@ angular.module('dailydish.services', [])
       return $http.get('/questions/' + id);
     };
     this.addAnswer = function(question, answer) {
-      console.log(question);
-      return $http.put('/questions/' + question._id, answer);
-    }
+      return $http.post('/questions/' + question._id + '/answers', answer);
+    };
   });

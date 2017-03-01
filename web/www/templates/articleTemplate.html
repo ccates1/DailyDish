@@ -14,14 +14,14 @@
               Sports Included:
             </label>
           </div>
-          <div class="col-lg-6 col-sm-6 col-xs-6">
+          <div class="col-lg-6 col-sm-6 col-xs-7">
             <div isteven-multi-select input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" on-item-click="clicked(data)" id="select" required>
             </div>
           </div>
         </div>
         <div class="row article-divider" ng-show="showAdditionalTagInput">
           <div ng-repeat="a in selectedTags">
-            <div class="form-group col-lg-4 col-xs-4">
+            <div class="form-group col-lg-4 col-xs-5">
               <div class="control-label text-center">
                 <strong class="article-label">{{a.main}} Teams:</strong>
               </div>
@@ -43,19 +43,18 @@
           </div>
         </div>
         <div class="row vertical-align article-divider">
-          <div class="col-lg-6 col-sm-6 col-xs-6">
+          <div class="col-lg-6 col-sm-6 col-xs-7">
             <label for="select" id="select-label" class="pull-right control-label">
               Upload Featured Image:
             </label>
           </div>
-          <div class="col-lg-6 col-sm-6 col-xs-6">
-            <button type="button" data-toggle="" id="filePickerBtn" class="btn btn-primary" ng-click="upload()">
-              Upload <i class="fa fa-arrow-circle-o-down fa-2w" style="margin-right: -5px;"></i>
+          <div class="col-lg-6 col-sm-6 col-xs-5">
+            <button type="button" data-toggle="" id="filePickerBtn" class="btn btn-primary" ng-click="upload()">Upload</button>
           </div>
-          <div style="margin-top:10px;">
-            <a href="{{article.picture.url}}" class="thumbnail" ng-if="article.picture">
+        </div>
+        <div class="row article-divider" ng-if="article.picture">
+          <div class="col-xs-12 text-center" style="margin-top:10px;" ng-if="article.picture">
               <img ng-src="{{article.picture.url | fpConvert: {filter:'sharpen'} }}">
-            </a>
           </div>
         </div>
         <div class="form-group">

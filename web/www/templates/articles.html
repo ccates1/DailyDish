@@ -12,8 +12,11 @@
     <li>
       <a data-target="#nfl" data-toggle="tab">NFL</a>
     </li>
-    <li class="pull-right">
-      <button class="btn btn-sm btn-primary" ui-sref="articleTemplate" type="button" style="margin-top: 10px;">Create New</button>
+    <li class="pull-right hidden-lg hidden-md hidden-sm">
+      <button class="btn btn-sm btn-primary btn-create" ui-sref="articleTemplate" type="button" style="margin-top: 10px;">Post New</button>
+    </li>
+    <li class="pull-right hidden-xs">
+      <button class="btn btn-sm btn-primary" ui-sref="articleTemplate" type="button" style="margin-top: 10px;">Post New</button>
     </li>
   </ul>
   <div ng-show="loading">
@@ -56,7 +59,7 @@
                 <div class="row container-fluid hidden-lg hidden-md hidden-sm">
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-user fa-stack-1x"></i>
@@ -67,14 +70,14 @@
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card" style="min-height: 64px;">
-                      <div class="list-group-item text-wrap text-center">Comments:
+                      <div class="list-group-item text-wrap text-center text-small">Comments:
                         <br /> {{article.comments.length || 0}}
                       </div>
                     </div>
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-star fa-stack-1x"></i>
@@ -214,7 +217,7 @@
                 <div class="row container-fluid hidden-lg hidden-md hidden-sm">
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-user fa-stack-1x"></i>
@@ -225,14 +228,14 @@
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card" style="min-height: 64px;">
-                      <div class="list-group-item text-wrap text-center">Comments:
+                      <div class="list-group-item text-wrap text-center text-small">Comments:
                         <br /> {{article.comments.length || 0}}
                       </div>
                     </div>
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-star fa-stack-1x"></i>
@@ -373,7 +376,7 @@
                   <div class="row container-fluid hidden-lg hidden-md hidden-sm">
                     <div class="col-xs-4">
                       <div class="list-group" id="card">
-                        <div class="list-group-item text-wrap text-center">
+                        <div class="list-group-item text-wrap text-center text-small">
                           <span class="fa-stack fa-sm">
                               <i class="fa fa-square-o fa-stack-2x"></i>
                               <i class="fa fa-user fa-stack-1x"></i>
@@ -384,14 +387,14 @@
                     </div>
                     <div class="col-xs-4">
                       <div class="list-group" id="card" style="min-height: 64px;">
-                        <div class="list-group-item text-wrap text-center">Comments:
+                        <div class="list-group-item text-wrap text-center text-small">Comments:
                           <br /> {{article.comments.length || 0}}
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-4">
                       <div class="list-group" id="card">
-                        <div class="list-group-item text-wrap text-center">
+                        <div class="list-group-item text-wrap text-center text-small">
                           <span class="fa-stack fa-sm">
                               <i class="fa fa-square-o fa-stack-2x"></i>
                               <i class="fa fa-star fa-stack-1x"></i>
@@ -532,7 +535,7 @@
                 <div class="row container-fluid hidden-lg hidden-md hidden-sm">
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-user fa-stack-1x"></i>
@@ -543,14 +546,14 @@
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card" style="min-height: 64px;">
-                      <div class="list-group-item text-wrap text-center">Comments:
+                      <div class="list-group-item text-wrap text-center text-small">Comments:
                         <br /> {{article.comments.length || 0}}
                       </div>
                     </div>
                   </div>
                   <div class="col-xs-4">
                     <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center">
+                      <div class="list-group-item text-wrap text-center text-small">
                         <span class="fa-stack fa-sm">
                             <i class="fa fa-square-o fa-stack-2x"></i>
                             <i class="fa fa-star fa-stack-1x"></i>

@@ -3,10 +3,9 @@ var app = angular.module('dailydish');
 app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uibModal,
   toastr, $state) {
     $scope.userArticles = [];
-    $scope.emptyArticleFeed = false;
-    $scope.emptyQuestionFeed = false;
     $scope.comment = '';
     $scope.loading = true;
+    var nbaPic = '../img/nba.png';
     $(function() {
       document.getElementById('dashboard').parentElement.className = 'activated';
       $timeout(function() {
@@ -24,14 +23,18 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
       $service.getUser()
       .then(function(res) {
         $scope.user = res.data;
-        if($scope.user.articles.length > 0) {
-          $scope.emptyArticleFeed = true;
-        }
-        if($scope.user.questions.length === 0) {
-          $scope.emptyQuestionFeed = true;
-        }
+        console.log($scope.user);
         if(!$scope.user.picture) {
           $scope.user.picture = '../img/default.png';
+        }
+        if($scope.user.questions.length) {
+          $scope.user.questions.forEach(function(question) {
+            console.log(question.sport)
+            if(question.sport === 'NBA') {
+              console.log('nba');
+              question.img = "../img/nba.png";
+            };
+          });
         }
         $scope.loading = false;
       })
@@ -85,7 +88,6 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
         toastr.error(response.data ? response.data.message : 'Could not unlink ' + provider + ' account', response.status);
       });
     };
-
   });
 
   app.controller('DashboardModalInstanceCtrl', function($scope, $uibModalInstance, filepickerService) {

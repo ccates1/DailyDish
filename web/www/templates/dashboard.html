@@ -126,7 +126,7 @@
           </div>
           <div class="panel-body">
             <div class="home-well well" ng-show="!user.articles.length">
-              No articles to display.
+              <strong>No articles to display.</strong>
             </div>
             <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
               <div class="row row-horizon">
@@ -134,7 +134,7 @@
                   <div class="info-card">
                     <div id="front">
                       <div class="card-image-background">
-                        <img class="img-rounded card-dash" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                        <img class="img-rounded card-img" ng-src="{{article.picture.url}}" alt="{{article.title}}" />
                       </div>
                       <div class="list-group list-group-dash">
                         <div class="list-group-item">
@@ -187,10 +187,55 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             Your Questions
+            <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.questions.length}}</span>
           </div>
           <div class="panel-body">
-            <div class="home-well well" ng-show="!emptyQuestionFeed">
+            <div class="home-well well" ng-show="!user.questions.length">
               <strong>No questions to display.</strong>
+            </div>
+            <div class="well" id="question-well">
+              <ul class="chat list-group">
+                <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in user.questions track by $index" id="question-list">
+                <li class="left clearfix " >
+                  <span class="chat-img pull-left">
+                    <img ng-src="{{question.img}}" alt="" class="img-circle cimg" />
+                  </span>
+                  <div class="chat-body clearfix">
+                    <div class="header" style="margin-top: -10px; margin-bottom: 5px;">
+                        <small class="dash-text-date hidden-xs">
+                          <span class="glyphicon glyphicon-time" style="top: 2px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                        </small>
+                        <small class="dash-text-date2 hidden-lg hidden-md hidden-sm">
+                          <span class="glyphicon glyphicon-time" style="top: 2px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                        </small>
+                      </div>
+                      <p class="dash-question-p text-wrap">
+                        {{question.content}}
+                      </p>
+                      <ul class="list-inline dash-q-list hidden-lg hidden-md hidden-sm">
+                        <li>
+                          <span class="label label-primary label-dash-q">Answers: {{question.answers.length || 0}}</span>
+                        </li>
+                        <li>
+                          <small class="text-muted">
+                            <span class="label label-primary label-dash-q">No Rating Given</span>
+                          </small>
+                        </li>
+                      </ul>
+                      <ul class="list-inline hidden-xs">
+                        <li>
+                          <span class="label label-primary label-dash-q">Answers: {{question.answers.length || 0}}</span>
+                        </li>
+                        <li>
+                          <small class="text-muted">
+                            <span class="label label-primary label-dash-q">No Rating Given</span>
+                          </small>
+                        </li>
+                      </ul>
+                    </div>
+                </li>
+              </a>
+              </ul>
             </div>
           </div>
         </div>

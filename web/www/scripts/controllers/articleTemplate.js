@@ -121,27 +121,32 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
   };
 
   $scope.submit = function () {
-    $scope.tagOutput.forEach(function (item) {
-      if (item.ticked === true) {
-        $scope.article.sports.push(item.name);
-      }
-    });
-    $scope.teamOutput.forEach(function (item) {
-      $scope.article.teams.push(item);
-    });
-    $scope.article.author = $scope.user._id;
-    $scope.article.date = moment.now();
-
-    $service.submitArticle($scope.article)
-      .then(function (res) {
-        toastr.success('Your article has been posted!', 'Success');
-        $state.go('dashboard');
-
-      })
-      .catch(function (err) {
-        console.log(err);
-        toastr.error('There was a problem and your article was not submitted.', 'Error');
+    if(!$scope.article.picture) {
+      toastr.error('Must upload an image for your article!');
+      return;
+    } else {
+      $scope.tagOutput.forEach(function (item) {
+        if (item.ticked === true) {
+          $scope.article.sports.push(item.name);
+        }
       });
+      $scope.teamOutput.forEach(function (item) {
+        $scope.article.teams.push(item);
+      });
+      $scope.article.author = $scope.user._id;
+      $scope.article.date = moment.now();
+
+      $service.submitArticle($scope.article)
+        .then(function (res) {
+          toastr.success('Your article has been posted!', 'Success');
+          $state.go('dashboard');
+
+        })
+        .catch(function (err) {
+          console.log(err);
+          toastr.error('There was a problem and your article was not submitted.', 'Error');
+        });
+    }
   };
 
 });

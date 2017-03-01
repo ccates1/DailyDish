@@ -3,11 +3,15 @@ var app = angular.module('dailydish');
 app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   question, toastr, $state, moment, $uibModal) {
   $scope.question = question;
+  console.log($scope.question);
   $scope.loading = true;
   var getUser = function () {
     $service.getUser()
       .then(function (res) {
         $scope.user = res.data;
+        if (!$scope.question.author.picture) {
+          $scope.question.author.picture = '../img/default.png';
+        }
         if ($scope.question.answers.length > 0) {
           listQuestions();
         } else {
@@ -59,10 +63,13 @@ app.controller('AnswerModalInstanceCtrl', function ($scope, $uibModalInstance, $
       return;
     } else {
       $scope.answer.author = $scope.user._id;
+      $scope.answer.question = $scope.question._id;
       $scope.answer.rating = 0;
       $scope.answer.date = moment.now();
       $scope.answer.likes = 0;
       $scope.answer.dislikes = 0;
+      $scope.answer.usersWhoLiked = [];
+      $scope.answer.usersWhoDisliked = [];
       $service.addAnswer($scope.question, $scope.answer)
         .then(function (res) {
           $state.reload();

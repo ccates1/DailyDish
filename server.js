@@ -18,6 +18,7 @@ var userSchema = new mongoose.Schema ({
   username: String,
   facebook: String,
   picture: {type: mongoose.Schema.Types.Mixed},
+  rating: Number,
   email: String,
   password: {
     type: String,
@@ -33,16 +34,11 @@ var userSchema = new mongoose.Schema ({
   }],
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Article'
+    ref: 'Comment'
   }],
   answers: [{
-    content: String,
-    rating: Number,
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    date: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer'
   }]
 });
 userSchema.pre('save', function(next) {
@@ -65,6 +61,30 @@ userSchema.methods.comparePassword = function(password, done) {
 };
 var User = mongoose.model('User', userSchema);
 
+var commentSchema = new mongoose.Schema ({
+  content: String,
+  article: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Article'
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  date: String,
+  likes: Number,
+  usersWhoLiked: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  dislikes: Number,
+  usersWhoDisliked: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
+});
+var Comment = mongoose.model('Comment', commentSchema);
+
 var articleSchema = new mongoose.Schema ({
   content: String,
   title: String,
@@ -73,22 +93,8 @@ var articleSchema = new mongoose.Schema ({
     ref: 'User'
   },
   comments: [{
-    content: String,
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    date: String,
-    likes: Number,
-    usersWhoLiked: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }],
-    dislikes: Number,
-    usersWhoDisliked: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }]
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
   }],
   sports: [String],
   teams: [String],
@@ -105,28 +111,38 @@ var questionSchema = new mongoose.Schema ({
     ref: 'User'
   },
   answers: [{
-    content: String,
-    rating: Number,
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    likes: Number,
-    usersWhoLiked: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }],
-    dislikes: Number,
-    usersWhoDisliked: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }],
-    date: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer'
   }],
   sport: String,
   date: String
 });
 var Question = mongoose.model('Question', questionSchema);
+
+var answerSchema = new mongoose.Schema ({
+  content: String,
+  rating: Number,
+  date: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  question: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Question'
+  },
+  likes: Number,
+  usersWhoLiked: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  dislikes: Number,
+  usersWhoDisliked: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
+});
+var Answer = mongoose.model('Answer', answerSchema);
 
 /*
 |--------------------------------------------------------------------------
@@ -236,9 +252,37 @@ app.param('question', function(req, res, next, id) {
   });
 });
 
+app.param('answer', function(req, res, next, id) {
+  var query = Answer.findById(id);
+  query.exec(function(err, answer) {
+    if(err) {
+      return next(err);
+    }
+    if(!question) {
+      return next(new Error('Error - the answer requested could not be found.'));
+    }
+    req.answer = answer;
+    return next();
+  });
+});
+
+app.param('comment', function(req, res, next, id) {
+  var query = Comment.findById(id);
+  query.exec(function(err, comment) {
+    if(err) {
+      return next(err);
+    }
+    if(!question) {
+      return next(new Error('Error - the comment requested could not be found.'));
+    }
+    req.comment = comment;
+    return next();
+  });
+});
+
 
 app.get('/api/me', ensureAuthenticated, function(req, res) {
-  User.findById(req.user).populate('articles').exec(function(err, user) {
+  User.findById(req.user).populate('articles questions').exec(function(err, user) {
     if(err) {
       return next(err);
     }
@@ -268,9 +312,7 @@ app.post('/auth/signup', function(req, res) {
     var user = new User({
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
-      picture: 'web/www/img/default.png'
-      //picture: 'stylesheets/images/profilepic.jpg'--------------------------<<
+      password: req.body.password
     });
     console.log(user);
     user.save(function(err, result) {
@@ -281,6 +323,28 @@ app.post('/auth/signup', function(req, res) {
       }
       res.send({
         token: createJWT(result)
+      });
+    });
+  });
+});
+
+app.post('/auth/login', function(req, res) {
+  User.findOne({
+    username: req.body.username
+  }, '+password', function(err, user) {
+    if (!user) {
+      return res.status(401).send({
+        message: 'Invalid username and/or password'
+      });
+    }
+    user.comparePassword(req.body.password, function(err, isMatch) {
+      if (!isMatch) {
+        return res.status(401).send({
+          message: 'Invalid username and/or password'
+        });
+      }
+      res.send({
+        token: createJWT(user)
       });
     });
   });
@@ -327,38 +391,17 @@ app.get('/questions', function(req, res, next) {
 });
 
 app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers.author', select: 'username picture'}];
-  Question.findById(req.question, function(err, question) {
-    Question.populate(question, q)
-      .then(function() {
+  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
+  Question.populate(req.question, q)
+    .then(function(question) {
+      Answer.populate(req.question.answers, {
+        path: 'author', select: 'username picture rating'
+      }).then(function(answers) {
+        console.log(answers);
         res.json(question);
-      })
-      .catch(function(err) {
-        throw(err);
-      });
-  });
-});
-
-app.post('/auth/login', function(req, res) {
-  User.findOne({
-    username: req.body.username
-  }, '+password', function(err, user) {
-    if (!user) {
-      return res.status(401).send({
-        message: 'Invalid username and/or password'
-      });
-    }
-    user.comparePassword(req.body.password, function(err, isMatch) {
-      if (!isMatch) {
-        return res.status(401).send({
-          message: 'Invalid username and/or password'
-        });
-      }
-      res.send({
-        token: createJWT(user)
+        res.json(answers);
       });
     });
-  });
 });
 
 app.post('/articles', function(req, res, next) {
@@ -398,6 +441,37 @@ app.put('/questions/:question', function(req, res, next) {
       return next(err);
     }
     res.send(question);
+  });
+});
+
+app.post('/questions/:question/answers', function(req, res, next) {
+  var answer = new Answer(req.body);
+  User.findById(req.body.author, function(err, user) {
+    user.answers.push(answer);
+    user.save(function(err) {
+      if(err) {
+        return next(err);
+      }
+    });
+  });
+  answer.save(function(err, answer) {
+    if(err) {
+      return next(err);
+    }
+    req.question.answers.push(answer);
+
+    req.question.save(function(err, question) {
+      Question.populate(req.question, {
+        path: 'author answers'
+      }).then(function(question) {
+        Answer.populate(req.question.answers, {
+          path: 'author'
+        }).then(function(answers) {
+          res.json(question);
+          res.json(answers);
+        });
+      });
+    });
   });
 });
 
