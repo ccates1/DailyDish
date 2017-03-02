@@ -17,6 +17,12 @@ body {
   font-size: 70% !important;
 }
 
+.panel-footer-xs {
+  border-top: 1px solid #dddddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
 .dash-text-date2 {
   font-size: 50% !important;
 }
@@ -163,6 +169,10 @@ body {
     border-top: 2px groove #2c3e50 !important;
     border-bottom: none;
     font-weight: bold;
+}
+
+.glyphicon {
+  vertical-align: middle;
 }
 
 .nav-tabs>li:hover {

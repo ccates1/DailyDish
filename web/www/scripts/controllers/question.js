@@ -3,7 +3,6 @@ var app = angular.module('dailydish');
 app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   question, toastr, $state, moment, $uibModal) {
   $scope.question = question;
-  console.log($scope.question);
   $scope.loading = true;
   var getUser = function () {
     $service.getUser()
@@ -35,6 +34,179 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   };
   getUser();
   listQuestions();
+
+  $scope.addLikeToAnswer = function(answer) {
+    $scope.answer = answer;
+    if(answer.likes > 0 && answer.dislikes > 0) {
+      // check both usersWhoLiked and usersWhoDisliked lists for user
+      if(answer.usersWhoLiked.indexOf($scope.user._id) === -1 && answer.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+        // user hasn't liked or disliked the answer OK
+        $scope.answer.usersWhoLiked.push($scope.user._id);
+        $scope.answer.likes++;
+        answer.userWhoLiked = $scope.user._id;
+        $service.addLike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has liked or disliked the answer ERR
+        toastr.error('You can only like or dislike an answer once!', 'Error');
+        return;
+      }
+    } else if(answer.dislikes > 0) {
+      // check usersWhoDisliked list for user
+      if(answer.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+        // user hasn't disliked the answer OK (usersWhoLiked list is empty)
+        $scope.answer.usersWhoLiked.push($scope.user._id);
+        $scope.answer.likes++;
+        answer.userWhoLiked = $scope.user._id;
+        $service.addLike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has disliked the answer ERR
+        toastr.error('You cant like an answer after disliking it!', 'Error');
+        return;
+      }
+    } else if(answer.likes > 0) {
+      // check usersWhoLiked list for user
+      if(answer.usersWhoLiked.indexOf($scope.user._id) === -1) {
+        // user hasn't liked the answer OK (usersWhoDisliked list is empty)
+        $scope.answer.usersWhoLiked.push($scope.user._id);
+        $scope.answer.likes++;
+        answer.userWhoLiked = $scope.user._id;
+        $service.addLike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has liked the answer ERR
+        toastr.error('You cant like an answer more than once!', 'Error');
+        return;
+      }
+    } else {
+      // both the usersWhoLiked and usersWhoDisliked lists are empty OK
+      $scope.answer.usersWhoLiked.push($scope.user._id);
+      $scope.answer.likes++;
+      answer.userWhoLiked = $scope.user._id;
+      $service.addLike($scope.question, answer)
+        .then(function(res) {
+          console.log(res);
+          $timeout(function() {
+            $scope.$apply();
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    }
+  };
+
+  $scope.addDislikeToAnswer = function(answer) {
+    $scope.answer = answer;
+    if(answer.likes > 0 && answer.dislikes > 0) {
+      // check both usersWhoLiked and usersWhoDisliked lists for user
+      if(answer.usersWhoLiked.indexOf($scope.user._id) === -1 && answer.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+        // user hasn't liked or disliked the answer OK
+        $scope.answer.usersWhoDisliked.push($scope.user._id);
+        $scope.answer.dislikes++;
+        answer.userWhoDisliked = $scope.user._id;
+        $service.addDislike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has liked or disliked the answer ERR
+        toastr.error('You can only like or dislike an answer once!', 'Error');
+        return;
+      }
+    } else if(answer.dislikes > 0) {
+      // check usersWhoDisliked list for user
+      if(answer.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+        // user hasn't disliked the answer OK (usersWhoLiked list is empty)
+        $scope.answer.usersWhoDisliked.push($scope.user._id);
+        $scope.answer.dislikes++;
+        answer.userWhoDisliked = $scope.user._id;
+        $service.addDislike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has disliked the answer ERR
+        toastr.error('You can only dislike an answer once!', 'Error');
+        return;
+      }
+    } else if(answer.likes > 0) {
+      // check usersWhoLiked list for user
+      if(answer.usersWhoLiked.indexOf($scope.user._id) === -1) {
+        // user hasn't liked the answer OK (usersWhoDisliked list is empty)
+        $scope.answer.usersWhoDisliked.push($scope.user._id);
+        $scope.answer.dislikes++;
+        answer.userWhoDisliked = $scope.user._id;
+        $service.addDislike($scope.question, answer)
+          .then(function(res) {
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        // user has liked the answer ERR
+        toastr.error('You cant dislike an answer after liking it!', 'Error');
+        return;
+      }
+    } else {
+      // both the usersWhoLiked and usersWhoDisliked lists are empty OK
+      $scope.answer.usersWhoLiked.push($scope.user._id);
+      $scope.answer.usersWhoDisliked.push($scope.user._id);
+      $scope.answer.dislikes++;
+      answer.userWhoDisliked = $scope.user._id;
+      $service.addDislike($scope.question, answer)
+        .then(function(res) {
+          $timeout(function() {
+            $scope.$apply();
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+          toastr.error('Please try again', 'Error');
+        });
+    }
+  };
 
   $scope.openAnswerModal = function () {
     $uibModal.open({

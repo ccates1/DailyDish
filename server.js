@@ -258,7 +258,7 @@ app.param('answer', function(req, res, next, id) {
     if(err) {
       return next(err);
     }
-    if(!question) {
+    if(!answer) {
       return next(new Error('Error - the answer requested could not be found.'));
     }
     req.answer = answer;
@@ -272,7 +272,7 @@ app.param('comment', function(req, res, next, id) {
     if(err) {
       return next(err);
     }
-    if(!question) {
+    if(!comment) {
       return next(new Error('Error - the comment requested could not be found.'));
     }
     req.comment = comment;
@@ -280,7 +280,11 @@ app.param('comment', function(req, res, next, id) {
   });
 });
 
-
+/*
+|--------------------------------------------------------------------------
+| User Routes
+|--------------------------------------------------------------------------
+*/
 app.get('/api/me', ensureAuthenticated, function(req, res) {
   User.findById(req.user).populate('articles questions').exec(function(err, user) {
     if(err) {
@@ -350,6 +354,11 @@ app.post('/auth/login', function(req, res) {
   });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Article Routes
+|--------------------------------------------------------------------------
+*/
 app.get('/articles', function(req, res, next) {
   var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
   Article.find({}, function(err, articles) {
@@ -376,7 +385,32 @@ app.get('/articles/:article', function(req, res, next) {
   });
 });
 
+app.post('/articles', function(req, res, next) {
+  var article = new Article(req.body);
+  User.findById(article.author, function(err, user) {
+    if(err) {
+      return next(err);
+    }
+    user.articles.push(article);
+    user.save(function(err, user) {
+      if(err) {
+        return next(err);
+      }
+    });
+  });
+  article.save(function(err, article) {
+    if(err) {
+      return next(err);
+    }
+    res.send(article);
+  });
+});
 
+/*
+|--------------------------------------------------------------------------
+| Question Routes
+|--------------------------------------------------------------------------
+*/
 app.get('/questions', function(req, res, next) {
   var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
   Question.find({}, function(err, questions) {
@@ -404,77 +438,6 @@ app.get('/questions/:question', function(req, res, next) {
     });
 });
 
-app.post('/articles', function(req, res, next) {
-  var article = new Article(req.body);
-  User.findById(article.author, function(err, user) {
-    if(err) {
-      return next(err);
-    }
-    user.articles.push(article);
-    user.save(function(err, user) {
-      if(err) {
-        return next(err);
-      }
-    });
-  });
-  article.save(function(err, article) {
-    if(err) {
-      return next(err);
-    }
-    res.send(article);
-  });
-});
-
-app.put('/questions/:question', function(req, res, next) {
-  var answer = req.body;
-  User.findById(req.body.author, function(err, user) {
-    user.answers.push(answer);
-    user.save(function(err) {
-      if(err) {
-        return next(err);
-      }
-    });
-  });
-  req.question.answers.push(answer);
-  req.question.save(function(err, question) {
-    if(err) {
-      return next(err);
-    }
-    res.send(question);
-  });
-});
-
-app.post('/questions/:question/answers', function(req, res, next) {
-  var answer = new Answer(req.body);
-  User.findById(req.body.author, function(err, user) {
-    user.answers.push(answer);
-    user.save(function(err) {
-      if(err) {
-        return next(err);
-      }
-    });
-  });
-  answer.save(function(err, answer) {
-    if(err) {
-      return next(err);
-    }
-    req.question.answers.push(answer);
-
-    req.question.save(function(err, question) {
-      Question.populate(req.question, {
-        path: 'author answers'
-      }).then(function(question) {
-        Answer.populate(req.question.answers, {
-          path: 'author'
-        }).then(function(answers) {
-          res.json(question);
-          res.json(answers);
-        });
-      });
-    });
-  });
-});
-
 app.post('/questions', function(req, res, next) {
   var question = new Question(req.body);
   User.findById(question.author, function(err, user) {
@@ -496,6 +459,84 @@ app.post('/questions', function(req, res, next) {
   });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Answer Routes
+|--------------------------------------------------------------------------
+*/
+app.post('/questions/:question/answers', function(req, res, next) {
+  var answer = new Answer(req.body);
+  User.findById(req.body.author, function(err, user) {
+    user.answers.push(answer);
+    user.save(function(err) {
+      if(err) {
+        return next(err);
+      }
+    });
+  });
+  answer.save(function(err, answer) {
+    if(err) {
+      return next(err);
+    }
+    req.question.answers.push(answer);
+
+    req.question.save(function(err, question) {
+      if(err) {
+        return next(err);
+      }
+      Question.populate(req.question, {
+        path: 'author answers'
+      }).then(function(question) {
+        Answer.populate(req.question.answers, {
+          path: 'author'
+        }).then(function(answers) {
+          res.json(question);
+          res.json(answers);
+        });
+      });
+    });
+  });
+});
+
+app.put('/questions/:question/answers/:answer/addLike', function(req, res, next) {
+  var reqAnswer = req.body;
+  Answer.findById(reqAnswer._id, function(err, answer) {
+    if(err) {
+      return next(err);
+    }
+    answer.likes++;
+    answer.usersWhoLiked.push(reqAnswer.userWhoLiked);
+    answer.save(function(err, ans) {
+      if(err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
+app.put('/questions/:question/answers/:answer/addLike', function(req, res, next) {
+  var reqAnswer = req.body;
+  Answer.findById(reqAnswer._id, function(err, answer) {
+    if(err) {
+      return next(err);
+    }
+    answer.dislikes++;
+    answer.usersWhoDisliked.push(reqAnswer.userWhoDisliked);
+    answer.save(function(err, ans) {
+      if(err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Social Account Routes
+|--------------------------------------------------------------------------
+*/
 app.post('/auth/facebook', function(req, res) {
   var fields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
   var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';

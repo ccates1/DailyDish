@@ -24,4 +24,10 @@ angular.module('dailydish.services', [])
     this.addAnswer = function(question, answer) {
       return $http.post('/questions/' + question._id + '/answers', answer);
     };
+    this.addLike = function(question, answer) {
+      return $http.put('/questions/' + question._id + '/answers/' + answer._id + '/addLike', answer);
+    };
+    this.addDislike = function(question, answer) {
+      return $http.put('/questions/' + question._id + '/answers/' + answer._id + '/addDislike', answer);
+    };
   });

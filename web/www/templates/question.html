@@ -58,17 +58,20 @@
                   <p style="margin:0">
                     {{answer.content}}
                   </p>
+                  <div class="col-xs-12 panel-footer-xs">
+
+                  </div>
                   <small><i class="fa fa-star fa-fw"></i> Guru Rating: {{answer.author.rating || 0}}</small>
                 </div>
                 <div class="row hidden-lg hidden-md hidden-sm">
                   <ul class="list-inline" style="margin-left: 10px">
                     <li>
                       <span class="badge">{{answer.likes || 0}}</span>
-                      <span class="fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
+                      <span class="fa fa-thumbs-o-up fa-fw glyphicon-align-right" ng-click="addLikeToAnswer(answer)"></span>
                     </li>
                     <li>
-                      <span class="badge">{{answer.likes || 0}}</span>
-                      <span class="fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
+                      <span class="badge">{{answer.dislikes || 0}}</span>
+                      <span class="fa fa-thumbs-o-up fa-fw glyphicon-align-right" ng-click="addDislikeToAnswer(answer)"></span>
                     </li>
                     <li style="font-weight: bold;">
                       Rating: <span class="badge">{{answer.rating || 'N/A'}}</span>
@@ -80,18 +83,18 @@
                     <small class="text-muted"><span class="glyphicon glyphicon-time"></span> {{answer.date | amCalendar}}</small>
                   </span>
                   <small><i class="fa fa-star fa-fw"></i> Guru Rating: {{answer.author.rating || 0}}</small>
-                  <p>
+                  <p style="margin: 0 0 1.5px;">
                     {{answer.content}}
                   </p>
                   <div class="panel-footer" style="padding: 5px 5px;">
                     <ul class="list-inline">
                       <li>
                         <span class="badge">{{answer.likes || 0}}</span>
-                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
+                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right" ng-click="addLikeToAnswer(answer)"></span>
                       </li>
                       <li>
-                        <span class="badge">{{answer.likes || 0}}</span>
-                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
+                        <span class="badge">{{answer.dislikes || 0}}</span>
+                        <span class="fa fa-thumbs-o-up fa-lg glyphicon-align-right" ng-click="addDislikeToAnswer(answer)"></span>
                       </li>
                       <li style="font-weight: bold;">
                         Rating: <span class="badge">{{answer.rating || 'N/A'}}</span>
