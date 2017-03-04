@@ -29,11 +29,15 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
         }
         if($scope.user.questions.length) {
           $scope.user.questions.forEach(function(question) {
-            console.log(question.sport)
             if(question.sport === 'NBA') {
-              console.log('nba');
               question.img = "../img/nba.png";
-            };
+            }
+            if(question.sport === 'MLB') {
+              question.img = "../img/mlb.png";
+            }
+            if(question.sport === 'NFL') {
+              question.img = "../img/nfl.png";
+            }
           });
         }
         $scope.loading = false;

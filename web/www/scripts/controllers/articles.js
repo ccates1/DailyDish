@@ -36,8 +36,12 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
     $service.articlesList()
       .then(function (res) {
         $scope.articles = res.data;
+        console.log($scope.articles);
         if($scope.articles) {
           $scope.articles.forEach(function(article) {
+            if(!article.author.picture) {
+              article.author.picture = '../img/default.png';
+            }
             if(article.sports.includes('NBA')) {
               $scope.nba.push(article);
             }

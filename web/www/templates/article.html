@@ -6,24 +6,40 @@
     <div class="loader"></div>
   </div>
   <div ng-show="!loading">
-    <div class="well">
-      <div class="page-header text-center" style="padding-bottom: 0px; margin-top: 0px;">
-        <div class="effect8 card">
-          <h3 style="margin-bottom:21px; padding-left: 5px; padding-right: 5px;">{{article.title}}</h3>
-          <p class="lead">
-            Author: {{article.author.username}}
+    <div class="well well-shadow">
+      <div class="page-header text-center" style="padding-bottom: 0px; margin-top: 0px; padding-top: 0px;">
+        <div class="card article-header-well">
+          <h3 style="margin-bottom:21px; padding-left: 5px; padding-right: 5px; color: #FFF">{{article.title}}</h3>
+          <p class="lead" style="margin-bottom: 0px;">
+            Author:
           </p>
-          <p style="font-style=italic">
-            <span class="glyphicon glyphicon-time"></span> {{article.date | amCalendar}}
-          </p>
+          <div class="media media-article">
+            <figure>
+              <div class="text-center" href="javascript:void(0)">
+                <img class="thumbnail-q img-circle" ng-src="{{article.author.picture}}" alt="profile">
+                <figcaption class="text-center">
+                  <strong class="text-success">{{article.author.username}}</strong>
+                  <div class="panel-footer">
+                    <p class="text-q">
+                      <span class="fa-stack fa-sm">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-university fa-stack-1x" style="margin-left: 0.5px;"></i>
+                        </span> Guru Rating: {{article.author.rating || 0}}
+                    </p>
+                    <small class="text-muted">
+                        <i class="fa fa-clock-o fa-fw"></i> {{article.date | amCalendar}}
+                      </small>
+                  </div>
+                </figcaption>
+              </div>
+            </figure>
+          </div>
         </div>
       </div>
       <div class="row">
 
         <div class="col-xs-12 border-photo">
-          <img class="img-responsive center-block img-rounded"
-          ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:400, h:200} }}"
-          alt="{{article.title}}" />
+          <img class="img-responsive center-block img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:400, h:200} }}" alt="{{article.title}}" />
         </div>
         <div class="col-xs-12" style="margin-top: 20px; border-bottom: 2px groove #2c3e50;">
           <div class="list-group card-shadow" style="font-size: 1.2em;">
@@ -57,11 +73,11 @@
         </div>
       </div>
       <div class="panel-q panel-q-white post panel-q-shadow" style="background-color: #FFFFFF; margin-top: 10px;">
-          <div class="post-description">
-            <p>
-              {{article.content}}
-            </p>
-          </div>
+        <div class="post-description">
+          <p>
+            {{article.content}}
+          </p>
+        </div>
       </div>
     </div>
     <div class="col-xs-12" style="padding-top: 10px;">
@@ -69,46 +85,94 @@
         <div class="panel-heading">
           Comments
           <div class="pull-right">
-            <button type="button" class="btn btn-sm btn-default" style="margin-top: -5px;">Post New</button>
+            <a type="button" class="btn btn-sm btn-default" ng-click="openCommentModal()" style="margin-top: -5px;">Add New</a>
           </div>
         </div>
         <div class="panel-body">
           <ul class="media-list">
-            <li class="media" ng-repeat="comment in article.comments">
-              <div class="well" style="padding: 5px 10px;">
-                <a class="pull-left" href="#">
-                  <img class="img-q img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
-                </a>
-                <div class="media-body">
-                  <span class="text-muted pull-right">
-                    <small class="text-muted"><span class="glyphicon glyphicon-time"></span>{{comment.date | amCalendar}}</small>
-                  </span>
-                  <strong class="text-success">Marco </strong>
-                  <small class=""><i class="fa fa-star fa-fw"></i> Guru Rating: 0</small>
-                  <p>
-                    Blah blah blah blah.. just typing random text to test the paragraph block for answers to each of the fantasy questions posted by users so this is just meaningless text.
-                  </p>
-                  <div class="panel-footer" style="padding: 5px 5px;">
-                    <ul class="list-inline hidden-xs">
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">42</span>
-                        <span class="form-fa fa fa-thumbs-o-up fa-lg glyphicon-align-right"></span>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">42</span>
-                        <span class="form-fa fa fa-thumbs-o-down fa-lg glyphicon-align-right"></span>
-                      </button>
+            <li class="answer-media media" ng-repeat="comment in article.comments">
+              <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px;">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                  <figure>
+                    <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
+                      <img class="thumbnail-q img-circle" ng-src="{{comment.author.picture}}" alt="profile">
+                      <figcaption class="text-center">
+                        <strong class="text-q">{{comment.author.username}}</strong>
+                      </figcaption>
+                    </div>
+                  </figure>
+                  <div class="pull-left" id="fish">
+                    <p class="">
+                      <i class="fa fa-university fa-fw"></i> Guru Rating: {{comment.author.rating || 0}}
+                    </p>
+                    <p class="">
+                      <i class="fa fa-fire fa-lg"></i> Author Rating:
+                      <span class="label label-primary">{{comment.author.authorRating || 'N/A'}}</span>
+                    </p>
+                    <ul class="list-inline" id="comment-list">
+                      <li style="padding-right: 0px;">
+                        <span class="badge">{{comment.likes || 0}}</span>
+                        <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addLikeToComment(comment)"></span>
+                      </li>
+                      <li>
+                        <span class="badge">{{comment.dislikes || 0}}</span>
+                        <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addDislikeToComment(comment)"></span>
+                      </li>
                     </ul>
-                    <ul class="list-inline hidden-lg hidden-md hidden-sm">
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">42</span>
-                        <span class="form-fa fa fa-thumbs-o-up fa-fw glyphicon-align-right"></span>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-primary">
-                        <span class="badge">42</span>
-                        <span class="form-fa fa fa-thumbs-o-down fa-fw glyphicon-align-right"></span>
-                      </button>
+                  </div>
+                  <div class="col-xs-12 panel-footer" style="padding: 0px;">
+                    <blockquote>
+                      {{comment.content}}
+                    </blockquote>
+                    <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
+                    <div class="chat text-center">
+                      <small class="text-muted">
+                        <i class="fa fa-clock-o fa-fw"></i> {{comment.date | amCalendar}}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px;">
+                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                  <figure>
+                    <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
+                      <img class="thumbnail-q img-circle" ng-src="{{comment.author.picture}}" alt="profile">
+                      <figcaption class="text-center">
+                        <strong class="text-q">{{comment.author.username}}</strong>
+                      </figcaption>
+                    </div>
+                  </figure>
+                  <div class="pull-left" id="fish-lg">
+                    <p class="">
+                      <i class="fa fa-university fa-lg"></i> Guru Rating:
+                      <span class="label label-primary">{{comment.author.rating || 0}}</span>
+                    </p>
+                    <p class="">
+                      <i class="fa fa-fire fa-lg"></i> Author Rating:
+                      <span class="label label-primary">{{comment.author.authorRating || 'N/A'}}</span>
+                    </p>
+                    <ul class="list-inline" id="comment-list">
+                      <li style="padding-right: 0px;">
+                        <span class="badge">{{comment.likes || 0}}</span>
+                        <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addLikeToComment(comment)"></span>
+                      </li>
+                      <li>
+                        <span class="badge">{{comment.dislikes || 0}}</span>
+                        <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addDislikeToComment(comment)"></span>
+                      </li>
                     </ul>
+                  </div>
+                  <div class="col-xs-12 panel-footer" style="padding: 0px;">
+                    <blockquote>
+                      {{comment.content}}
+                    </blockquote>
+                    <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
+                    <div class="chat text-center">
+                      <small class="text-muted">
+                        <i class="fa fa-clock-o fa-fw"></i> {{comment.date | amCalendar}}
+                      </small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -117,6 +181,57 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
+<script type="text/ng-template" id="commentModal.html">
+  <div class="modal-header" style="border: 0">
+    <h3 class="modal-title text-center">Add Comment:</h3>
+  </div>
+  <div class="modal-body" style="background-color: #2c3e50">
+    <div class="container-fluid">
+      <form method="post" name="commentForm">
+        <div class="col-xs-12">
+          <div class="well well-shadow hidden-xs">
+            <div class="media">
+              <div class="col-xs-2">
+                <figure>
+                  <div class="pull-left">
+                    <img class="img-circle img-q" ng-src="{{user.picture}}" style="margin-right: 0px;" />
+                    <figcaption class="text-center">
+                      <strong class="text-success ">{{user.username}}</strong>
+                    </figcaption>
+                  </div>
+                </figure>
+              </div>
+              <div class="col-xs-10">
+                <textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="well well-shadow hidden-lg hidden-md hidden-sm">
+            <div class="media hidden-lg hidden-md hidden-sm">
+              <div class="col-xs-12">
+                <figure>
+                  <div class="text-center">
+                    <img class="img-circle img-q" ng-src="{{user.picture}}" style="margin-right: 0px;" />
+                    <figcaption class="text-center">
+                      <strong class="text-success ">{{user.username}}</strong>
+                    </figcaption>
+                  </div>
+                </figure>
+              </div>
+              <div class="col-xs-12">
+                <textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" ng-click="submitComment()" ng-disabled="commentForm.$invalid" class="btn btn-info btn-lg">Submit</button>
+    <button class="btn btn-danger btn-lg" ng-click="cancel()">Cancel</button>
+  </div>
+  </div>
+</script>

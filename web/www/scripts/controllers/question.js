@@ -3,6 +3,7 @@ var app = angular.module('dailydish');
 app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   question, toastr, $state, moment, $uibModal) {
   $scope.question = question;
+  $scope.sportImg = '';
   $scope.loading = true;
   var getUser = function () {
     $service.getUser()
@@ -11,11 +12,10 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         if (!$scope.question.author.picture) {
           $scope.question.author.picture = '../img/default.png';
         }
-        if ($scope.question.answers.length > 0) {
-          listQuestions();
-        } else {
-          $scope.loading = false;
+        if (!$scope.user.picture) {
+          $scope.user.picture = '../img/default.png';
         }
+        listQuestions();
       })
       .catch(function (err) {
         $timeout(function () {
@@ -30,10 +30,18 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         answer.author.picture = '../img/default.png';
       }
     });
+    if ($scope.question.sport === 'NBA') {
+      $scope.sportImg = '../img/nba.png';
+    }
+    if ($scope.question.sport === 'MLB') {
+      $scope.sportImg = '../img/mlb.png';
+    }
+    if ($scope.question.sport === 'NFL') {
+      $scope.sportImg = '../img/nfl.png';
+    }
     $scope.loading = false;
   };
   getUser();
-  listQuestions();
 
   $scope.addLikeToAnswer = function(answer) {
     $scope.answer = answer;
@@ -44,7 +52,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoLiked.push($scope.user._id);
         $scope.answer.likes++;
         answer.userWhoLiked = $scope.user._id;
-        $service.addLike($scope.question, answer)
+        $service.addLikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -66,7 +74,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoLiked.push($scope.user._id);
         $scope.answer.likes++;
         answer.userWhoLiked = $scope.user._id;
-        $service.addLike($scope.question, answer)
+        $service.addLikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -88,7 +96,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoLiked.push($scope.user._id);
         $scope.answer.likes++;
         answer.userWhoLiked = $scope.user._id;
-        $service.addLike($scope.question, answer)
+        $service.addLikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -108,7 +116,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
       $scope.answer.usersWhoLiked.push($scope.user._id);
       $scope.answer.likes++;
       answer.userWhoLiked = $scope.user._id;
-      $service.addLike($scope.question, answer)
+      $service.addLikeAns($scope.question, answer)
         .then(function(res) {
           console.log(res);
           $timeout(function() {
@@ -130,7 +138,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoDisliked.push($scope.user._id);
         $scope.answer.dislikes++;
         answer.userWhoDisliked = $scope.user._id;
-        $service.addDislike($scope.question, answer)
+        $service.addDislikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -152,7 +160,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoDisliked.push($scope.user._id);
         $scope.answer.dislikes++;
         answer.userWhoDisliked = $scope.user._id;
-        $service.addDislike($scope.question, answer)
+        $service.addDislikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -174,7 +182,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
         $scope.answer.usersWhoDisliked.push($scope.user._id);
         $scope.answer.dislikes++;
         answer.userWhoDisliked = $scope.user._id;
-        $service.addDislike($scope.question, answer)
+        $service.addDislikeAns($scope.question, answer)
           .then(function(res) {
             $timeout(function() {
               $scope.$apply();
@@ -195,7 +203,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
       $scope.answer.usersWhoDisliked.push($scope.user._id);
       $scope.answer.dislikes++;
       answer.userWhoDisliked = $scope.user._id;
-      $service.addDislike($scope.question, answer)
+      $service.addDislikeAns($scope.question, answer)
         .then(function(res) {
           $timeout(function() {
             $scope.$apply();
@@ -211,7 +219,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   $scope.openAnswerModal = function () {
     $uibModal.open({
       ariaLabelledBy: 'modal-title',
-      ariaDescribedBy: 'mobal-body',
+      ariaDescribedBy: 'modal-body',
       templateUrl: 'answerModal.html',
       controller: 'AnswerModalInstanceCtrl',
       size: 'lg',
@@ -231,7 +239,7 @@ app.controller('AnswerModalInstanceCtrl', function ($scope, $uibModalInstance, $
 
   $scope.submitAnswer = function () {
     if ($scope.answer.content === '') {
-      toastr.err("Answer is blank.");
+      toastr.error("Answer is blank.");
       return;
     } else {
       $scope.answer.author = $scope.user._id;

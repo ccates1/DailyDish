@@ -146,7 +146,7 @@
                       </div>
                     </div>
                     <div id="back">
-                      <div class="list-group">
+                      <div class="list-group list-group-dash">
                         <div class="list-group-item offset-padding">
                           <ul class="list-inline">
                             <li>
@@ -198,15 +198,15 @@
                 <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in user.questions track by $index" id="question-list">
                 <li class="left clearfix " >
                   <span class="chat-img pull-left">
-                    <img ng-src="{{question.img}}" alt="" class="img-circle cimg" />
+                    <img ng-src="{{question.img}}" alt="" class="img-rounded cimg" />
                   </span>
                   <div class="chat-body clearfix">
                     <div class="header" style="margin-top: -10px; margin-bottom: 5px;">
                         <small class="dash-text-date hidden-xs">
-                          <span class="glyphicon glyphicon-time" style="top: 2px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                          <span class="glyphicon glyphicon-time" style="top: -1px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                         </small>
                         <small class="dash-text-date2 hidden-lg hidden-md hidden-sm">
-                          <span class="glyphicon glyphicon-time" style="top: 2px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                          <span class="glyphicon glyphicon-time" style="top: 0px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                         </small>
                       </div>
                       <p class="dash-question-p text-wrap ellipsis">

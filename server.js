@@ -14,11 +14,14 @@ var path = require('path');
 var qs = require('querystring');
 var request = require('request');
 
-var userSchema = new mongoose.Schema ({
+var userSchema = new mongoose.Schema({
   username: String,
   facebook: String,
-  picture: {type: mongoose.Schema.Types.Mixed},
+  picture: {
+    type: mongoose.Schema.Types.Mixed
+  },
   rating: Number,
+  authorRating: Number,
   email: String,
   password: {
     type: String,
@@ -41,27 +44,27 @@ var userSchema = new mongoose.Schema ({
     ref: 'Answer'
   }]
 });
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   var user = this;
   if (!user.isModified('password')) {
     return next();
   }
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(user.password, salt, function(err, hash) {
+  bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       user.password = hash;
       next();
     });
   });
 });
 
-userSchema.methods.comparePassword = function(password, done) {
-  bcrypt.compare(password, this.password, function(err, isMatch) {
+userSchema.methods.comparePassword = function (password, done) {
+  bcrypt.compare(password, this.password, function (err, isMatch) {
     done(err, isMatch);
   });
 };
 var User = mongoose.model('User', userSchema);
 
-var commentSchema = new mongoose.Schema ({
+var commentSchema = new mongoose.Schema({
   content: String,
   article: {
     type: mongoose.Schema.ObjectId,
@@ -85,7 +88,7 @@ var commentSchema = new mongoose.Schema ({
 });
 var Comment = mongoose.model('Comment', commentSchema);
 
-var articleSchema = new mongoose.Schema ({
+var articleSchema = new mongoose.Schema({
   content: String,
   title: String,
   author: {
@@ -98,13 +101,15 @@ var articleSchema = new mongoose.Schema ({
   }],
   sports: [String],
   teams: [String],
-  picture: {type: mongoose.Schema.Types.Mixed},
+  picture: {
+    type: mongoose.Schema.Types.Mixed
+  },
   date: String,
   ratings: [Number]
 });
 var Article = mongoose.model('Article', articleSchema);
 
-var questionSchema = new mongoose.Schema ({
+var questionSchema = new mongoose.Schema({
   content: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -119,7 +124,7 @@ var questionSchema = new mongoose.Schema ({
 });
 var Question = mongoose.model('Question', questionSchema);
 
-var answerSchema = new mongoose.Schema ({
+var answerSchema = new mongoose.Schema({
   content: String,
   rating: Number,
   date: String,
@@ -151,7 +156,7 @@ var Answer = mongoose.model('Answer', answerSchema);
 */
 mongoose.Promise = global.Promise;
 mongoose.connect(config.url);
-mongoose.connection.on('error', function(err) {
+mongoose.connection.on('error', function (err) {
   console.log('Error: Could not connect to MongoDB.');
 });
 
@@ -165,7 +170,7 @@ app.set('port', process.env.PORT || 3198);
 app.use(cors({
   origin: '*',
   withCredentials: false,
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin' ]
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
 }));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -224,13 +229,13 @@ function createJWT(user) {
 | MongoDB query object parameters
 |--------------------------------------------------------------------------
 */
-app.param('article', function(req, res, next, id) {
+app.param('article', function (req, res, next, id) {
   var query = Article.findById(id);
-  query.exec(function(err, article) {
-    if(err) {
+  query.exec(function (err, article) {
+    if (err) {
       return next(err);
     }
-    if(!article) {
+    if (!article) {
       return next(new Error('Error - the article requested could not be found.'));
     }
     req.article = article;
@@ -238,13 +243,13 @@ app.param('article', function(req, res, next, id) {
   });
 });
 
-app.param('question', function(req, res, next, id) {
+app.param('question', function (req, res, next, id) {
   var query = Question.findById(id);
-  query.exec(function(err, question) {
-    if(err) {
+  query.exec(function (err, question) {
+    if (err) {
       return next(err);
     }
-    if(!question) {
+    if (!question) {
       return next(new Error('Error - the question requested could not be found.'));
     }
     req.question = question;
@@ -252,13 +257,13 @@ app.param('question', function(req, res, next, id) {
   });
 });
 
-app.param('answer', function(req, res, next, id) {
+app.param('answer', function (req, res, next, id) {
   var query = Answer.findById(id);
-  query.exec(function(err, answer) {
-    if(err) {
+  query.exec(function (err, answer) {
+    if (err) {
       return next(err);
     }
-    if(!answer) {
+    if (!answer) {
       return next(new Error('Error - the answer requested could not be found.'));
     }
     req.answer = answer;
@@ -266,13 +271,13 @@ app.param('answer', function(req, res, next, id) {
   });
 });
 
-app.param('comment', function(req, res, next, id) {
+app.param('comment', function (req, res, next, id) {
   var query = Comment.findById(id);
-  query.exec(function(err, comment) {
-    if(err) {
+  query.exec(function (err, comment) {
+    if (err) {
       return next(err);
     }
-    if(!comment) {
+    if (!comment) {
       return next(new Error('Error - the comment requested could not be found.'));
     }
     req.comment = comment;
@@ -285,23 +290,23 @@ app.param('comment', function(req, res, next, id) {
 | User Routes
 |--------------------------------------------------------------------------
 */
-app.get('/api/me', ensureAuthenticated, function(req, res) {
-  User.findById(req.user).populate('articles questions').exec(function(err, user) {
-    if(err) {
+app.get('/api/me', ensureAuthenticated, function (req, res) {
+  User.findById(req.user).populate('articles questions').exec(function (err, user) {
+    if (err) {
       return next(err);
     }
     res.send(user);
   });
 });
 
-app.post('/auth/signup', function(req, res) {
+app.post('/auth/signup', function (req, res) {
   User.findOne({
     $or: [{
       email: req.body.email
     }, {
       username: req.body.username
     }]
-  }, function(err, user) {
+  }, function (err, user) {
     if (user) {
       if (user.username === req.body.username) {
         return res.status(409).send({
@@ -319,7 +324,7 @@ app.post('/auth/signup', function(req, res) {
       password: req.body.password
     });
     console.log(user);
-    user.save(function(err, result) {
+    user.save(function (err, result) {
       if (err) {
         res.status(500).send({
           message: err.message
@@ -332,16 +337,16 @@ app.post('/auth/signup', function(req, res) {
   });
 });
 
-app.post('/auth/login', function(req, res) {
+app.post('/auth/login', function (req, res) {
   User.findOne({
     username: req.body.username
-  }, '+password', function(err, user) {
+  }, '+password', function (err, user) {
     if (!user) {
       return res.status(401).send({
         message: 'Invalid username and/or password'
       });
     }
-    user.comparePassword(req.body.password, function(err, isMatch) {
+    user.comparePassword(req.body.password, function (err, isMatch) {
       if (!isMatch) {
         return res.status(401).send({
           message: 'Invalid username and/or password'
@@ -359,47 +364,54 @@ app.post('/auth/login', function(req, res) {
 | Article Routes
 |--------------------------------------------------------------------------
 */
-app.get('/articles', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
-  Article.find({}, function(err, articles) {
-    Article.populate(articles, q)
-      .then(function() {
+app.get('/articles', function (req, res, next) {
+  Article.find({}, function (err, articles) {
+    Article.populate(articles, {
+      path: 'author'
+    })
+      .then(function (articles) {
         res.json(articles);
       })
-      .catch(function(err) {
-        throw(err);
+      .catch(function (err) {
+        throw (err);
       });
   });
 });
 
-app.get('/articles/:article', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username' }, { path: 'comments' }];
-  Article.findById(req.article, function(err, article) {
-    Article.populate(article, q)
-      .then(function() {
+app.get('/articles/:article', function (req, res, next) {
+  var q = [{
+    path: 'author'
+  }, {
+    path: 'comments'
+  }];
+  Article.populate(req.article, q)
+    .then(function (article) {
+      Comment.populate(req.article.comments, {
+        path: 'author',
+        select: 'username picture rating'
+      }).then(function (comments) {
+        console.log(comments);
         res.json(article);
-      })
-      .catch(function(err) {
-        throw(err);
+        res.json(comments);
       });
-  });
+    });
 });
 
-app.post('/articles', function(req, res, next) {
+app.post('/articles', function (req, res, next) {
   var article = new Article(req.body);
-  User.findById(article.author, function(err, user) {
-    if(err) {
+  User.findById(article.author, function (err, user) {
+    if (err) {
       return next(err);
     }
     user.articles.push(article);
-    user.save(function(err, user) {
-      if(err) {
+    user.save(function (err, user) {
+      if (err) {
         return next(err);
       }
     });
   });
-  article.save(function(err, article) {
-    if(err) {
+  article.save(function (err, article) {
+    if (err) {
       return next(err);
     }
     res.send(article);
@@ -411,26 +423,37 @@ app.post('/articles', function(req, res, next) {
 | Question Routes
 |--------------------------------------------------------------------------
 */
-app.get('/questions', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
-  Question.find({}, function(err, questions) {
+app.get('/questions', function (req, res, next) {
+  var q = [{
+    path: 'author',
+    select: 'username picture'
+  }, {
+    path: 'answers'
+  }];
+  Question.find({}, function (err, questions) {
     Question.populate(questions, q)
-      .then(function() {
+      .then(function () {
         res.json(questions);
       })
-      .catch(function(err) {
-        throw(err);
+      .catch(function (err) {
+        throw (err);
       });
   });
 });
 
-app.get('/questions/:question', function(req, res, next) {
-  var q = [{ path: 'author', select: 'username picture' }, { path: 'answers' }];
+app.get('/questions/:question', function (req, res, next) {
+  var q = [{
+    path: 'author',
+    select: 'username picture'
+  }, {
+    path: 'answers'
+  }];
   Question.populate(req.question, q)
-    .then(function(question) {
+    .then(function (question) {
       Answer.populate(req.question.answers, {
-        path: 'author', select: 'username picture rating'
-      }).then(function(answers) {
+        path: 'author',
+        select: 'username picture rating'
+      }).then(function (answers) {
         console.log(answers);
         res.json(question);
         res.json(answers);
@@ -438,24 +461,58 @@ app.get('/questions/:question', function(req, res, next) {
     });
 });
 
-app.post('/questions', function(req, res, next) {
+app.post('/questions', function (req, res, next) {
   var question = new Question(req.body);
-  User.findById(question.author, function(err, user) {
-    if(err) {
+  User.findById(question.author, function (err, user) {
+    if (err) {
       return next(err);
     }
     user.questions.push(question);
-    user.save(function(err, user) {
-      if(err) {
+    user.save(function (err, user) {
+      if (err) {
         return next(err);
       }
     });
   });
-  question.save(function(err, question) {
-    if(err) {
+  question.save(function (err, question) {
+    if (err) {
       return nest(err);
     }
     res.send(question);
+  });
+});
+
+app.post('/articles/:article/comments', function (req, res, next) {
+  var comment = new Comment(req.body);
+  User.findById(req.body.author, function (err, user) {
+    user.comments.push(comment);
+    user.save(function (err, comment) {
+      if (err) {
+        return next(err);
+      }
+    });
+  });
+  comment.save(function (err, comment) {
+    if (err) {
+      return next(err);
+    }
+    req.article.comments.push(comment);
+
+    req.article.save(function (err, article) {
+      if (err) {
+        return next(err);
+      }
+      Article.populate(req.article, {
+        path: 'author comments'
+      }).then(function (article) {
+        Comment.populate(req.article.comments, {
+          path: 'author'
+        }).then(function (comments) {
+          res.json(article);
+          res.json(comments);
+        });
+      });
+    });
   });
 });
 
@@ -464,32 +521,32 @@ app.post('/questions', function(req, res, next) {
 | Answer Routes
 |--------------------------------------------------------------------------
 */
-app.post('/questions/:question/answers', function(req, res, next) {
+app.post('/questions/:question/answers', function (req, res, next) {
   var answer = new Answer(req.body);
-  User.findById(req.body.author, function(err, user) {
+  User.findById(req.body.author, function (err, user) {
     user.answers.push(answer);
-    user.save(function(err) {
-      if(err) {
+    user.save(function (err) {
+      if (err) {
         return next(err);
       }
     });
   });
-  answer.save(function(err, answer) {
-    if(err) {
+  answer.save(function (err, answer) {
+    if (err) {
       return next(err);
     }
     req.question.answers.push(answer);
 
-    req.question.save(function(err, question) {
-      if(err) {
+    req.question.save(function (err, question) {
+      if (err) {
         return next(err);
       }
       Question.populate(req.question, {
         path: 'author answers'
-      }).then(function(question) {
+      }).then(function (question) {
         Answer.populate(req.question.answers, {
           path: 'author'
-        }).then(function(answers) {
+        }).then(function (answers) {
           res.json(question);
           res.json(answers);
         });
@@ -498,16 +555,16 @@ app.post('/questions/:question/answers', function(req, res, next) {
   });
 });
 
-app.put('/questions/:question/answers/:answer/addLike', function(req, res, next) {
+app.put('/questions/:question/answers/:answer/addLike', function (req, res, next) {
   var reqAnswer = req.body;
-  Answer.findById(reqAnswer._id, function(err, answer) {
-    if(err) {
+  Answer.findById(reqAnswer._id, function (err, answer) {
+    if (err) {
       return next(err);
     }
     answer.likes++;
     answer.usersWhoLiked.push(reqAnswer.userWhoLiked);
-    answer.save(function(err, ans) {
-      if(err) {
+    answer.save(function (err, ans) {
+      if (err) {
         return next(err);
       }
       res.sendStatus(200);
@@ -515,16 +572,16 @@ app.put('/questions/:question/answers/:answer/addLike', function(req, res, next)
   });
 });
 
-app.put('/questions/:question/answers/:answer/addLike', function(req, res, next) {
+app.put('/questions/:question/answers/:answer/addLike', function (req, res, next) {
   var reqAnswer = req.body;
-  Answer.findById(reqAnswer._id, function(err, answer) {
-    if(err) {
+  Answer.findById(reqAnswer._id, function (err, answer) {
+    if (err) {
       return next(err);
     }
     answer.dislikes++;
     answer.usersWhoDisliked.push(reqAnswer.userWhoDisliked);
-    answer.save(function(err, ans) {
-      if(err) {
+    answer.save(function (err, ans) {
+      if (err) {
         return next(err);
       }
       res.sendStatus(200);
@@ -537,7 +594,7 @@ app.put('/questions/:question/answers/:answer/addLike', function(req, res, next)
 | Social Account Routes
 |--------------------------------------------------------------------------
 */
-app.post('/auth/facebook', function(req, res) {
+app.post('/auth/facebook', function (req, res) {
   var fields = ['id', 'email', 'first_name', 'last_name', 'link', 'name'];
   var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
   var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + fields.join(',');
@@ -553,7 +610,7 @@ app.post('/auth/facebook', function(req, res) {
     url: accessTokenUrl,
     qs: params,
     json: true
-  }, function(err, response, accessToken) {
+  }, function (err, response, accessToken) {
     if (response.statusCode !== 200) {
       return res.status(500).send({
         message: accessToken.error.message
@@ -565,7 +622,7 @@ app.post('/auth/facebook', function(req, res) {
       url: graphApiUrl,
       qs: accessToken,
       json: true
-    }, function(err, response, profile) {
+    }, function (err, response, profile) {
       if (response.statusCode !== 200) {
         return res.status(500).send({
           message: profile.error.message
@@ -574,7 +631,7 @@ app.post('/auth/facebook', function(req, res) {
       if (req.header('Authorization')) {
         User.findOne({
           facebook: profile.id
-        }, function(err, existingUser) {
+        }, function (err, existingUser) {
           if (existingUser) {
             return res.status(409).send({
               message: 'There is already a Facebook account that belongs to you.'
@@ -582,7 +639,7 @@ app.post('/auth/facebook', function(req, res) {
           }
           var token = req.header('Authorization').split(' ')[1];
           var payload = jwt.decode(token, config.TOKEN_SECRET);
-          User.findById(payload.sub, function(err, user) {
+          User.findById(payload.sub, function (err, user) {
             if (!user) {
               return res.status(400).send({
                 message: 'User not found'
@@ -591,7 +648,7 @@ app.post('/auth/facebook', function(req, res) {
             user.facebook = profile.id;
             user.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
             //user.username = user.username || profile.name;
-            user.save(function() {
+            user.save(function () {
               var token = createJWT(user);
               res.send({
                 token: token
@@ -603,7 +660,7 @@ app.post('/auth/facebook', function(req, res) {
         // Step 3. Create a new user account or return an existing one.
         User.findOne({
           facebook: profile.id
-        }, function(err, existingUser) {
+        }, function (err, existingUser) {
           if (existingUser) {
             var token = createJWT(existingUser);
             return res.send({
@@ -625,7 +682,7 @@ app.post('/auth/facebook', function(req, res) {
 | Login with Twitter
 |--------------------------------------------------------------------------
 */
-app.post('/auth/twitter', function(req, res) {
+app.post('/auth/twitter', function (req, res) {
   var requestTokenUrl = 'https://api.twitter.com/oauth/request_token';
   var accessTokenUrl = 'https://api.twitter.com/oauth/access_token';
   var profileUrl = 'https://api.twitter.com/1.1/users/show.json?screen_name=';
@@ -642,7 +699,7 @@ app.post('/auth/twitter', function(req, res) {
     request.post({
       url: requestTokenUrl,
       oauth: requestTokenOauth
-    }, function(err, response, body) {
+    }, function (err, response, body) {
       var oauthToken = qs.parse(body);
 
       // Step 2. Send OAuth token back to open the authorization screen.
@@ -661,7 +718,7 @@ app.post('/auth/twitter', function(req, res) {
     request.post({
       url: accessTokenUrl,
       oauth: accessTokenOauth
-    }, function(err, response, accessToken) {
+    }, function (err, response, accessToken) {
 
       accessToken = qs.parse(accessToken);
 
@@ -676,13 +733,13 @@ app.post('/auth/twitter', function(req, res) {
         url: profileUrl + accessToken.screen_name,
         oauth: profileOauth,
         json: true
-      }, function(err, response, profile) {
+      }, function (err, response, profile) {
 
         // Step 5a. Link user accounts.
         if (req.header('Authorization')) {
           User.findOne({
             twitter: profile.id
-          }, function(err, existingUser) {
+          }, function (err, existingUser) {
             if (existingUser) {
               return res.status(409).send({
                 message: 'There is already a Twitter account that belongs to you.'
@@ -692,7 +749,7 @@ app.post('/auth/twitter', function(req, res) {
             var token = req.header('Authorization').split(' ')[1];
             var payload = jwt.decode(token, config.TOKEN_SECRET);
 
-            User.findById(payload.sub, function(err, user) {
+            User.findById(payload.sub, function (err, user) {
               if (!user) {
                 return res.status(400).send({
                   message: 'User not found'
@@ -701,7 +758,7 @@ app.post('/auth/twitter', function(req, res) {
               user.twitter = profile.id;
               user.username = user.username || profile.name;
               user.picture = profile.profile_image_url.replace('_normal', '');
-              user.save(function(err) {
+              user.save(function (err) {
                 res.send({
                   token: createJWT(user)
                 });
@@ -712,7 +769,7 @@ app.post('/auth/twitter', function(req, res) {
           // Step 5b. Create a new user account or return an existing one.
           User.findOne({
             twitter: profile.id
-          }, function(err, existingUser) {
+          }, function (err, existingUser) {
             if (existingUser) {
               return res.send({
                 token: createJWT(existingUser)
@@ -734,7 +791,7 @@ app.post('/auth/twitter', function(req, res) {
 | Unlink Provider
 |--------------------------------------------------------------------------
 */
-app.post('/auth/unlink', ensureAuthenticated, function(req, res) {
+app.post('/auth/unlink', ensureAuthenticated, function (req, res) {
   var provider = req.body.provider;
   var providers = ['facebook', 'twitter'];
 
@@ -744,20 +801,20 @@ app.post('/auth/unlink', ensureAuthenticated, function(req, res) {
     });
   }
 
-  User.findById(req.user, function(err, user) {
+  User.findById(req.user, function (err, user) {
     if (!user) {
       return res.status(400).send({
         message: 'User Not Found'
       });
     }
     user[provider] = undefined;
-    user.save(function() {
+    user.save(function () {
       res.status(200).end();
     });
   });
 });
 
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
