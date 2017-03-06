@@ -64,7 +64,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the answer ERR
-        toastr.error('You can only like or dislike an answer once!', 'Error');
+        toastr.error('You can only like or dislike a answer once!', 'Error');
         return;
       }
     } else if(answer.dislikes > 0) {
@@ -86,7 +86,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the answer ERR
-        toastr.error('You cant like an answer after disliking it!', 'Error');
+        toastr.error('You cant like a answer after disliking it!', 'Error');
         return;
       }
     } else if(answer.likes > 0) {
@@ -108,7 +108,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the answer ERR
-        toastr.error('You cant like an answer more than once!', 'Error');
+        toastr.error('You cant like a answer more than once!', 'Error');
         return;
       }
     } else {
@@ -150,7 +150,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the answer ERR
-        toastr.error('You can only like or dislike an answer once!', 'Error');
+        toastr.error('You can only like or dislike a answer once!', 'Error');
         return;
       }
     } else if(answer.dislikes > 0) {
@@ -172,7 +172,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the answer ERR
-        toastr.error('You can only dislike an answer once!', 'Error');
+        toastr.error('You can only dislike a answer once!', 'Error');
         return;
       }
     } else if(answer.likes > 0) {
@@ -194,7 +194,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the answer ERR
-        toastr.error('You cant dislike an answer after liking it!', 'Error');
+        toastr.error('You cant dislike a answer after liking it!', 'Error');
         return;
       }
     } else {

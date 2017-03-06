@@ -1,254 +1,346 @@
 <div class="container">
-  <ul class="nav nav-tabs text-center">
-    <li class="active">
-      <a data-target="#all" data-toggle="tab">All</a>
-    </li>
-    <li>
-      <a data-target="#nba" data-toggle="tab">NBA</a>
-    </li>
-    <li>
-      <a data-target="#mlb" data-toggle="tab">MLB</a>
-    </li>
-    <li>
-      <a data-target="#nfl" data-toggle="tab">NFL</a>
-    </li>
-    <li class="pull-right hidden-lg hidden-md hidden-sm">
-      <button class="btn btn-sm btn-primary btn-create" ui-sref="articleTemplate" type="button" style="margin-top: 10px;">Post New</button>
-    </li>
-    <li class="pull-right hidden-xs">
-      <button class="btn btn-sm btn-primary" ui-sref="articleTemplate" type="button" style="margin-top: 10px;">Post New</button>
-    </li>
-  </ul>
   <div ng-show="loading">
     <div class="loader"></div>
   </div>
-  <div class="tab-content clearfix" ng-hide="loading">
-    <div class="tab-pane active" id="all">
-      <div ng-if="!articles.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-            No articles to display.
-          </div>
+  <div ng-show="!loading">
+    <div class="row center-block text-center">
+      <div class="board">
+        <div class="board-inner">
+          <ul class="nav nav-tabs custom-nav">
+            <div class="liner"></div>
+            <li class="active">
+              <a data-target="#all" data-toggle="tab" title="All Fantasy Sports">
+                <span class="round-tabs primary">
+                  ALL
+                </span>
+              </a>
+            </li>
+            <li>
+              <a data-target="#nba" data-toggle="tab" title="Fantasy Basketball">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-basketball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a data-target="#mlb" data-toggle="tab" title="Fantasy Baseball">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-baseball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a data-target="#nfl" data-toggle="tab" title="Fantasy Football">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-americanfootball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="articleTemplate" data-toggle="tab" title="Post New Article">
+                <span class="round-tabs primary">
+                  <i class="fa fa-plus fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div ng-if="articles.length">
-        <div id="question-row-parent">
+    </div>
+    <div class="tab-content clearfix" ng-hide="loading">
+      <div class="tab-pane active" id="all">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">All Fantasy Sports</h2>
+          </legend>
         </div>
-        <div class="list-group">
-         <a type="button" class="list-group-item" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
-           <div class="well" id="article-well">
-             <div class="row">
-               <div class="col-xs-12">
-                 <div class="effect8 card">
-                   <h4 class="h4">{{article.title}}</h4>
-                   <small class="text-muted">
-                     <span class="glyphicon glyphicon-time"></span> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                   </small>
-                 </div>
-               </div>
-             </div>
-             <div class="row " style="margin-bottom:10px;">
-               <div class="col-sm-4 text-center hidden-xs">
-                 <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-               </div>
-               <div class="text-center">
-                 <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-                   <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-                 </div>
-               </div>
-               <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                 <div class="col-xs-4">
-                   <div class="list-group" id="card">
-                     <div class="list-group-item text-wrap text-center text-small">
-                       <span class="fa-stack fa-sm">
-                           <i class="fa fa-square-o fa-stack-2x"></i>
-                           <i class="fa fa-user fa-stack-1x"></i>
-                         </span> Author:
-                       <br /> {{article.author.username}}
-                     </div>
-                   </div>
-                 </div>
-                 <div class="col-xs-4">
-                   <div class="list-group" id="card" style="min-height: 64px;">
-                     <div class="list-group-item text-wrap text-center text-small">Comments:
-                       <br /> {{article.comments.length || 0}}
-                     </div>
-                   </div>
-                 </div>
-                 <div class="col-xs-4">
-                   <div class="list-group" id="card">
-                     <div class="list-group-item text-wrap text-center text-small">
-                       <span class="fa-stack fa-sm">
-                           <i class="fa fa-square-o fa-stack-2x"></i>
-                           <i class="fa fa-star fa-stack-1x"></i>
-                         </span> Rating:
-                       <br /> {{article.rating || 0}}
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                 <div class="col-xs-6">
-                   <div class="list-group" id="card">
-                     <div class="list-group-item ellipsis" style="font-size: 12px;">
-                       <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                         <li>
-                           <span class="fa-stack fa-sm">
+        <div ng-if="!articles.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No articles to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="articles.length">
+          <div id="question-row-parent">
+          </div>
+          <div class="list-group">
+            <a type="button" class="list-group-item" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
+              <div class="well" id="article-well">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="effect8 card">
+                      <h4 class="h4">{{article.title}}</h4>
+                      <small class="text-muted">
+                       <i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                     </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="row " style="margin-bottom:10px;">
+                  <div class="col-sm-4 text-center hidden-xs">
+                    <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                  </div>
+                  <div class="text-center">
+                    <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                      <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                    </div>
+                  </div>
+                  <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item text-wrap text-center text-small">
+                          <span class="fa-stack fa-sm">
+                             <i class="fa fa-square-o fa-stack-2x"></i>
+                             <i class="fa fa-user fa-stack-1x"></i>
+                           </span> Author:
+                          <br /> {{article.author.username}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card" style="min-height: 64px;">
+                        <div class="list-group-item text-wrap text-center text-small">Comments:
+                          <br /> {{article.comments.length || 0}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item text-wrap text-center text-small">
+                          <span class="fa-stack fa-sm">
+                             <i class="fa fa-square-o fa-stack-2x"></i>
+                             <i class="fa fa-star fa-stack-1x"></i>
+                           </span> Rating:
+                          <br /> {{article.rating || 0}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                    <div class="col-xs-6">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item ellipsis" style="font-size: 12px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                               <i class="fa fa-square-o fa-stack-2x"></i>
+                               <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                             </span> Sports:
+                            </li>
+                            <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{sport}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item ellipsis" style="font-size: 12px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                               <i class="fa fa-square-o fa-stack-2x"></i>
+                               <i class="fa fa-users fa-stack-1x"></i>
+                             </span> Teams:
+                            </li>
+                            <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{team}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 hidden-xs">
+                    <div class="list-group" id="home-card">
+                      <div class="list-group-item">
+                        <span class="fa-stack fa-sm">
+                         <i class="fa fa-square-o fa-stack-2x"></i>
+                         <i class="fa fa-user fa-stack-1x"></i>
+                       </span> Author: {{article.author.username}}
+                      </div>
+                      <div class="list-group-item">
+                        <span class="fa-stack fa-sm">
+                         <i class="fa fa-square-o fa-stack-2x"></i>
+                         <i class="fa fa-hashtag fa-stack-1x"></i>
+                       </span> Comments: {{article.comments.length || 0}}
+                      </div>
+                      <div class="list-group-item">
+                        <span class="fa-stack fa-sm">
+                         <i class="fa fa-square-o fa-stack-2x"></i>
+                         <i class="fa fa-star fa-stack-1x"></i>
+                       </span> Rating: {{article.rating || 0}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
+                    <div class="list-group" id="home-card">
+                      <div class="list-group-item ellipsis" style="font-size: 14px;">
+                        <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                          <li>
+                            <span class="fa-stack fa-sm">
                              <i class="fa fa-square-o fa-stack-2x"></i>
                              <i class="fa ion-ios-basketball fa-stack-1x"></i>
                            </span> Sports:
-                         </li>
-                         <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
-                           <span class="label label-primary" id="custom-label">{{sport}}</span>
-                         </li>
-                       </ul>
-                     </div>
-                   </div>
-                 </div>
-                 <div class="col-xs-6">
-                   <div class="list-group" id="card">
-                     <div class="list-group-item ellipsis" style="font-size: 12px;">
-                       <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                         <li>
-                           <span class="fa-stack fa-sm">
-                             <i class="fa fa-square-o fa-stack-2x"></i>
-                             <i class="fa fa-users fa-stack-1x"></i>
-                           </span> Teams:
-                         </li>
-                         <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
-                           <span class="label label-primary" id="custom-label">{{team}}</span>
-                         </li>
-                       </ul>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               <div class="col-sm-4 hidden-xs">
-                 <div class="list-group" id="home-card">
-                   <div class="list-group-item">
-                     <span class="fa-stack fa-sm">
-                       <i class="fa fa-square-o fa-stack-2x"></i>
-                       <i class="fa fa-user fa-stack-1x"></i>
-                     </span> Author: {{article.author.username}}
-                   </div>
-                   <div class="list-group-item">
-                     <span class="fa-stack fa-sm">
-                       <i class="fa fa-square-o fa-stack-2x"></i>
-                       <i class="fa fa-hashtag fa-stack-1x"></i>
-                     </span> Comments: {{article.comments.length || 0}}
-                   </div>
-                   <div class="list-group-item">
-                     <span class="fa-stack fa-sm">
-                       <i class="fa fa-square-o fa-stack-2x"></i>
-                       <i class="fa fa-star fa-stack-1x"></i>
-                     </span> Rating: {{article.rating || 0}}
-                   </div>
-                 </div>
-               </div>
-               <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
-                 <div class="list-group" id="home-card">
-                   <div class="list-group-item ellipsis" style="font-size: 14px;">
-                     <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                       <li>
-                         <span class="fa-stack fa-sm">
-                           <i class="fa fa-square-o fa-stack-2x"></i>
-                           <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                         </span> Sports:
-                       </li>
-                       <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
-                         <span class="label label-primary" id="custom-label">{{sport}}</span>
-                       </li>
-                     </ul>
-                   </div>
-                   <div class="list-group-item ellipsis" style="font-size: 14px;">
-                     <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                       <li>
-                         <span class="fa-stack fa-sm">
-                             <i class="fa fa-square-o fa-stack-2x"></i>
-                             <i class="fa fa-users fa-stack-1x"></i>
-                           </span> Teams:
-                       </li>
-                       <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
-                         <span class="label label-primary" id="custom-label">{{team}}</span>
-                       </li>
-                     </ul>
-                   </div>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </a>
-       </div>
-      </div>
-    </div>
-    <div class="tab-pane" id="nba">
-      <div ng-if="!nba.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-            No articles to display.
-          </div>
-        </div>
-      </div>
-      <div ng-if="nba.length">
-        <div id="question-row-parent">
-        </div>
-        <div class="list-group">
-          <a type="button" class="list-group-item" ng-repeat="article in nba track by $index" id="articles-container" ui-sref="article({id: article._id})">
-            <div class="well" id="article-well">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="effect8 card">
-                    <h4 class="h4">{{article.title}}</h4>
-                    <small class="text-muted">
-                      <span class="glyphicon glyphicon-time"></span> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                    </small>
+                          </li>
+                          <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
+                            <span class="label label-primary" id="custom-label">{{sport}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="list-group-item ellipsis" style="font-size: 14px;">
+                        <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                          <li>
+                            <span class="fa-stack fa-sm">
+                               <i class="fa fa-square-o fa-stack-2x"></i>
+                               <i class="fa fa-users fa-stack-1x"></i>
+                             </span> Teams:
+                          </li>
+                          <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
+                            <span class="label label-primary" id="custom-label">{{team}}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row " style="margin-bottom:10px;">
-                <div class="col-sm-4 text-center hidden-xs">
-                  <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-                </div>
-                <div class="text-center">
-                  <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-                    <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="nba">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">Fantasy Basketball</h2>
+          </legend>
+        </div>
+        <div ng-if="!nba.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No articles to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="nba.length">
+          <div id="question-row-parent">
+          </div>
+          <div class="list-group">
+            <a type="button" class="list-group-item" ng-repeat="article in nba track by $index" id="articles-container" ui-sref="article({id: article._id})">
+              <div class="well" id="article-well">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="effect8 card">
+                      <h4 class="h4">{{article.title}}</h4>
+                      <small class="text-muted">
+                        <i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                      </small>
+                    </div>
                   </div>
                 </div>
-                <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center text-small">
+                <div class="row " style="margin-bottom:10px;">
+                  <div class="col-sm-4 text-center hidden-xs">
+                    <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                  </div>
+                  <div class="text-center">
+                    <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                      <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                    </div>
+                  </div>
+                  <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item text-wrap text-center text-small">
+                          <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-user fa-stack-1x"></i>
+                            </span> Author:
+                          <br /> {{article.author.username}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card" style="min-height: 64px;">
+                        <div class="list-group-item text-wrap text-center text-small">Comments:
+                          <br /> {{article.comments.length || 0}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item text-wrap text-center text-small">
+                          <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-star fa-stack-1x"></i>
+                            </span> Rating:
+                          <br /> {{article.rating || 0}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                    <div class="col-xs-6">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item ellipsis" style="font-size: 12px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                              </span> Sports:
+                            </li>
+                            <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{sport}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="list-group" id="card">
+                        <div class="list-group-item ellipsis" style="font-size: 12px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-users fa-stack-1x"></i>
+                              </span> Teams:
+                            </li>
+                            <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{team}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 hidden-xs">
+                    <div class="list-group" id="home-card">
+                      <div class="list-group-item">
                         <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa fa-user fa-stack-1x"></i>
-                          </span> Author:
-                        <br /> {{article.author.username}}
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-user fa-stack-1x"></i>
+                        </span> Author: {{article.author.username}}
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card" style="min-height: 64px;">
-                      <div class="list-group-item text-wrap text-center text-small">Comments:
-                        <br /> {{article.comments.length || 0}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center text-small">
+                      <div class="list-group-item">
                         <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa fa-star fa-stack-1x"></i>
-                          </span> Rating:
-                        <br /> {{article.rating || 0}}
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-hashtag fa-stack-1x"></i>
+                        </span> Comments: {{article.comments.length || 0}}
+                      </div>
+                      <div class="list-group-item">
+                        <span class="fa-stack fa-sm">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-star fa-stack-1x"></i>
+                        </span> Rating: {{article.rating || 0}}
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                  <div class="col-xs-6">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item ellipsis" style="font-size: 12px;">
+                  <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
+                    <div class="list-group" id="home-card">
+                      <div class="list-group-item ellipsis" style="font-size: 14px;">
                         <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
                           <li>
                             <span class="fa-stack fa-sm">
@@ -261,17 +353,13 @@
                           </li>
                         </ul>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-6">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item ellipsis" style="font-size: 12px;">
+                      <div class="list-group-item ellipsis" style="font-size: 14px;">
                         <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
                           <li>
                             <span class="fa-stack fa-sm">
-                              <i class="fa fa-square-o fa-stack-2x"></i>
-                              <i class="fa fa-users fa-stack-1x"></i>
-                            </span> Teams:
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-users fa-stack-1x"></i>
+                              </span> Teams:
                           </li>
                           <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
                             <span class="label label-primary" id="custom-label">{{team}}</span>
@@ -281,85 +369,201 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-4 hidden-xs">
-                  <div class="list-group" id="home-card">
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-user fa-stack-1x"></i>
-                      </span> Author: {{article.author.username}}
-                    </div>
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-hashtag fa-stack-1x"></i>
-                      </span> Comments: {{article.comments.length || 0}}
-                    </div>
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-star fa-stack-1x"></i>
-                      </span> Rating: {{article.rating || 0}}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
-                  <div class="list-group" id="home-card">
-                    <div class="list-group-item ellipsis" style="font-size: 14px;">
-                      <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                        <li>
-                          <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                          </span> Sports:
-                        </li>
-                        <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
-                          <span class="label label-primary" id="custom-label">{{sport}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="list-group-item ellipsis" style="font-size: 14px;">
-                      <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                        <li>
-                          <span class="fa-stack fa-sm">
-                              <i class="fa fa-square-o fa-stack-2x"></i>
-                              <i class="fa fa-users fa-stack-1x"></i>
-                            </span> Teams:
-                        </li>
-                        <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
-                          <span class="label label-primary" id="custom-label">{{team}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane" id="mlb">
-      <div ng-if="!mlb.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-            No articles to display.
+            </a>
           </div>
         </div>
       </div>
-      <div ng-if="mlb.length">
-        <div class="list-group" id="question-row-parent">
+      <div class="tab-pane" id="mlb">
+        <div ng-if="!mlb.length">
+          <div class="question-title page-header card well-shadow">
+            <legend style="border-bottom: 0px;">
+              <h2 class="text-center question-header">Fantasy Baseball</h2>
+            </legend>
+          </div>
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No articles to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="mlb.length">
+          <div class="list-group" id="question-row-parent">
+            <div id="question-row-parent">
+            </div>
+            <div class="list-group">
+              <a type="button" class="list-group-item" ng-repeat="article in mlb track by $index" id="articles-container" ui-sref="article({id: article._id})">
+                <div class="well" id="article-well">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="effect8 card">
+                        <h4 class="h4">{{article.title}}</h4>
+                        <small class="text-muted">
+                          <i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row " style="margin-bottom:10px;">
+                    <div class="col-sm-4 text-center hidden-xs">
+                      <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                    </div>
+                    <div class="text-center">
+                      <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                        <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
+                      </div>
+                    </div>
+                    <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                      <div class="col-xs-4">
+                        <div class="list-group" id="card">
+                          <div class="list-group-item text-wrap text-center text-small">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-user fa-stack-1x"></i>
+                              </span> Author:
+                            <br /> {{article.author.username}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <div class="list-group" id="card" style="min-height: 64px;">
+                          <div class="list-group-item text-wrap text-center text-small">Comments:
+                            <br /> {{article.comments.length || 0}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-4">
+                        <div class="list-group" id="card">
+                          <div class="list-group-item text-wrap text-center text-small">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-star fa-stack-1x"></i>
+                              </span> Rating:
+                            <br /> {{article.rating || 0}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row container-fluid hidden-lg hidden-md hidden-sm">
+                      <div class="col-xs-6">
+                        <div class="list-group" id="card">
+                          <div class="list-group-item ellipsis" style="font-size: 12px;">
+                            <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                              <li>
+                                <span class="fa-stack fa-sm">
+                                  <i class="fa fa-square-o fa-stack-2x"></i>
+                                  <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                                </span> Sports:
+                              </li>
+                              <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
+                                <span class="label label-primary" id="custom-label">{{sport}}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="list-group" id="card">
+                          <div class="list-group-item ellipsis" style="font-size: 12px;">
+                            <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                              <li>
+                                <span class="fa-stack fa-sm">
+                                  <i class="fa fa-square-o fa-stack-2x"></i>
+                                  <i class="fa fa-users fa-stack-1x"></i>
+                                </span> Teams:
+                              </li>
+                              <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
+                                <span class="label label-primary" id="custom-label">{{team}}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 hidden-xs">
+                      <div class="list-group" id="home-card">
+                        <div class="list-group-item">
+                          <span class="fa-stack fa-sm">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-user fa-stack-1x"></i>
+                          </span> Author: {{article.author.username}}
+                        </div>
+                        <div class="list-group-item">
+                          <span class="fa-stack fa-sm">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-hashtag fa-stack-1x"></i>
+                          </span> Comments: {{article.comments.length || 0}}
+                        </div>
+                        <div class="list-group-item">
+                          <span class="fa-stack fa-sm">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-star fa-stack-1x"></i>
+                          </span> Rating: {{article.rating || 0}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
+                      <div class="list-group" id="home-card">
+                        <div class="list-group-item ellipsis" style="font-size: 14px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                              </span> Sports:
+                            </li>
+                            <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{sport}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="list-group-item ellipsis" style="font-size: 14px;">
+                          <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
+                            <li>
+                              <span class="fa-stack fa-sm">
+                                  <i class="fa fa-square-o fa-stack-2x"></i>
+                                  <i class="fa fa-users fa-stack-1x"></i>
+                                </span> Teams:
+                            </li>
+                            <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
+                              <span class="label label-primary" id="custom-label">{{team}}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="nfl">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">Fantasy Football</h2>
+          </legend>
+        </div>
+        <div ng-if="!nfl.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No articles to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="nfl.length">
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="list-group-item" ng-repeat="article in mlb track by $index" id="articles-container" ui-sref="article({id: article._id})">
+            <a type="button" class="list-group-item" ng-repeat="article in nfl track by $index" id="articles-container" ui-sref="article({id: article._id})">
               <div class="well" id="article-well">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="effect8 card">
                       <h4 class="h4">{{article.title}}</h4>
                       <small class="text-muted">
-                        <span class="glyphicon glyphicon-time"></span> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                        <i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                       </small>
                     </div>
                   </div>
@@ -499,163 +703,6 @@
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="nfl">
-      <div ng-if="!nfl.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-            No articles to display.
-          </div>
-        </div>
-      </div>
-      <div ng-if="nfl.length">
-        <div id="question-row-parent">
-        </div>
-        <div class="list-group">
-          <a type="button" class="list-group-item" ng-repeat="article in nfl track by $index" id="articles-container" ui-sref="article({id: article._id})">
-            <div class="well" id="article-well">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="effect8 card">
-                    <h4 class="h4">{{article.title}}</h4>
-                    <small class="text-muted">
-                      <span class="glyphicon glyphicon-time"></span> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div class="row " style="margin-bottom:10px;">
-                <div class="col-sm-4 text-center hidden-xs">
-                  <img class="img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-                </div>
-                <div class="text-center">
-                  <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
-                    <img class="img-rounded card-image" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:300, h:150} }}" alt="{{article.title}}" />
-                  </div>
-                </div>
-                <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center text-small">
-                        <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa fa-user fa-stack-1x"></i>
-                          </span> Author:
-                        <br /> {{article.author.username}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card" style="min-height: 64px;">
-                      <div class="list-group-item text-wrap text-center text-small">Comments:
-                        <br /> {{article.comments.length || 0}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-4">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item text-wrap text-center text-small">
-                        <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa fa-star fa-stack-1x"></i>
-                          </span> Rating:
-                        <br /> {{article.rating || 0}}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row container-fluid hidden-lg hidden-md hidden-sm">
-                  <div class="col-xs-6">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item ellipsis" style="font-size: 12px;">
-                        <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                          <li>
-                            <span class="fa-stack fa-sm">
-                              <i class="fa fa-square-o fa-stack-2x"></i>
-                              <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                            </span> Sports:
-                          </li>
-                          <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
-                            <span class="label label-primary" id="custom-label">{{sport}}</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xs-6">
-                    <div class="list-group" id="card">
-                      <div class="list-group-item ellipsis" style="font-size: 12px;">
-                        <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                          <li>
-                            <span class="fa-stack fa-sm">
-                              <i class="fa fa-square-o fa-stack-2x"></i>
-                              <i class="fa fa-users fa-stack-1x"></i>
-                            </span> Teams:
-                          </li>
-                          <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
-                            <span class="label label-primary" id="custom-label">{{team}}</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 hidden-xs">
-                  <div class="list-group" id="home-card">
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-user fa-stack-1x"></i>
-                      </span> Author: {{article.author.username}}
-                    </div>
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-hashtag fa-stack-1x"></i>
-                      </span> Comments: {{article.comments.length || 0}}
-                    </div>
-                    <div class="list-group-item">
-                      <span class="fa-stack fa-sm">
-                        <i class="fa fa-square-o fa-stack-2x"></i>
-                        <i class="fa fa-star fa-stack-1x"></i>
-                      </span> Rating: {{article.rating || 0}}
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 hidden-xs" style="padding-top: 2.5%;">
-                  <div class="list-group" id="home-card">
-                    <div class="list-group-item ellipsis" style="font-size: 14px;">
-                      <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                        <li>
-                          <span class="fa-stack fa-sm">
-                            <i class="fa fa-square-o fa-stack-2x"></i>
-                            <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                          </span> Sports:
-                        </li>
-                        <li ng-repeat="sport in article.sports track by $index" style="margin-left: -8px;">
-                          <span class="label label-primary" id="custom-label">{{sport}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="list-group-item ellipsis" style="font-size: 14px;">
-                      <ul class="list-inline" style="margin-left: -3px; margin-bottom: 0px;">
-                        <li>
-                          <span class="fa-stack fa-sm">
-                              <i class="fa fa-square-o fa-stack-2x"></i>
-                              <i class="fa fa-users fa-stack-1x"></i>
-                            </span> Teams:
-                        </li>
-                        <li ng-repeat="team in article.teams track by $index" style="margin-left: -8px;">
-                          <span class="label label-primary" id="custom-label">{{team}}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <div class="clearfix"></div>
   </div>
 </div>

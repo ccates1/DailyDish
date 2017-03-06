@@ -2,6 +2,10 @@ var app = angular.module('dailydish');
 
 app.controller('QuestionsCtrl', function($scope, $auth, $service, $timeout,
     toastr, $state, $uibModal, moment) {
+      $(function () {
+        $('a[title]').tooltip();
+      });
+      
       $scope.articles = [];
       $scope.nba = [];
       $scope.mlb = [];

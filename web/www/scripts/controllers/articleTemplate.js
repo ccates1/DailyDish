@@ -7,6 +7,7 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
   $scope.selectedTags = [];
   $scope.teamOutput = [];
   $scope.showAdditionalTagInput = false;
+  $scope.loading = true;
   $scope.tags = [{
       main: 'NBA',
       teams: [{
@@ -53,6 +54,7 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
     $service.getUser()
       .then(function (res) {
         $scope.user = res.data;
+        $scope.loading = false;
       })
       .catch(function (err) {
         console.log(err);

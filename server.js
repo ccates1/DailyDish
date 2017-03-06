@@ -105,7 +105,11 @@ var articleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed
   },
   date: String,
-  ratings: [Number]
+  ratings: [Number],
+  usersWhoRated: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 var Article = mongoose.model('Article', articleSchema);
 
@@ -454,7 +458,6 @@ app.get('/questions/:question', function (req, res, next) {
         path: 'author',
         select: 'username picture rating'
       }).then(function (answers) {
-        console.log(answers);
         res.json(question);
         res.json(answers);
       });
@@ -482,6 +485,11 @@ app.post('/questions', function (req, res, next) {
   });
 });
 
+/*
+|--------------------------------------------------------------------------
+| Comment Routes -- (FOR ARTICLES)
+|--------------------------------------------------------------------------
+*/
 app.post('/articles/:article/comments', function (req, res, next) {
   var comment = new Comment(req.body);
   User.findById(req.body.author, function (err, user) {
@@ -516,9 +524,43 @@ app.post('/articles/:article/comments', function (req, res, next) {
   });
 });
 
+app.put('/articles/:article/comments/:comment/addLike', function (req, res, next) {
+  var reqComment = req.body;
+  Comment.findById(reqComment._id, function (err, comment) {
+    if (err) {
+      return next(err);
+    }
+    comment.likes++;
+    comment.usersWhoLiked.push(reqComment.userWhoLiked);
+    comment.save(function (err, com) {
+      if (err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
+app.put('/articles/:article/comments/:comment/addDislike', function (req, res, next) {
+  var reqComment = req.body;
+  Comment.findById(reqComment._id, function (err, comment) {
+    if (err) {
+      return next(err);
+    }
+    comment.dislikes++;
+    comment.usersWhoDisliked.push(reqComment.userWhoDisliked);
+    comment.save(function (err, com) {
+      if (err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
 /*
 |--------------------------------------------------------------------------
-| Answer Routes
+| Answer Routes -- (FOR QUESTIONS)
 |--------------------------------------------------------------------------
 */
 app.post('/questions/:question/answers', function (req, res, next) {
@@ -572,7 +614,7 @@ app.put('/questions/:question/answers/:answer/addLike', function (req, res, next
   });
 });
 
-app.put('/questions/:question/answers/:answer/addLike', function (req, res, next) {
+app.put('/questions/:question/answers/:answer/addDislike', function (req, res, next) {
   var reqAnswer = req.body;
   Answer.findById(reqAnswer._id, function (err, answer) {
     if (err) {

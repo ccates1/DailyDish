@@ -1,204 +1,248 @@
 <div class="container">
-  <ul class="nav nav-tabs text-center">
-    <li class="active">
-      <a data-target="#all" data-toggle="tab">All</a>
-    </li>
-    <li>
-      <a data-target="#nba" data-toggle="tab">NBA</a>
-    </li>
-    <li>
-      <a data-target="#mlb" data-toggle="tab">MLB</a>
-    </li>
-    <li>
-      <a data-target="#nfl" data-toggle="tab">NFL</a>
-    </li>
-    <li class="pull-right hidden-lg hidden-md hidden-sm">
-      <button class="btn btn-sm btn-primary btn-create" ng-click="openQuestionModal()" type="button" style="margin-top: 10px;">Post New</button>
-    </li>
-    <li class="pull-right hidden-xs">
-      <button class="btn btn-sm btn-primary" ng-click="openQuestionModal()" type="button" style="margin-top: 10px;">Post New</button>
-    </li>
-  </ul>
   <div ng-show="loading">
     <div class="loader"></div>
   </div>
-  <div class="tab-content clearfix" ng-hide="loading">
-    <div class="tab-pane active" id="all">
-      <div ng-if="!questions.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-              No questions to display.
-          </div>
-        </div>
-      </div>
-      <div ng-if="questions.length">
-        <div class="well" id="question-well">
-          <ul class="chat list-group">
-            <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in questions track by $index" id="question-list">
-            <li class="left clearfix " >
-              <span class="chat-img pull-left">
-                <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
-              </span>
-              <div class="chat-body clearfix">
-                <div class="header">
-                  <strong class="text-success">{{question.author.username}}</strong>
-                  <small class="text-date pull-right text-muted">
-                    <span class="glyphicon glyphicon-time" style="top: -1px;"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                  </small>
-                  </div>
-                  <p class="text-wrap question-p">
-                    {{question.content}}
-                  </p>
-                  <small class="pull-right text-muted">
-                    Answers: {{question.answers.length || 0}}
-                  </small>
-                </div>
+  <div ng-show="!loading">
+    <div class="row">
+      <div class="board">
+        <div class="board-inner">
+          <ul class="nav nav-tabs custom-nav">
+            <div class="liner"></div>
+            <li class="active">
+              <a data-target="#all" data-toggle="tab" title="All Fantasy Sports">
+                <span class="round-tabs primary">
+                  ALL
+                </span>
+              </a>
             </li>
-          </a>
+            <li>
+              <a data-target="#nba" data-toggle="tab" title="Fantasy Basketball">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-basketball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a data-target="#mlb" data-toggle="tab" title="Fantasy Baseball">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-baseball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a data-target="#nfl" data-toggle="tab" title="Fantasy Football">
+                <span class="round-tabs primary">
+                  <i class="fa ion-ios-americanfootball fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" data-toggle="tab" title="Post New Question" ng-click="openQuestionModal()">
+                <span class="round-tabs primary">
+                  <i class="fa fa-plus fa-2x nav-fa"></i>
+                </span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="nba">
-      <div ng-if="!nba.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
+    <div class="tab-content clearfix" ng-hide="loading">
+      <div class="tab-pane active" id="all">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">All Fantasy Sports</h2>
+          </legend>
+        </div>
+        <div ng-if="!questions.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
               No questions to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="questions.length">
+          <div class="well" id="question-well">
+            <ul class="chat list-group">
+              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in questions track by $index" id="question-list">
+                <li class="left clearfix ">
+                  <span class="chat-img pull-left">
+                  <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
+                </span>
+                  <div class="chat-body clearfix">
+                    <div class="header">
+                      <strong class="text-q">{{question.author.username}}</strong>
+                      <small class="text-date pull-right text-muted">
+                      <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                    </small>
+                    </div>
+                    <p class="text-wrap question-p">
+                      {{question.content}}
+                    </p>
+                    <small class="pull-right text-muted">
+                      Answers: {{question.answers.length || 0}}
+                    </small>
+                  </div>
+                </li>
+              </a>
+            </ul>
           </div>
         </div>
       </div>
-      <div ng-if="nba.length">
-        <div class="well" id="question-well">
-          <ul class="chat list-group">
-            <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in nba track by $index" id="question-list">
-            <li class="left clearfix " >
-              <span class="chat-img pull-left">
-                <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
-              </span>
-              <div class="chat-body clearfix">
-                <div class="header">
-                  <strong class="text-success">{{question.author.username}}</strong>
-                  <small class="text-date pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                  </small>
+      <div class="tab-pane" id="nba">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">Fantasy Basketball</h2>
+          </legend>
+        </div>
+        <div ng-if="!nba.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No questions to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="nba.length">
+          <div class="well" id="question-well">
+            <ul class="chat list-group">
+              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in nba track by $index" id="question-list">
+                <li class="left clearfix ">
+                  <span class="chat-img pull-left">
+                  <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
+                </span>
+                  <div class="chat-body clearfix">
+                    <div class="header">
+                      <strong class="text-q">{{question.author.username}}</strong>
+                      <small class="text-date pull-right text-muted">
+                      <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                    </small>
+                    </div>
+                    <p class="text-wrap question-p">
+                      {{question.content}}
+                    </p>
+                    <small class="pull-right text-muted">
+                      Answers: {{question.answers.length || 0}}
+                    </small>
                   </div>
-                  <p class="text-wrap question-p">
-                    {{question.content}}
-                  </p>
-                  <small class="pull-right text-muted">
-                    Answers: {{question.answers.length || 0}}
-                  </small>
-                </div>
-            </li>
-          </a>
-          </ul>
+                </li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="mlb">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">Fantasy Baseball</h2>
+          </legend>
+        </div>
+        <div ng-if="!mlb.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No questions to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="mlb.length">
+          <div class="well" id="question-well">
+            <ul class="chat list-group">
+              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in mlb track by $index" id="question-list">
+                <li class="left clearfix ">
+                  <span class="chat-img pull-left">
+                  <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
+                </span>
+                  <div class="chat-body clearfix">
+                    <div class="header">
+                      <strong class="text-q">{{question.author.username}}</strong>
+                      <small class="text-date pull-right text-muted">
+                      <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                    </small>
+                    </div>
+                    <p class="text-wrap question-p">
+                      {{question.content}}
+                    </p>
+                    <small class="pull-right text-muted">
+                      Answers: {{question.answers.length || 0}}
+                    </small>
+                  </div>
+                </li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="nfl">
+        <div class="question-title page-header card well-shadow">
+          <legend style="border-bottom: 0px;">
+            <h2 class="text-center question-header">Fantasy Football</h2>
+          </legend>
+        </div>
+        <div ng-if="!nfl.length">
+          <div class="well" id="question-well">
+            <div class="no-q list-group-item">
+              No questions to display.
+            </div>
+          </div>
+        </div>
+        <div ng-if="nfl.length">
+          <div class="well" id="question-well">
+            <ul class="chat list-group">
+              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in nfl track by $index" id="question-list">
+                <li class="left clearfix ">
+                  <span class="chat-img pull-left">
+                  <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
+                </span>
+                  <div class="chat-body clearfix">
+                    <div class="header">
+                      <strong class="text-q">{{question.author.username}}</strong>
+                      <small class="text-date pull-right text-muted">
+                      <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                    </small>
+                    </div>
+                    <p class="text-wrap question-p">
+                      {{question.content}}
+                    </p>
+                    <small class="pull-right text-muted">
+                      Answers: {{question.answers.length || 0}}
+                    </small>
+                  </div>
+                </li>
+              </a>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane" id="mlb">
-      <div ng-if="!mlb.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-              No questions to display.
-          </div>
-        </div>
-      </div>
-      <div ng-if="mlb.length">
-        <div class="well" id="question-well">
-          <ul class="chat list-group">
-            <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in mlb track by $index" id="question-list">
-            <li class="left clearfix " >
-              <span class="chat-img pull-left">
-                <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
-              </span>
-              <div class="chat-body clearfix">
-                <div class="header">
-                  <strong class="text-success">{{question.author.username}}</strong>
-                  <small class="text-date pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                  </small>
-                  </div>
-                  <p class="text-wrap question-p">
-                    {{question.content}}
-                  </p>
-                  <small class="pull-right text-muted">
-                    Answers: {{question.answers.length || 0}}
-                  </small>
-                </div>
-            </li>
-          </a>
-          </ul>
-        </div>
-      </div>
-
+  </div>
+  <script type="text/ng-template" id="questionModal.html">
+    <div class="modal-header">
+      <h3 class="modal-title text-center">Fantasy Question Post:</h3>
     </div>
-    <div class="tab-pane" id="nfl">
-      <div ng-if="!nfl.length">
-        <div class="well" id="question-well">
-          <div class="no-q list-group-item">
-              No questions to display.
+    <div class="modal-body">
+      <form class="form-horizontal" method="post" name="questionForm">
+        <div class="form-group">
+          <label class="col-lg-3 control-label" style="font-size: 1.2em;">Question:</label>
+          <div class="col-xs-12">
+            <textarea draggable="false" class="form-control" rows="4" id="question" ng-model="question.content" required></textarea>
           </div>
         </div>
-      </div>
-      <div ng-if="nfl.length">
-        <div class="well" id="question-well">
-          <ul class="chat list-group">
-            <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in nfl track by $index" id="question-list">
-            <li class="left clearfix " >
-              <span class="chat-img pull-left">
-                <img ng-src="{{question.author.picture}}" alt="{{question.author.username}}" class="img-circle cimg" />
-              </span>
-              <div class="chat-body clearfix">
-                <div class="header">
-                  <strong class="text-success">{{question.author.username}}</strong>
-                  <small class="text-date pull-right text-muted">
-                    <span class="glyphicon glyphicon-time"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                  </small>
-                  </div>
-                  <p class="text-wrap question-p">
-                    {{question.content}}
-                  </p>
-                  <small class="pull-right text-muted">
-                    Answers: {{question.answers.length || 0}}
-                  </small>
-                </div>
-            </li>
-          </a>
-          </ul>
+        <div class="form-group">
+          <label class="col-xs-4 control-label" style="font-size: 1.2em;"><i class="fa ion-ios-baseball"></i> Sport:</label>
+          <div class="col-xs-8">
+            <div isteven-multi-select class="form-controle" selection-mode="single" input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" id="select" required>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row" ng-show="error">
+        <div class="alert alert-danger">
+          <i class="fa fa-exclamation-circle fa-fw"></i> Please select a sport for your question!
         </div>
       </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" ng-click="submit(question)" ng-disabled="questionForm.$invalid" class="btn btn-info btn-lg">Submit</button>
+      <button class="btn btn-danger btn-lg" ng-click="cancel()">Cancel</button>
     </div>
 </div>
-<script type="text/ng-template" id="questionModal.html">
-  <div class="modal-header">
-    <h3 class="modal-title text-center">Fantasy Question Post:</h3>
-  </div>
-  <div class="modal-body">
-    <form class="form-horizontal" method="post" name="questionForm">
-      <div class="form-group">
-        <label class="col-lg-3 control-label" style="font-size: 1.2em;">Question:</label>
-        <div class="col-xs-12">
-          <textarea draggable="false" class="form-control" rows="4" id="question" ng-model="question.content" required></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-xs-4 control-label" style="font-size: 1.2em;"><i class="fa ion-ios-baseball"></i> Sport:</label>
-        <div class="col-xs-8">
-          <div isteven-multi-select class="form-controle" selection-mode="single" input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked"
-          id="select" required>
-          </div>
-        </div>
-      </div>
-    </form>
-    <div class="row" ng-show="error">
-      <div class="alert alert-danger">
-        <i class="fa fa-exclamation-circle fa-fw"></i> Please select a sport for your question!
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" ng-click="submit(question)" ng-disabled="questionForm.$invalid" class="btn btn-info btn-lg">Submit</button>
-    <button class="btn btn-danger btn-lg" ng-click="cancel()">Cancel</button>
-  </div>
-  </div>
 </script>
