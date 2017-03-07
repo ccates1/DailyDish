@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var cloudinary = require('cloudinary');
 var config = require('./config.js');
 var cors = require('cors');
+var errorHelper = require('mongoose-error-helper').errorHelper;
 var express = require('express');
 var fs = require('fs');
 var jwt = require('jwt-simple');
@@ -105,10 +106,12 @@ var articleSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Mixed
   },
   date: String,
-  ratings: [Number],
-  usersWhoRated: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  articleRatings: [{
+    rating: Number,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
   }]
 });
 var Article = mongoose.model('Article', articleSchema);
@@ -551,6 +554,22 @@ app.put('/articles/:article/comments/:comment/addDislike', function (req, res, n
     comment.usersWhoDisliked.push(reqComment.userWhoDisliked);
     comment.save(function (err, com) {
       if (err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+
+app.put('/articles/:article/rate', function (req, res, next) {
+  var data = req.body;
+  var reqRating = {};
+  Article.findById(data.article, function (err, article) {
+    reqRating.user = data.userWhoRated;
+    reqRating.rating = data.rating;
+    article.articleRatings.push(reqRating);
+    article.save(function (err) {
+      if(err) {
         return next(err);
       }
       res.sendStatus(200);

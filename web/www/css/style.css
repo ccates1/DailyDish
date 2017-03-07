@@ -16,6 +16,18 @@ font-weight: bold;
 padding-top: 10px;
 padding-bottom: 10px;
 }
+
+.star-fa {
+  color: #FD4 !important;
+}
+
+.no-margin {
+  margin: 0px !important;
+}
+
+input[type=radio]:disabled+label {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 span.round-tabs {
@@ -39,12 +51,6 @@ span.round-tabs {
     -webkit-box-shadow: 0 8px 6px -6px black !important;
     -moz-box-shadow: 0 8px 6px -6px black !important;
     box-shadow: 0 8px 6px -6px black !important;
-}
-
-#authorize > .panel-heading,
-#authorize > .panel-body {
-    background-color: #d3d3d3;
-    border-color: #d3d3d3;
 }
 
 #authorize > .panel-heading {

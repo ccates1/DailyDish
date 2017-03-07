@@ -5,6 +5,9 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   $scope.article = article;
   console.log(article);
   $scope.loading = true;
+  $scope.averageRating = 0;
+  $scope.isRated = false;
+  $scope.isEmpty = true;
   $scope.stars = '';
   var getUser = function() {
     $service.getUser()
@@ -35,9 +38,25 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
         comment.author.picture = '../img/default.png';
       }
     });
+    if($scope.article.articleRatings.length > 0) {
+      $scope.isEmpty = false;
+      $scope.article.articleRatings.forEach(function(articleRating) {
+        $scope.averageRating += articleRating.rating;
+        if(articleRating.user == $scope.user._id) {
+          $scope.stars = articleRating.rating;
+          $scope.isRated = true;
+          $scope.changeStar();
+        }
+      });
+      $scope.averageRating = $scope.averageRating / $scope.article.articleRatings.length;
+    }
     $scope.loading = false;
   };
   getUser();
+
+  $scope.getNumber = function() {
+    return new Array($scope.averageRating);
+  };
 
   $scope.openCommentModal = function () {
     $uibModal.open({
@@ -52,7 +71,6 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   };
 
   $scope.changeStar = function() {
-    console.log($scope.stars);
     var result = '';
     if ($scope.stars == '1') {
       result = '<i class="text-danger-dark fa fa-frown-o fa-5x"></i>' +
@@ -82,10 +100,54 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
     document.getElementById('starContext').innerHTML = result;
   };
 
-  $scope.submitRating = function() {
+  $scope.rateArticle = function() {
+    var data = {};
+    var check = false;
     if($scope.stars === '') {
       toastr.error('No rating selected!');
       return;
+    }
+    if($scope.article.articleRatings.length > 0) {
+      $scope.article.articleRatings.forEach(function(articleRating) {
+        if(articleRating.user == $scope.user._id) {
+          check = true;
+        }
+      });
+      if(check === false) {
+        console.log('not rated by user');
+        data.rating = $scope.stars;
+        data.article = $scope.article._id;
+        data.userWhoRated = $scope.user._id;
+        $service.submitArticleRating($scope.article, data)
+          .then(function(res) {
+            toastr.success('Rating was submitted!', 'Success');
+            $timeout(function() {
+              $scope.$apply();
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+            toastr.error('Please try again', 'Error');
+          });
+      } else {
+        toastr.error('You have already rated this article!');
+        return;
+      }
+    } else {
+      data.rating = $scope.stars;
+      data.article = $scope.article._id;
+      data.userWhoRated = $scope.user._id;
+      $service.submitArticleRating($scope.article, data)
+        .then(function(res) {
+          toastr.success('Rating was submitted!', 'Success');
+          $timeout(function() {
+            $scope.$apply();
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+          toastr.error('Please try again', 'Error');
+        });
     }
   };
 

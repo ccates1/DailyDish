@@ -39,4 +39,7 @@ angular.module('dailydish.services', [])
     this.addDislikeCom = function(question, answer) {
       return $http.put('/articles/' + article._id + '/comments/' + comment._id + '/addDislike', comment);
     };
+    this.submitArticleRating = function(article, rating) {
+      return $http.put('/articles/' + article._id + '/rate', rating);
+    }
   });

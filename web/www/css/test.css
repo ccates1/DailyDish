@@ -27,8 +27,9 @@
 }
 
 .board > div.board-inner{
-    background: #fafafa url(http://subtlepatterns.com/patterns/geometry2.png);
-    background-size: 30%;
+    /*background: #fafafa url(http://subtlepatterns.com/patterns/Escheresque-Dark.png);
+    background-size: 30%;*/
+    background-color:#fafafa;
 }
 
 p.narrow{
@@ -50,13 +51,14 @@ p.narrow{
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     color: #555555;
-    cursor: pointer;;
+    cursor: pointer;
     /* background-color: #ffffff; */
     border: 0;
     border-bottom-color: transparent;
 }
 
 span.round-tabs{
+  cursor: pointer;
     width: 70px;
     height: 70px;
     line-height: 70px;
