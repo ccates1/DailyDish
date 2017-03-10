@@ -20,7 +20,7 @@
                 <img class="img-circle img-profile" ng-src="{{user.picture}}" alt="{{user.username}}" />
               </div>
             </div>
-            <div class="row">
+            <div class="row hidden-xs">
               <div class="col-xs-6">
                 <div class="list-group home-list" id="home-card">
                   <div class="list-group-item">
@@ -118,7 +118,7 @@
       </div>-->
     </div>
     <div class="row">
-      <section class="col-sm-12">
+      <div class="col-sm-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
             Your Articles
@@ -180,10 +180,10 @@
 
           </div>
         </div>
-      </section>
+      </div>
     </div>
     <div class="row">
-      <section class="col-sm-12">
+      <div class="col-sm-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
             Your Questions
@@ -193,53 +193,45 @@
             <div class="home-well well" ng-show="!user.questions.length">
               <strong>No questions to display.</strong>
             </div>
-            <div class="well" id="question-well">
-              <ul class="chat list-group">
-                <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in user.questions track by $index" id="question-list">
-                <li class="left clearfix " >
-                  <span class="chat-img pull-left">
-                    <img ng-src="{{question.img}}" alt="" class="img-rounded cimg" />
-                  </span>
-                  <div class="chat-body clearfix">
-                    <div class="header" style="margin-top: -10px; margin-bottom: 5px;">
-                        <small class="dash-text-date hidden-xs">
-                          <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                        </small>
-                        <small class="dash-text-date2 hidden-lg hidden-md hidden-sm">
-                          <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                        </small>
+            <div class="fancy-collapse-panel">
+              <div class="panel-group" id="accordion" role="tablist">
+                <div class="panel panel-default" ng-repeat="question in user.questions track by $index">
+                  <div class="panel-heading" role="tab">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" data-target="#{{$index}}" aria-multiselectable="true" class="ellipsis">
+                        <span><img ng-src="{{question.img}}" class="item-img" /></span>
+                        {{question.content}}{{question.content}}{{question.content}}
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="{{$index}}" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body card-shadow">
+                      <div class="list-group-item small">
+                        <span class="fa fa-calendar fa-fw"></span>
+                        {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                       </div>
-                      <p class="dash-question-p text-wrap ellipsis">
-                        {{question.content}}
-                      </p>
-                      <ul class="list-inline dash-q-list hidden-lg hidden-md hidden-sm">
-                        <li>
-                          <span class="label label-primary label-dash-q">Answers: {{question.answers.length || 0}}</span>
-                        </li>
-                        <li>
-                          <small class="text-muted">
-                            <span class="label label-primary label-dash-q">No Rating Given</span>
-                          </small>
-                        </li>
-                      </ul>
-                      <ul class="list-inline hidden-xs">
-                        <li>
-                          <span class="label label-primary label-dash-q">Answers: {{question.answers.length || 0}}</span>
-                        </li>
-                        <li>
-                          <small class="text-muted">
-                            <span class="label label-primary label-dash-q">No Rating Given</span>
-                          </small>
-                        </li>
-                      </ul>
+                      <div class="list-group-item small">
+                        <span class="fa fa-comments-o fa-fw"></span>
+                          Answers: {{question.answers.length}}
+                      </div>
+                      <div class="list-group-item small">
+                        <span class="fa fa-info-circle fa-fw"></span>
+                          You haven't rated any answers!
+                      </div>
+                      <div class="list-group-item small">
+                        <a ui-sref="question({id: question._id})" type="button" class="btn btn-block btn-primary">
+                          Access Question Page
+                          <span class="pull-right"><i class="form-fa fa fa-arrow-right"></i></span>
+                        </a>
+                      </div>
                     </div>
-                </li>
-              </a>
-              </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </div>
 </div>

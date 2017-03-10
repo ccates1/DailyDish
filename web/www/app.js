@@ -18,7 +18,7 @@ angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.b
                 controller: 'LogoutCtrl'
             })
             .state('dashboard', {
-                url: '/dashboard',
+                url: '/',
                 templateUrl: 'templates/dashboard.html',
                 controller: 'DashboardCtrl'
             })
@@ -68,14 +68,16 @@ angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.b
                 controller: 'ArticleTemplateCtrl'
             });
 
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/');
 
         function verifyLogin($q, $auth, $state, $timeout) {
-            if ($auth.isAuthenticated()) {
-                $timeout(function() {
-                    $state.go('dashboard');
-                });
-            }
+          var deferred = $q.defer();
+          if ($auth.isAuthenticated()) {
+            deferred.reject();
+          } else {
+            deferred.resolve();
+          }
+          return deferred.promise;
         }
 
         $authProvider.facebook({

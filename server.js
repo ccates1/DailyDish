@@ -162,6 +162,7 @@ var Answer = mongoose.model('Answer', answerSchema);
 |--------------------------------------------------------------------------
 */
 mongoose.Promise = global.Promise;
+//mongoose.connect('mongodb://localhost/Desktop/data');
 mongoose.connect(config.url);
 mongoose.connection.on('error', function (err) {
   console.log('Error: Could not connect to MongoDB.');

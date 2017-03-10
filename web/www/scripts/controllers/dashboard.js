@@ -22,32 +22,35 @@ app.controller('DashboardCtrl', function($scope, $auth, $service, $timeout, $uib
     var getUser = function() {
       $service.getUser()
       .then(function(res) {
-        $scope.user = res.data;
-        console.log($scope.user);
-        if(!$scope.user.picture) {
-          $scope.user.picture = '../img/default.png';
-        }
-        if($scope.user.questions.length) {
-          $scope.user.questions.forEach(function(question) {
-            if(question.sport === 'NBA') {
-              question.img = "../img/nba.png";
-            }
-            if(question.sport === 'MLB') {
-              question.img = "../img/mlb.png";
-            }
-            if(question.sport === 'NFL') {
-              question.img = "../img/nfl.png";
-            }
-          });
-        }
-        $scope.loading = false;
-      })
-      .catch(function(err) {
-        $timeout(function() {
+        if (res.data === "") {
+          $auth.logout();
           $state.go('login');
-        });
+        } else {
+          $scope.user = res.data;
+          if(!$scope.user.picture) {
+            $scope.user.picture = '../img/default.png';
+          }
+          if($scope.user.questions.length) {
+            $scope.user.questions.forEach(function(question) {
+              if(question.sport === 'NBA') {
+                question.img = "../img/icons/nba.ico";
+              }
+              if(question.sport === 'MLB') {
+                question.img = "../img/icons/mlb.ico";
+              }
+              if(question.sport === 'NFL') {
+                question.img = "../img/icons/nfl.ico";
+              }
+            });
+          }
+          $scope.loading = false;
+        }
+      })
+      .catch(function (err) {
         console.log(err);
-      });
+        console.log('Unauthorized');
+        $state.go('login')
+      })
     };
     getUser();
 
