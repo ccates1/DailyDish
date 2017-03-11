@@ -4,6 +4,7 @@
   "description": "Fantasy Sports StackOverflow",
   "main": "server.js",
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -21,6 +22,7 @@
     "async": "^2.1.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.0",
+    "bower": "^",
     "cloudinary": "^1.7.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
