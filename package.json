@@ -22,7 +22,6 @@
     "async": "^2.1.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.16.0",
-    "bower": "^",
     "cloudinary": "^1.7.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
