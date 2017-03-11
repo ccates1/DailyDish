@@ -4,7 +4,7 @@
   "description": "Fantasy Sports StackOverflow",
   "main": "server.js",
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
+    "postinstall": "/web/bower install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
