@@ -193,7 +193,7 @@
             <div class="home-well well" ng-show="!user.questions.length">
               <strong>No questions to display.</strong>
             </div>
-            <div class="fancy-collapse-panel">
+            <div class="fancy-collapse-panel" ng-show="user.questions.length">
               <div class="panel-group" id="accordion" role="tablist">
                 <div class="panel panel-default" ng-repeat="question in user.questions track by $index">
                   <div class="panel-heading" role="tab">
@@ -204,7 +204,7 @@
                       </a>
                     </h4>
                   </div>
-                  <div id="{{$index}}" class="panel-collapse collapse" role="tabpanel">
+                  <div id="{{$index}}" class="panel-collapse collapse in" role="tabpanel">
                     <div class="panel-body card-shadow">
                       <div class="list-group-item small">
                         <span class="fa fa-calendar fa-fw"></span>

@@ -36,10 +36,13 @@ angular.module('dailydish.services', [])
     this.addLikeCom = function(article, comment) {
       return $http.put('/articles/' + article._id + '/comments/' + comment._id + '/addLike', comment);
     };
-    this.addDislikeCom = function(question, answer) {
+    this.addDislikeCom = function(question, comment) {
       return $http.put('/articles/' + article._id + '/comments/' + comment._id + '/addDislike', comment);
     };
     this.submitArticleRating = function(article, rating) {
       return $http.put('/articles/' + article._id + '/rate', rating);
-    }
+    };
+    this.rateAnswer = function(question, answer) {
+      return $http.put('/questions/' + question._id + '/answers/' + answer._id + '/rate', answer);
+    };
   });

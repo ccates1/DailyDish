@@ -2,12 +2,11 @@ var app = angular.module('dailydish');
 
 app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   toastr, $state, moment) {
-
-    $scope.articles = [];
-    $scope.nba = [];
-    $scope.mlb = [];
-    $scope.nfl = [];
-    $scope.loading = true;
+  $scope.articles = [];
+  $scope.nba = [];
+  $scope.mlb = [];
+  $scope.nfl = [];
+  $scope.loading = true;
   $(function () {
     document.getElementById('articles').parentElement.className = 'activated';
     $timeout(function () {
@@ -24,13 +23,17 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   var getUser = function () {
     $service.getUser()
       .then(function (res) {
-        $scope.user = res.data;
+        if (res.data === "") {
+          $auth.logout();
+          $state.go('login');
+        } else {
+          $scope.user = res.data;
+        }
       })
       .catch(function (err) {
         $timeout(function () {
           $state.go('login');
         });
-        console.log(err);
       });
   };
   var getArticles = function () {
@@ -38,18 +41,18 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
       .then(function (res) {
         $scope.articles = res.data;
         console.log($scope.articles);
-        if($scope.articles) {
-          $scope.articles.forEach(function(article) {
-            if(!article.author.picture) {
+        if ($scope.articles) {
+          $scope.articles.forEach(function (article) {
+            if (!article.author.picture) {
               article.author.picture = '../img/default.png';
             }
-            if(article.sports.includes('NBA')) {
+            if (article.sports.includes('NBA')) {
               $scope.nba.push(article);
             }
-            if(article.sports.includes('NFL')) {
+            if (article.sports.includes('NFL')) {
               $scope.nfl.push(article);
             }
-            if(article.sports.includes('MLB')) {
+            if (article.sports.includes('MLB')) {
               $scope.mlb.push(article);
             }
           });
@@ -57,7 +60,7 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
         } else {
           $scope.loading = false;
         }
-        $timeout(function() {
+        $timeout(function () {
           $scope.$apply();
         });
       })

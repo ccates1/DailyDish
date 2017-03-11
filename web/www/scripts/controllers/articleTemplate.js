@@ -2,53 +2,68 @@ var app = angular.module('dailydish');
 
 app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
   toastr, $state, filepickerService, moment) {
-  $scope.article = { sports: [], teams: [] };
+  $scope.article = {
+    sports: [],
+    teams: [],
+    picture: ''
+  };
   $scope.tagOutput = [];
   $scope.selectedTags = [];
   $scope.teamOutput = [];
   $scope.showAdditionalTagInput = false;
   $scope.loading = true;
-  $scope.tags = [{
+  $scope.tags = [
+    {
       main: 'NBA',
-      teams: [{
-        name: 'ATL'
-            }, {
-        name: 'BOS'
-            }]
+      teams: [
+        {
+          name: 'ATL'
         },
+        {
+          name: 'BOS'
+        }
+      ]
+    },
     {
       main: 'MLB',
-      teams: [{
-        name: 'ATL'
-            }, {
-        name: 'BOS'
-            }]
+      teams: [
+        {
+          name: 'ATL'
         },
+        {
+          name: 'BOS'
+        }
+      ]
+    },
     {
       main: 'NFL',
-      teams: [{
-        name: 'ATL'
-            }, {
-        name: 'BOS'
-            }]
+      teams: [
+        {
+          name: 'ATL'
         },
+        {
+          name: 'BOS'
+        }
+      ]
+    },
     ];
-  $scope.categories = [{
+  $scope.categories = [
+    {
       icon: "<img src='./img/nba.png'>",
       name: "NBA",
       ticked: false
-        },
+    },
     {
       icon: "<img src='./img/mlb.png'>",
       name: "MLB",
       ticked: false
-        },
+    },
     {
       icon: "<img src='./img/nfl.png'>",
       name: "NFL",
       ticked: false
-        }
-    ];
+    }
+  ];
 
   var getUser = function () {
     $service.getUser()
@@ -123,8 +138,14 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
   };
 
   $scope.submit = function () {
-    if(!$scope.article.picture) {
-      toastr.error('Must upload an image for your article!');
+    if ($scope.article.picture === '') {
+      toastr.warning('Must upload an image for your article!', 'Warning');
+      return;
+    } else if ($scope.tagOutput.length === 0) {
+      toastr.warning('Must select a sport for your article!', 'Warning');
+      return;
+    } else if ($scope.teamOutput.length === 0) {
+      toastr.warning('Must select a team for your article!', 'Warning');
       return;
     } else {
       $scope.tagOutput.forEach(function (item) {
@@ -142,7 +163,6 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
         .then(function (res) {
           toastr.success('Your article has been posted!', 'Success');
           $state.go('dashboard');
-
         })
         .catch(function (err) {
           console.log(err);

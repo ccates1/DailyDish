@@ -9,40 +9,39 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   $scope.isRated = false;
   $scope.isEmpty = true;
   $scope.stars = '';
-  var getUser = function() {
+  var getUser = function () {
     $service.getUser()
-    .then(function(res) {
-      $scope.user = res.data;
-      if (!$scope.article.author.picture) {
-        $scope.article.author.picture = '../img/default.png';
-      }
-      if (!$scope.user.picture) {
-        $scope.user.picture = '../img/default.png';
-      }
-      if ($scope.article.comments.length > 0) {
-        listComments();
-      } else {
-        $scope.loading = false;
-      }
-    })
-    .catch(function(err) {
-      $timeout(function() {
-        $state.go('login');
+      .then(function (res) {
+        $scope.user = res.data;
+        if (!$scope.article.author.picture) {
+          $scope.article.author.picture = '../img/default.png';
+        }
+        if (!$scope.user.picture) {
+          $scope.user.picture = '../img/default.png';
+        }
+        if ($scope.article.comments.length > 0) {
+          listComments();
+        } else {
+          $scope.loading = false;
+        }
+      })
+      .catch(function (err) {
+        $timeout(function () {
+          $state.go('login');
+        });
       });
-      console.log(err);
-    });
   };
-  var listComments = function() {
+  var listComments = function () {
     $scope.article.comments.forEach(function (comment) {
-      if(!comment.author.picture) {
+      if (!comment.author.picture) {
         comment.author.picture = '../img/default.png';
       }
     });
-    if($scope.article.articleRatings.length > 0) {
+    if ($scope.article.articleRatings.length > 0) {
       $scope.isEmpty = false;
-      $scope.article.articleRatings.forEach(function(articleRating) {
+      $scope.article.articleRatings.forEach(function (articleRating) {
         $scope.averageRating += articleRating.rating;
-        if(articleRating.user == $scope.user._id) {
+        if (articleRating.user == $scope.user._id) {
           $scope.stars = articleRating.rating;
           $scope.isRated = true;
           $scope.changeStar();
@@ -54,7 +53,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   };
   getUser();
 
-  $scope.getNumber = function() {
+  $scope.getNumber = function () {
     return new Array($scope.averageRating);
   };
 
@@ -70,62 +69,62 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
     });
   };
 
-  $scope.changeStar = function() {
+  $scope.changeStar = function () {
     var result = '';
     if ($scope.stars == '1') {
       result = '<i class="text-danger-dark fa fa-frown-o fa-5x"></i>' +
-      '<br />' +
-      '<h3 class="text-danger-dark cancel-margin">Poor</h3>';
+        '<br />' +
+        '<h3 class="text-danger-dark cancel-margin">Poor</h3>';
     }
     if ($scope.stars == '2') {
       result = '<i class="text-warning-dark fa fa-frown-o fa-5x"></i>' +
-      '<br />' +
-      '<h3 class="text-warning-dark cancel-margin">Below Average</h3>';
+        '<br />' +
+        '<h3 class="text-warning-dark cancel-margin">Below Average</h3>';
     }
     if ($scope.stars == '3') {
       result = '<i class="fa fa-meh-o fa-5x"></i>' +
-      '<br />' +
-      '<h3 class="text-q cancel-margin">Average</h3>';
+        '<br />' +
+        '<h3 class="text-q cancel-margin">Average</h3>';
     }
     if ($scope.stars == '4') {
       result = '<i class="text-info fa fa-smile-o fa-5x"></i>' +
-      '<br />' +
-      '<h3 class="text-info cancel-margin">Above Average</h3>';
+        '<br />' +
+        '<h3 class="text-info cancel-margin">Above Average</h3>';
     }
     if ($scope.stars == '5') {
       result = '<i class="text-success fa fa-smile-o fa-5x"></i>' +
-      '<br />' +
-      '<h3 class="text-success-dark cancel-margin">Excellent</h3>';
+        '<br />' +
+        '<h3 class="text-success-dark cancel-margin">Excellent</h3>';
     }
     document.getElementById('starContext').innerHTML = result;
   };
 
-  $scope.rateArticle = function() {
+  $scope.rateArticle = function () {
     var data = {};
     var check = false;
-    if($scope.stars === '') {
+    if ($scope.stars === '') {
       toastr.error('No rating selected!');
       return;
     }
-    if($scope.article.articleRatings.length > 0) {
-      $scope.article.articleRatings.forEach(function(articleRating) {
-        if(articleRating.user == $scope.user._id) {
+    if ($scope.article.articleRatings.length > 0) {
+      $scope.article.articleRatings.forEach(function (articleRating) {
+        if (articleRating.user == $scope.user._id) {
           check = true;
         }
       });
-      if(check === false) {
+      if (check === false) {
         console.log('not rated by user');
         data.rating = $scope.stars;
         data.article = $scope.article._id;
         data.userWhoRated = $scope.user._id;
         $service.submitArticleRating($scope.article, data)
-          .then(function(res) {
+          .then(function (res) {
             toastr.success('Rating was submitted!', 'Success');
-            $timeout(function() {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -138,35 +137,35 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
       data.article = $scope.article._id;
       data.userWhoRated = $scope.user._id;
       $service.submitArticleRating($scope.article, data)
-        .then(function(res) {
+        .then(function (res) {
           toastr.success('Rating was submitted!', 'Success');
-          $timeout(function() {
+          $timeout(function () {
             $scope.$apply();
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           toastr.error('Please try again', 'Error');
         });
     }
   };
 
-  $scope.addLikeToComment = function(comment) {
+  $scope.addLikeToComment = function (comment) {
     $scope.comment = comment;
-    if(comment.likes > 0 && comment.dislikes > 0) {
+    if (comment.likes > 0 && comment.dislikes > 0) {
       // check both usersWhoLiked and usersWhoDisliked lists for user
-      if(comment.usersWhoLiked.indexOf($scope.user._id) === -1 && comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoLiked.indexOf($scope.user._id) === -1 && comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
         // user hasn't liked or disliked the comment OK
         $scope.comment.usersWhoLiked.push($scope.user._id);
         $scope.comment.likes++;
         comment.userWhoLiked = $scope.user._id;
         $service.addLikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -175,20 +174,20 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
         toastr.error('You can only like or dislike a comment once!', 'Error');
         return;
       }
-    } else if(comment.dislikes > 0) {
+    } else if (comment.dislikes > 0) {
       // check usersWhoDisliked list for user
-      if(comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
         // user hasn't disliked the comment OK (usersWhoLiked list is empty)
         $scope.comment.usersWhoLiked.push($scope.user._id);
         $scope.comment.likes++;
         comment.userWhoLiked = $scope.user._id;
         $service.addLikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -197,20 +196,20 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
         toastr.error('You cant like a comment after disliking it!', 'Error');
         return;
       }
-    } else if(comment.likes > 0) {
+    } else if (comment.likes > 0) {
       // check usersWhoLiked list for user
-      if(comment.usersWhoLiked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoLiked.indexOf($scope.user._id) === -1) {
         // user hasn't liked the comment OK (usersWhoDisliked list is empty)
         $scope.comment.usersWhoLiked.push($scope.user._id);
         $scope.comment.likes++;
         comment.userWhoLiked = $scope.user._id;
         $service.addLikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -225,34 +224,34 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
       $scope.comment.likes++;
       comment.userWhoLiked = $scope.user._id;
       $service.addLikeCom($scope.article, comment)
-        .then(function(res) {
+        .then(function (res) {
           console.log(res);
-          $timeout(function() {
+          $timeout(function () {
             $scope.$apply();
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
     }
   };
 
-  $scope.addDislikeToComment = function(comment) {
+  $scope.addDislikeToComment = function (comment) {
     $scope.comment = comment;
-    if(comment.likes > 0 && comment.dislikes > 0) {
+    if (comment.likes > 0 && comment.dislikes > 0) {
       // check both usersWhoLiked and usersWhoDisliked lists for user
-      if(comment.usersWhoLiked.indexOf($scope.user._id) === -1 && comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoLiked.indexOf($scope.user._id) === -1 && comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
         // user hasn't liked or disliked the comment OK
         $scope.comment.usersWhoDisliked.push($scope.user._id);
         $scope.comment.dislikes++;
         comment.userWhoDisliked = $scope.user._id;
         $service.addDislikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -261,20 +260,20 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
         toastr.error('You can only like or dislike a comment once!', 'Error');
         return;
       }
-    } else if(comment.dislikes > 0) {
+    } else if (comment.dislikes > 0) {
       // check usersWhoDisliked list for user
-      if(comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoDisliked.indexOf($scope.user._id) === -1) {
         // user hasn't disliked the comment OK (usersWhoLiked list is empty)
         $scope.comment.usersWhoDisliked.push($scope.user._id);
         $scope.comment.dislikes++;
         comment.userWhoDisliked = $scope.user._id;
         $service.addDislikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -283,20 +282,20 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
         toastr.error('You can only dislike a comment once!', 'Error');
         return;
       }
-    } else if(comment.likes > 0) {
+    } else if (comment.likes > 0) {
       // check usersWhoLiked list for user
-      if(comment.usersWhoLiked.indexOf($scope.user._id) === -1) {
+      if (comment.usersWhoLiked.indexOf($scope.user._id) === -1) {
         // user hasn't liked the comment OK (usersWhoDisliked list is empty)
         $scope.comment.usersWhoDisliked.push($scope.user._id);
         $scope.comment.dislikes++;
         comment.userWhoDisliked = $scope.user._id;
         $service.addDislikeCom($scope.article, comment)
-          .then(function(res) {
-            $timeout(function() {
+          .then(function (res) {
+            $timeout(function () {
               $scope.$apply();
             });
           })
-          .catch(function(err) {
+          .catch(function (err) {
             console.log(err);
             toastr.error('Please try again', 'Error');
           });
@@ -312,12 +311,12 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
       $scope.comment.dislikes++;
       comment.userWhoDisliked = $scope.user._id;
       $service.addDislikeCom($scope.article, comment)
-        .then(function(res) {
-          $timeout(function() {
+        .then(function (res) {
+          $timeout(function () {
             $scope.$apply();
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
           toastr.error('Please try again', 'Error');
         });

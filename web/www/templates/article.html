@@ -19,30 +19,58 @@
               <i class="fa fa-square-o fa-stack-2x"></i>
               <i class="fa fa-university fa-stack-1x" style="margin-left: 0.5px;"></i>
             </span>
-            <p class="no-margin">Guru Rating:</p>{{article.author.rating || 0}}
+            <p class="no-margin well-xs-p">Guru Rating:</p>{{article.author.rating || 0}}
           </div>
           <div class="col-xs-4 well well-sm well-shadow">
             <span class="fa-stack fa-sm">
               <i class="fa fa-square-o fa-stack-2x"></i>
               <i class="fa fa-fire fa-stack-1x" style="margin-left: 0.5px;"></i>
             </span>
-            <p class="no-margin">Article Rating:</p><span ng-if="!isEmpty" ng-repeat="i in getNumber() track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
+            <p class="no-margin well-xs-p">Article Rating:</p><span ng-if="!isEmpty" ng-repeat="i in getNumber() track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
           </div>
           <div class="col-xs-4 well well-sm well-shadow">
             <span class="fa-stack fa-sm">
               <i class="fa fa-square-o fa-stack-2x"></i>
               <i class="fa fa-star fa-stack-1x" style="margin-left: 0.5px;"></i>
             </span>
-            <p class="no-margin">Author Rating:</p>{{article.author.authorRating || 'N/A'}}
+            <p class="no-margin well-xs-p">Author Rating:</p>{{article.author.authorRating || 'N/A'}}
           </div>
         </div>
         <p class="text-muted" style="text-align: center"><i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}</p>
         <div class="content">
           <div class="well ">
             <div class="row">
-              <img class="img-responsive center-block img-rounded" ng-src="{{article.picture.url | fpConvert: {filter:'sharpen', w:400, h:200} }}" alt="{{article.title}}" />
+              <img class="center-block card-image img-rounded" ng-src="{{article.picture.url}}" alt="{{article.title}}" style="max-width: 200px; max-height: 200px"/>
             </div>
-            <div class="list-group card-shadow" style="margin-top: 10px;">
+            <div class="list-group card-shadow hidden-lg hidden-md hidden-sm" style="margin-top: 10px;" id="article-xs">
+              <div class="list-group-item">
+                <ul class="list-inline text-left">
+                  <li>
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa ion-ios-basketball fa-stack-1x"></i>
+                    </span> Sports:
+                  </li>
+                  <li ng-repeat="sport in article.sports">
+                    <span class="label label-primary">{{sport}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="list-group-item">
+                <ul class="list-inline text-left">
+                  <li>
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-users fa-stack-1x"></i>
+                    </span> Teams:
+                  </li>
+                  <li ng-repeat="team in article.teams">
+                    <span class="label label-primary">{{team}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="list-group card-shadow hidden-xs" style="margin-top: 10px;">
               <div class="list-group-item">
                 <ul class="list-inline text-left">
                   <li>
@@ -122,6 +150,9 @@
             </div>
           </div>
           <div class="panel-body">
+            <div class="home-well well" ng-show="!article.comments.length">
+              <strong>No comments have been posted.</strong>
+            </div>
             <ul class="media-list">
               <li class="answer-media media" ng-repeat="comment in article.comments">
                 <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px;">
@@ -272,6 +303,5 @@
         <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
       </div>
     </div>
-  </div>
   </div>
 </script>
