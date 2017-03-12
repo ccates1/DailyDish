@@ -6,6 +6,8 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   $scope.nba = [];
   $scope.mlb = [];
   $scope.nfl = [];
+  $scope.authors = [
+  ];
   $scope.loading = true;
   $(function () {
     document.getElementById('articles').parentElement.className = 'activated';
@@ -40,9 +42,9 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
     $service.articlesList()
       .then(function (res) {
         $scope.articles = res.data;
-        console.log($scope.articles);
         if ($scope.articles) {
           $scope.articles.forEach(function (article) {
+            article.totalStars = 0;
             if (!article.author.picture) {
               article.author.picture = '../img/default.png';
             }
@@ -55,6 +57,14 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
             if (article.sports.includes('MLB')) {
               $scope.mlb.push(article);
             }
+            if (article.articleRatings.length > 0) {
+              article.isEmpty = false;
+              article.articleRatings.forEach(function (articleRating) {
+                article.totalStars += articleRating.rating;
+              });
+              article.averageStars = article.totalStars / article.articleRatings.length;
+            }
+            console.log(article);
           });
           $scope.loading = false;
         } else {
@@ -71,4 +81,19 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   getUser();
   getArticles();
 
+  $scope.getNumber = function (article) {
+    return new Array(article.averageStars);
+  };
 });
+
+app.directive('matchHeight', ['$timeout', function ($timeout) {
+    var linkFunction = function(scope, element) {
+      $timeout(function() {
+        angular.element(element).find('.equal').matchHeight();
+      });
+    };
+    return {
+      restrict: 'A',
+      link: linkFunction
+    };
+}]);

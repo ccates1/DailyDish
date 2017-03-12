@@ -43,6 +43,7 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
               }
             });
           }
+          console.log($scope.user);
           $scope.loading = false;
         }
       })
@@ -97,7 +98,9 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
   };
 });
 
-app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance, filepickerService) {
+app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance, filepickerService, toastr) {
+  $scope.edit = {};
+  $scope.final = {};
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
@@ -113,8 +116,7 @@ app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance
       },
       function (Blob) {
         console.log(JSON.stringify(Blob));
-        $scope.user.picture = Blob;
-        $scope.$apply();
+        $scope.edit.picture = Blob;
       }
     );
   };
