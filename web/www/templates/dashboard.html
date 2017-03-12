@@ -111,7 +111,7 @@
           <div class="panel-footer">
             <div class="row">
               <div class="col-xs-12">
-                <div class="list-group-item">
+                <div class="list-group-item well-shadow">
                   <span class="fa-stack fa-fw">
                     <i class="fa fa-square-o fa-stack-2x"></i>
                     <i class="fa fa-fire fa-stack-1x"></i>
@@ -186,7 +186,7 @@
           <div class="panel-footer text-center hidden-lg hidden-md hidden-sm">
             <div class="row text-center">
               <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #fff">
+                <div class="well well-sm well-shadow" style="background-color: #ffffff">
                   <span class="fa-stack fa-fw">
                     <i class="fa fa-square-o fa-stack-2x"></i>
                     <i class="fa fa-university fa-stack-1x"></i>
@@ -197,7 +197,7 @@
                 </div>
               </div>
               <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #fff">
+                <div class="well well-sm well-shadow" style="background-color: #ffffff">
                   <span class="fa-stack fa-fw">
                     <i class="fa fa-square-o fa-stack-2x"></i>
                     <i class="fa fa-hashtag fa-stack-1x"></i>
@@ -237,9 +237,9 @@
             <div class="fancy-collapse-panel" ng-show="user.questions.length">
               <div class="panel-group" id="accordion" role="tablist">
                 <div class="panel panel-default" ng-repeat="question in user.questions track by $index">
-                  <div class="panel-heading" role="tab">
+                  <div class="panel-heading" role="tab" style="background-color: #2c3e50;">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" data-target="#{{$index}}" aria-multiselectable="true" class="ellipsis">
+                      <a data-toggle="collapse" data-parent="#accordion" data-target="#{{$index}}" aria-multiselectable="true" class="ellipsis" style="background-color: #ffffff;">
                         <span><img ng-src="{{question.img}}" class="item-img" /></span>
                         {{question.content}}
                       </a>
@@ -281,65 +281,24 @@
     </div>
     <div class="modal-body">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-9 personal-info">
-            <h3 class="text-center">Account Information:</h3>
-            <p class="text-muted text-center">
-              Change your profile picture or password below:
-            </p>
-            <div class="col-md-3" style="margin-bottom: 10px;">
-              <div class="text-center">
-                <img ng-src="{{user.picture}}" class="edit-picture avatar img-circle" alt="">
-                <h6>Update Profile Picture</h6>
-                <button type="button" class="btn btn-primary form-control" ng-click="upload()" id="filePickerBtn">Upload</button>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-8">
-                <strong>Change Password</strong>
-              </div>
-              <div class="col-xs-4">
-                <label class="switch">
-                  <input type="checkbox">
-                  <div class="slider round"></div>
-                </label>
-              </div>
-            </div>
-            <form class="form-horizontal" role="form">
-              <div class="form-group">
-                <label class="col-lg-3 control-label">New Password:</label>
-                <div class="col-lg-8">
-                  <input placeholder="" class="form-control" type="password" ng-model="edit.password">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-lg-3 control-label">Confirm New Password:</label>
-                <div class="col-lg-8">
-                  <input class="form-control" type="password" ng-model="edit.confirmPassword">
-                </div>
-              </div>
-              <div class="form-group col-lg-8" ng-show="!user.twitter">
-                <a class="btn btn-block btn-social btn-twitter" ng-click="link('twitter')" href="javascript:void(0)">
-                  <span class="fa fa-twitter"></span> Link Twitter
-                </a>
-              </div>
-              <div class="form-group col-lg-8" ng-show="user.twitter">
-                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('twitter')" href="javascript:void(0)">
-                  <span class="fa fa-twitter"></span> Unlink Twitter
-                </a>
-              </div>
-              <div class="form-group col-lg-8" ng-show="!user.facebook">
-                <a class="btn btn-block btn-social btn-facebook" ng-click="link('facebook')" href="javascript:void(0)">
-                  <span class="fa fa-facebook"></span> Link Facebook
-                </a>
-              </div>
-              <div class="form-group col-lg-8" ng-show="user.facebook">
-                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('facebook')" href="javascript:void(0)" ng-show="user.facebook">
-                  <span class="fa fa-facebook"></span> Unlink Facebook
-                </a>
-              </div>
-            </form>
-          </div>
+        <div class="text-center">
+          <ul class="list-inline">
+            <li>
+              <button type="button" class="btn3d btn btn-primary">
+                <i class="btn3d-fa fa fa-lock fa-fw"></i> Change Password
+              </button>
+            </li>
+            <li>
+              <button type="button" class="btn3d btn btn-primary">
+                <i class="btn3d-fa fa fa-camera fa-fw"></i> Change Picture
+              </button>
+            </li>
+            <li>
+              <button type="button" class="btn3d btn btn-primary">
+                <i class="btn3d-fa fa fa-facebook-square fa-fw"></i> Manage Social Accounts
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

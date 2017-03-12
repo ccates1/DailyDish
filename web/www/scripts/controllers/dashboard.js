@@ -99,6 +99,9 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
 });
 
 app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance, filepickerService, toastr) {
+  $scope.showPicture = false;
+  $scope.showPassword = false;
+  $scope.showSocialAccounts = false;
   $scope.edit = {};
   $scope.final = {};
   $scope.cancel = function () {

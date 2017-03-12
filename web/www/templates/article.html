@@ -6,7 +6,7 @@
     <div class="text-left" style="padding-bottom: 10px;">
       <a type="button" class="btn btn-sm btn-primary" ui-sref="articles"><i class="form-fa fa fa-chevron-circle-left fa-fw"></i> Back</a>
     </div>
-    <div class="box">
+    <div class="box well-shadow">
       <div class="box-icon">
         <img class="img-circle" style="height: 100%; width: 100%;" ng-src="{{article.author.picture}}"></img>
       </div>
@@ -155,7 +155,7 @@
             </div>
             <ul class="media-list">
               <li class="answer-media media" ng-repeat="comment in article.comments">
-                <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px;">
+                <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                   <div class="row" style="margin-left: 0px; margin-right: 0px;">
                     <figure>
                       <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
@@ -184,11 +184,11 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-xs-12 panel-footer" style="padding: 0px;">
+                    <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
                       <blockquote>
                         {{comment.content}}
                       </blockquote>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
+                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
                       <div class="chat text-center">
                         <small class="text-muted">
                           <i class="fa fa-calendar fa-fw"></i> {{comment.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
@@ -197,7 +197,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px;">
+                <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                   <div class="row offset-row-margin">
                     <figure>
                       <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
@@ -227,11 +227,11 @@
                         </li>
                       </ul>
                     </div>
-                    <div class="col-xs-12 panel-footer" style="padding: 0px;">
+                    <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
                       <blockquote>
                         {{comment.content}}
                       </blockquote>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
+                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
                       <div class="chat text-center">
                         <small class="text-muted">
                           <i class="fa fa-calendar fa-fw"></i> {{comment.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}

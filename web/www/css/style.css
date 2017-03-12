@@ -5,10 +5,26 @@ body {
     padding-top: 90px;
     color: #2d2e2e;
     padding-bottom: 20px;
+    background-color: #f36c00 !important;
+}
+.panel {
+  -webkit-box-shadow: 0 8px 6px -6px black !important;
+  -moz-box-shadow: 0 8px 6px -6px black !important;
+  box-shadow: 0 8px 6px -6px black !important;
+}
+.panel-body {
+  background-color: #f5f5f5;
+}
+.well {
+  background-color: #fff ;
+}
+.box {
+  background-color: #fff;
 }
 #box-articles {
   padding: 15px;
-  border: 1px solid #e5e5e5; border-top: 2px groove #2c3e50; border-bottom: 2px groove #2c3e50; background-color: #f5f5f5; border-radius: 10px; margin-top: 75px;
+  border: 1px solid #e5e5e5; border-top: 2px groove #2c3e50; border-bottom: 2px groove #2c3e50; background-color: #f5f5f5; border-radius: 10px;
+  margin-top: 65px;
 }
 #article-xs > .list-group-item {
   font-size: 12.5px !important;
@@ -505,8 +521,16 @@ legend {
     margin-bottom: 10px !important;
 }
 
+.panel-footer {
+  border-bottom: 1px solid #eeeeee;
+}
+
 .home-well {
+  background-color: #ffffff !important;
     margin-bottom: 0px !important;
+    -webkit-box-shadow: 0 8px 6px -6px black !important;
+    -moz-box-shadow: 0 8px 6px -6px black !important;
+    box-shadow: 0 8px 6px -6px black !important;
 }
 
 .vertical-align {
@@ -560,8 +584,7 @@ legend {
 }
 
 .activated {
-  background-color: #fff !important;
-  border-bottom: 2px solid #2c3e50;
+  border-bottom: 3px solid #2c3e50;
 }
 #select-label {
     display: inline;
@@ -1683,7 +1706,7 @@ label.star:before {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     padding: 10px 25px;
     display: block;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 .box-icon {
     background-color: #f5f5f5 !important;

@@ -7,7 +7,7 @@
     <div class="loader"></div>
   </div>
   <div ng-show="!loading">
-    <div class="box" style="margin-bottom: 20px;">
+    <div class="box well-shadow" style="margin-bottom: 20px; margin-top: 30px">
       <div class="box-icon">
         <img class="img-circle" style="height: 100%; width: 100%;" ng-src="{{question.author.picture}}"></img>
       </div>
@@ -37,7 +37,7 @@
               </div>
               <ul class="media-list">
                 <li class="answer-media media" ng-repeat="answer in question.answers">
-                  <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px;">
+                  <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                     <div class="row" style="margin-left: 0px; margin-right: 0px;">
                       <figure>
                         <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
@@ -65,11 +65,11 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px;">
+                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
                         <blockquote>
                           {{answer.content}}
                         </blockquote>
-                        <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
+                        <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
                         <div class="chat text-center">
                           <small class="text-muted">
                             <i class="fa fa-calendar fa-fw"></i> {{answer.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
@@ -81,7 +81,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px;">
+                  <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                     <div class="row" style="margin-left: 0px; margin-right: 0px;">
                       <figure>
                         <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
@@ -109,12 +109,12 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px;">
-                        <blockquote style="font-size: 14px;">
+                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
+                        <blockquote style="font-size: 14px; background-color: #ffffff;">
                           {{answer.content}}
                         </blockquote>
-                        <div class="col-xs-12 panel-footer" style="padding: 0px;"></div>
-                        <div class="chat text-center">
+                        <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
+                        <div class="chat text-center" style="background-color: #ffffff;">
                           <small class="text-muted">
                             <i class="fa fa-calendar fa-fw"></i> {{answer.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                           </small>

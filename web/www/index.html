@@ -13,11 +13,12 @@
     <link href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" rel="stylesheet">
     <link href="lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
     <link href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
+    <link href="css/buttons.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet" />
   </head>
   <body ng-app="dailydish" ng-controller="NavCtrl" ng-cloak>
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
+    <div class="navbar navbar-harvest navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="navbar-header">
           <div class="navbar-brand">
             <img src="img/logo2.png" class="logo" />
@@ -42,8 +43,6 @@
             <li>
               <a href="javascript:void(0)" ng-click="check('articles')" id="articles">Articles</a>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
             <li>
               <a ui-sref="login" id="login" ng-show="!isAuthenticated()">Login/Register</a>
               <a ui-sref="logout" ng-show="isAuthenticated()">Logout</a>
