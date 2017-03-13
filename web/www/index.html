@@ -35,17 +35,17 @@
         <div class="collapse navbar-collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
-              <a href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">Dashboard</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">Dashboard</a>
             </li>
             <li>
-              <a href="javascript:void(0)" ng-click="check('questions')" id="questions">Fantasy Questions</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('questions')" id="questions">Fantasy Questions</a>
             </li>
             <li>
-              <a href="javascript:void(0)" ng-click="check('articles')" id="articles">Articles</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('articles')" id="articles">Articles</a>
             </li>
             <li class="nav-custom">
-              <a ui-sref="login" id="login" ng-show="!isAuthenticated()">Login/Register</a>
-              <a ui-sref="logout" ng-show="isAuthenticated()">Logout</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="login" id="login" ng-show="!isAuthenticated()">Login/Register</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="logout" ng-show="isAuthenticated()">Logout</a>
             </li>
           </ul>
         </div>

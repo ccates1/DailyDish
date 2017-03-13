@@ -12,6 +12,9 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
       $scope.$apply();
     });
   });
+  angular.element(document).ready(function () {
+    console.log('page loading completed');
+});
 
   $scope.$on('$destroy', function () {
     document.getElementById('dashboard').parentElement.className = '';
