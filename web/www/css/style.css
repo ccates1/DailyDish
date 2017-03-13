@@ -947,11 +947,13 @@ input {
     width: 7.5%;
 }
 @media (max-width: 768px) {
-  .nav-right {
+  .nav-custom {
+    margin-right: 0px !important;
     float: none !important;
   }
 }
-.navbar-nav > .nav-right {
+.navbar-nav > .nav-custom {
+  margin-right: 5px;
   float: right;
 }
 @media (min-width: 768px) {
