@@ -2,7 +2,9 @@ var app = angular.module('dailydish');
 
 app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
   toastr, $state, $uibModal, moment) {
-
+    angular.element(document).ready(function () {
+      $scope.loading = false;
+  });
   $scope.articles = [];
   $scope.nba = [];
   $scope.mlb = [];
