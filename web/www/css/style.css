@@ -7,6 +7,14 @@ body {
     padding-bottom: 20px;
     background-color: #f36c00 !important;
 }
+.p-format {
+  line-height: 100%;
+text-align: center;
+vertical-align: middle;
+font-size: 16.5px;
+margin: -10px 0 10.5px !important;
+white-space: pre-line;
+}
 .panel {
   -webkit-box-shadow: 0 8px 6px -6px black !important;
   -moz-box-shadow: 0 8px 6px -6px black !important;

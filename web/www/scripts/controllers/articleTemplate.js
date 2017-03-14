@@ -49,17 +49,17 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
     ];
   $scope.categories = [
     {
-      icon: "<img src='./img/nba.png'>",
+      icon: "<img src='./img/icons/nba.ico'>",
       name: "NBA",
       ticked: false
     },
     {
-      icon: "<img src='./img/mlb.png'>",
+      icon: "<img src='./img/icons/mlb.ico'>",
       name: "MLB",
       ticked: false
     },
     {
-      icon: "<img src='./img/nfl.png'>",
+      icon: "<img src='./img/icons/nfl.ico'>",
       name: "NFL",
       ticked: false
     }

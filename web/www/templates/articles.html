@@ -37,7 +37,7 @@
               </a>
             </li>
             <li>
-              <a ui-sref="articleTemplate" data-toggle="tab" title="Post New Article">
+              <a ui-sref="articleTemplate" title="Post New Article">
                 <span class="round-tabs primary">
                   <i class="fa fa-plus fa-2x nav-fa"></i>
                 </span>
@@ -91,7 +91,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-university fa-stack-1x"></i>
                      </span>
-                      <p class="bold">
+                      <p class="bold p-format">
                         Guru Rating:
                         <br />{{answer.author.rating || 0}}
                       </p>
@@ -101,7 +101,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-star fa-stack-1x"></i>
                      </span>
-                      <p style="margin-left: 2px;" class="bold">
+                      <p style="margin-left: 2px;" class="bold p-format">
                         Article Rating:
                         <br /><span ng-if="!isEmpty" ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
                       </p>
@@ -233,7 +233,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-university fa-stack-1x"></i>
                      </span>
-                      <p class="bold">
+                      <p class="bold p-format">
                         Guru Rating:
                         <br />{{answer.author.rating || 0}}
                       </p>
@@ -243,7 +243,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-star fa-stack-1x"></i>
                      </span>
-                      <p style="margin-left: 2px;" class="bold">
+                      <p style="margin-left: 2px;" class="bold p-format">
                         Article Rating:
                         <br /><span ng-if="!isEmpty" ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
                       </p>
@@ -375,7 +375,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-university fa-stack-1x"></i>
                      </span>
-                      <p class="bold">
+                      <p class="bold p-format">
                         Guru Rating:
                         <br />{{answer.author.rating || 0}}
                       </p>
@@ -385,7 +385,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-star fa-stack-1x"></i>
                      </span>
-                      <p style="margin-left: 2px;" class="bold">
+                      <p style="margin-left: 2px;" class="bold p-format">
                         Article Rating:
                         <br /><span ng-if="!isEmpty" ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
                       </p>
@@ -517,7 +517,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-university fa-stack-1x"></i>
                      </span>
-                      <p class="bold">
+                      <p class="bold p-format">
                         Guru Rating:
                         <br />{{answer.author.rating || 0}}
                       </p>
@@ -527,7 +527,7 @@
                        <i class="fa fa-square-o fa-stack-2x"></i>
                        <i class="fa fa-star fa-stack-1x"></i>
                      </span>
-                      <p style="margin-left: 2px;" class="bold">
+                      <p style="margin-left: 2px;" class="bold p-format">
                         Article Rating:
                         <br /><span ng-if="!isEmpty" ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
                       </p>
