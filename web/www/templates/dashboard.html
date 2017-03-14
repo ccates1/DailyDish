@@ -108,7 +108,7 @@
             Your Articles
             <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
           </div>
-          <div class="panel-footer">
+          <div class="panel-footer panel-footer-header">
             <div class="row">
               <div class="col-xs-12">
                 <div class="list-group-item well-shadow">
@@ -183,7 +183,7 @@
             Your Questions
             <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.questions.length}}</span>
           </div>
-          <div class="panel-footer text-center hidden-lg hidden-md hidden-sm">
+          <div class="panel-footer panel-footer-header text-center hidden-lg hidden-md hidden-sm">
             <div class="row text-center">
               <div class="col-xs-6">
                 <div class="well well-sm well-shadow" style="background-color: #ffffff">
@@ -209,7 +209,7 @@
               </div>
             </div>
           </div>
-          <div class="panel-footer text-center hidden-xs">
+          <div class="panel-footer .panel-foot-header text-center hidden-xs">
             <div class="row text-center">
               <div class="col-xs-6">
                 <div class="list-group-item">
@@ -235,11 +235,11 @@
               <strong>No questions to display.</strong>
             </div>
             <div class="fancy-collapse-panel" ng-show="user.questions.length">
-              <div class="panel-group" id="accordion" role="tablist">
-                <div class="panel panel-default" dir-paginate="question in user.questions | itemsPerPage:2" pagination-id="question.id" style="margin-top: 25px;">
+              <div class="panel-group panel-list" id="accordion" role="tablist">
+                <div class="panel panel-default" dir-paginate="question in user.questions | itemsPerPage:2" pagination-id="question.id">
                   <div class="panel-heading" role="tab" style="background-color: #2c3e50;">
                     <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" data-target="#{{question._id}}" aria-multiselectable="true" class="ellipsis" style="background-color: #ffffff;">
+                      <a data-toggle="collapse" data-parent="#accordion" data-target="#{{question._id}}" aria-multiselectable="true" class="ellipsis" style="background-color: #f5f5f5;">
                         <span><img ng-src="{{question.img}}" class="item-img" /></span>
                         {{question.content}}
                       </a>

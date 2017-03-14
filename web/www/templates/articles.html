@@ -65,7 +65,7 @@
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="hidden-lg hidden-md hidden-sm" ng-repeat="article in articles track by $index" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
+            <a type="button" class="hidden-lg hidden-md hidden-sm" dir-paginate="article in articles | itemsPerPage:4" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
               <div class="box well article-well well-shadow" id="box-articles">
                 <div class="box-icon" style="height:100%;">
                   <img class="img-circle" style="max-width: 100px;" ng-src="{{article.picture.url}}"></img>
@@ -109,8 +109,11 @@
                   </div>
                 </div>
               </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
+              </div>
             </a>
-            <a type="button" class="list-group-item hidden-xs" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
+            <a type="button" class="list-group-item hidden-xs" dir-paginate="article in articles | itemsPerPage:4" pagination-id="article.id" id="articles-container" ui-sref="article({id: article._id})">
               <div class="well well-shadow well-shadow" id="article-well">
                 <div class="row">
                   <div class="col-sm-12">
@@ -180,6 +183,9 @@
                   </div>
                 </div>
               </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
+              </div>
             </a>
           </div>
         </div>
@@ -201,7 +207,7 @@
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="hidden-lg hidden-md hidden-sm" ng-repeat="article in nba track by $index" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
+            <a type="button" class="hidden-lg hidden-md hidden-sm" dir-paginate="article in nba | itemsPerPage:4" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
               <div class="box well article-well well-shadow" id="box-articles">
                 <div class="box-icon" style="height:100%;">
                   <img class="img-circle" style="max-width: 100px;" ng-src="{{article.picture.url}}"></img>
@@ -245,8 +251,11 @@
                   </div>
                 </div>
               </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
+              </div>
             </a>
-            <a type="button" class="list-group-item hidden-xs" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
+            <a type="button" class="list-group-item hidden-xs" dir-paginate="article in nba | itemsPerPage:4" pagination-id="article.id" id="articles-container" ui-sref="article({id: article._id})">
               <div class="well well-shadow" id="article-well">
                 <div class="row">
                   <div class="col-sm-12">
@@ -315,6 +324,9 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
               </div>
             </a>
           </div>
@@ -337,7 +349,7 @@
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="hidden-lg hidden-md hidden-sm" ng-repeat="article in mlb track by $index" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
+            <a type="button" class="hidden-lg hidden-md hidden-sm" dir-paginate="article in mlb | itemsPerPage:4" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
               <div class="box well article-well well-shadow" id="box-articles">
                 <div class="box-icon" style="height:100%;">
                   <img class="img-circle" style="max-width: 100px;" ng-src="{{article.picture.url}}"></img>
@@ -381,8 +393,11 @@
                   </div>
                 </div>
               </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
+              </div>
             </a>
-            <a type="button" class="list-group-item hidden-xs" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
+            <a type="button" class="list-group-item hidden-xs" dir-paginate="article in mlb | itemsPerPage:4" pagination-id="article.id" id="articles-container" ui-sref="article({id: article._id})">
               <div class="well well-shadow" id="article-well">
                 <div class="row">
                   <div class="col-sm-12">
@@ -451,6 +466,9 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
               </div>
             </a>
           </div>
@@ -473,7 +491,7 @@
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="hidden-lg hidden-md hidden-sm" ng-repeat="article in nfl track by $index" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
+            <a type="button" class="hidden-lg hidden-md hidden-sm" ndir-paginate="article in nfl | itemsPerPage:4" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
               <div class="box well article-well well-shadow" id="box-articles">
                 <div class="box-icon" style="height:100%;">
                   <img class="img-circle" style="max-width: 100px;" ng-src="{{article.picture.url}}"></img>
@@ -517,8 +535,11 @@
                   </div>
                 </div>
               </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
+              </div>
             </a>
-            <a type="button" class="list-group-item hidden-xs" ng-repeat="article in articles track by $index" id="articles-container" ui-sref="article({id: article._id})">
+            <a type="button" class="list-group-item hidden-xs" dir-paginate="article in nfl | itemsPerPage:4" pagination-id="article.id" id="articles-container" ui-sref="article({id: article._id})">
               <div class="well well-shadow" id="article-well">
                 <div class="row">
                   <div class="col-sm-12">
@@ -587,6 +608,9 @@
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="text-center">
+                <dir-pagination-controls template-url="../lib/angularUtils-pagination/dirPagination.tpl.html" pagination-id="article.id"></dir-pagination-controls>
               </div>
             </a>
           </div>
