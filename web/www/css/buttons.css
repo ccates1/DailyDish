@@ -17,6 +17,12 @@
 	padding-bottom: 20px;
 }
 .navbar-harvest .navbar-inner .nav li a {
+    font-family: avenir, helvetica, arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    transition: all .4s;
+    -webkit-transition: all .4s;
 	color: #fff;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -32,10 +38,10 @@
 	transition: background 0.1s linear,opacity 0.1s linear;
 	-webkit-font-smoothing: antialiased;
 	opacity: .9;
-	font-weight: 600;
+	font-weight: normal;
 }
 .navbar-harvest .navbar-inner .nav li a:hover {
-	background: #f67d0f;
+	background: inherit;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;

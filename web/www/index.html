@@ -36,17 +36,37 @@
         <div class="collapse navbar-collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">Dashboard</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">
+                <span class="main-nav-fa fa-stack fa-fw">
+                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
+                 <i class="main-nav-fa fa fa-home fa-stack-1x"></i>
+               </span> Dashboard</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('questions')" id="questions">Fantasy Questions</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('questions')" id="questions">
+                <span class="fa-stack fa-fw">
+                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
+                 <i class="main-nav-fa fa fa-question fa-stack-1x"></i>
+               </span> Fantasy Questions</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('articles')" id="articles">Articles</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('articles')" id="articles">
+                <span class="main-nav-fa fa-stack fa-fw">
+                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
+                 <i class="main-nav-fa fa fa-newspaper-o fa-stack-1x" style="margin-top:2.25px;"></i>
+               </span> Articles</a>
             </li>
             <li class="nav-custom">
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="login" id="login" ng-show="!isAuthenticated()">Login/Register</a>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="logout" ng-show="isAuthenticated()">Logout</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="login" id="login" ng-show="!isAuthenticated()">
+                <span class="main-nav-fa fa-stack fa-fw">
+                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
+                 <i class="main-nav-fa fa fa-sign-in fa-stack-1x" style="margin-top:2.25px;"></i>
+               </span> Login/Register</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="logout" ng-show="isAuthenticated()">
+                <span class="main-nav-fa fa-stack fa-fw">
+                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
+                 <i class="main-nav-fa fa fa-sign-out fa-stack-1x" style="margin-top:2.25px;"></i>
+               </span> Logout</a>
             </li>
           </ul>
         </div>

@@ -9,6 +9,11 @@ body {
     height: 100% !important;
     width: 100% !important;
 }
+.sidebar {
+  background-color: #000;
+  height: 100vh !important;
+  display: inline-block;
+}
 .container {
   padding-right: 5% !important;
   padding-left: 5% !important;
@@ -655,10 +660,45 @@ legend {
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active, .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li:active {
     background-color: #fff !important;
 }
-
+.main-nav-fa {
+  color: inherit !important;
+  vertical-align: middle !important;
+}
 .activated {
   border-bottom: 3px solid #2c3e50;
+  border-radius: 100%;
+    font-family: avenir, helvetica, arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    transition: all .4s;
+    -webkit-transition: all .4s;
 }
+.activated > a {
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: #2c3e50 !important;
+}
+@media (max-width: 768px) {
+  .activated {
+      border: 0px !important;
+        font-family: avenir, helvetica, arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: .13em;
+        transition: all .10s;
+        -webkit-transition: all .10s;
+  }
+  .navbar-harvest .navbar-inner .nav li a {
+    font-size: 15px;
+    margin-left: -2%;
+  }
+  .navbar-harvest .navbar-inner .nav li {
+    margin-top: -10px;
+  }
+}
+
 #select-label {
     display: inline;
     padding: .2em .6em .3em;
