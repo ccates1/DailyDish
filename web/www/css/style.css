@@ -9,6 +9,10 @@ body {
     height: 100% !important;
     width: 100% !important;
 }
+.container {
+  padding-right: 5% !important;
+  padding-left: 5% !important;
+}
 .btn-a {
   text-decoration: none;
     color: #fff;
