@@ -3,128 +3,196 @@
     <div class="loader"></div>
   </div>
   <div ng-show="!loading">
-    <div class="row">
-      <div class="col-sm-12" id="top-panel">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            Profile Information
-            <div class="pull-right">
+    <!-- Profile Dash View ---------------->
+    <!-- Desktop View -->
+    <div class="row row-flex row-eq-height hidden-xs">
+      <div class="col-sm-6 panel panel-primary dash-panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class="pull-left">
+              <i class="form-fa fa fa-info-circle fa-fw"></i>
+            </span>
+            Profile
+            <span class="pull-right">
               <a href="javascript:void(0)" ng-click="open()" id="edit">
                 <i class="fa fa-pencil-square-o fa-lg"></i>
               </a>
+            </span>
+          </h4>
+        </div>
+        <div class="panel-body">
+          <div class="list-group list-group-shadow">
+            <div class="list-group-item">
+              <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" />
+            </div>
+            <div class="list-group-item ellipsis">
+              <span class="fa-stack fa-sm">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x"></i>
+              </span> Username: {{user.username}}
+            </div>
+            <div class="list-group-item ellipsis">
+              <span class="fa-stack fa-sm">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-at fa-stack-1x"></i>
+              </span> Email: {{user.email}}
             </div>
           </div>
-          <div class="panel-body" style="background-color: #f5f5f5">
-            <div class="well" id="image-dash">
-              <div class="text-center">
-                <img class="img-circle img-profile" ng-src="{{user.picture}}" alt="{{user.username}}" />
+        </div>
+      </div>
+      <div class="col-sm-6 panel panel-primary dash-panel">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <span class="pull-left">
+              <i class="form-fa fa fa-bar-chart fa-fw"></i>
+            </span>
+            DailyDish Stats
+          </h4>
+        </div>
+        <div class="panel-body">
+          <div class="list-group list-group-shadow">
+            <div class="list-group-item ellipsis">
+              <div class="media-body">
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-question-circle fa-stack-1x"></i>
+                </span> Questions Posted:
+              </div>
+              <div class="media-right">
+                <span class="item-right badge badge-default">{{user.questions.length}}</span>
               </div>
             </div>
-            <div class="row hidden-xs">
-              <div class="col-xs-6">
-                <div class="list-group-item">
-                  <span class="fa-stack fa-sm">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-user fa-stack-1x"></i>
-                  </span> {{user.username}}
-                </div>
+            <div class="list-group-item ellipsis">
+              <div class="media-body">
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-line-chart fa-stack-1x"></i>
+                </span> Questions Answered:
               </div>
-              <div class="col-xs-6">
-                <div class="list-group-item">
-                  <span class="fa-stack fa-sm">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-at fa-stack-1x"></i>
-                  </span> {{user.email}}
-                </div>
+              <div class="media-right">
+                <span class="item-right badge badge-default">{{user.answers.length}}</span>
               </div>
             </div>
-          </div>
-          <div class="panel-footer text-center hidden-lg hidden-md hidden-sm">
-            <div class="row text-center">
-              <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #fff">
-                  <span class="fa-stack fa-fw">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-at fa-stack-1x"></i>
-                  </span>
-                  <p class="ellipsis home-xs">
-                    {{user.email}}
-                  </p>
-                </div>
+            <div class="list-group-item ellipsis">
+              <div class="media-body">
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-university fa-stack-1x"></i>
+                </span> Guru Rating:
               </div>
-              <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #fff">
-                  <span class="fa-stack fa-fw">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-user fa-stack-1x"></i>
-                  </span>
-                  <p class="ellipsis home-xs">
-                    {{user.username}}
-                  </p>
-                </div>
+              <div class="media-right">
+                <span class="item-right badge badge-default">{{user.rating || 'N/A'}}</span>
+              </div>
+            </div>
+            <div class="list-group-item ellipsis">
+              <div class="media-body">
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-certificate fa-stack-1x"></i>
+                </span> Articles Posted:
+              </div>
+              <div class="media-right">
+                <span class="item-right badge badge-default">{{user.articles.length || '0'}}</span>
+              </div>
+            </div>
+            <div class="list-group-item ellipsis">
+              <div class="media-body">
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-star fa-stack-1x"></i>
+                </span> Author Rating:
+              </div>
+              <div class="media-right">
+                <span class="item-right badge badge-default">{{user.authorRating || 'N/A'}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!--<div class="col-sm-4" id="top-panel">
+    </div>
+    <!-- Mobile View -->
+    <div class="row hidden-lg hidden-md hidden-sm" style="padding: 10px 10px;">
+      <div class="col-xs-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Social Accounts
+            <h4 class="panel-title">
+              <span class="pull-left">
+                <i class="form-fa fa fa-info-circle fa-fw"></i>
+              </span>
+              Profile
+              <span class="pull-right">
+                <a href="javascript:void(0)" ng-click="open()" id="edit">
+                  <i class="fa fa-pencil-square-o fa-lg"></i>
+                </a>
+              </span>
+            </h4>
           </div>
-          <div class="panel-body">
-            <div class="list-group" style="margin-top: 0px; border: none">
-              <div class="list-group-item" ng-show="!user.twitter">
-                <a class="btn btn-block btn-social btn-twitter" ng-click="link('twitter')" href="javascript:void(0)">
-                  <span class="fa fa-twitter" ></span> Link Twitter
-                </a>
+          <div class="">
+            <div class="list-group text-center list-group-shadow " style="margin-bottom: 0px;">
+              <div class="list-group-item" >
+                <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" />
               </div>
-              <div class="list-group-item" ng-show="user.twitter">>
-                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('twitter')" href="javascript:void(0)" ng-show="user.twitter">
-                  <span class="fa fa-twitter"></span> Unlink Twitter
-                </a>
+              <div class="list-group-item ellipsis" >
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-user fa-stack-1x"></i>
+                </span> {{user.username}}
               </div>
-              <div class="list-group-item" ng-show="!user.facebook">
-                <a class="btn btn-block btn-social btn-facebook" ng-click="link('facebook')" href="javascript:void(0)">
-                  <span class="fa fa-facebook"></span> Link Facebook
-                </a>
+              <div class="list-group-item ellipsis" >
+                <span class="fa-stack fa-sm">
+                  <i class="fa fa-square-o fa-stack-2x"></i>
+                  <i class="fa fa-at fa-stack-1x"></i>
+                </span> {{user.email}}
               </div>
-              <div class="list-group-item" ng-show="user.facebook">
-                <a class="btn btn-block btn-social btn-danger" ng-click="unlink('facebook')" href="javascript:void(0)">
-                  <span class="fa fa-facebook"></span> Unlink Facebook
-                </a>
-              </div>
-
             </div>
           </div>
         </div>
-
-      </div>-->
+      </div>
     </div>
-    <div class="row">
-      <div class="col-sm-12">
+    <!-- End Profile Dash View ---------------->
+    <!-- Begin Article Dash View -------------->
+    <!-- Desktop View -->
+    <div class="row" style="margin: auto;">
+      <div class="col-xs-12" style="padding: 0px;">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Your Articles
-            <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.articles.length}}</span>
+            <h4 class="panel-title">
+              <span class="pull-left">
+                <i class="form-fa fa fa-archive fa-fw"></i>
+              </span>
+              Your Articles
+            </h4>
           </div>
-          <div class="panel-footer panel-footer-header">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="list-group-item well-shadow">
-                  <span class="fa-stack fa-fw">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-fire fa-stack-1x"></i>
-                  </span> Author Rating: {{user.authorRating || 'N/A'}}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel-body">
+          <div class="panel-body" style="padding: 0px;">
             <div class="home-well well" ng-show="!user.articles.length">
               <strong>No articles to display.</strong>
             </div>
-            <div class="home-well well" ng-show="user.articles.length" id="article-dashboard">
+            <div class="home-well well" ng-show="user.articles.length" id="article-dashboard" style="border: 0px; border-radius: 0px;">
+              <div class="list-group list-group-shadow hidden-lg hidden-md hidden-sm">
+                <div class="list-group-item ellipsis">
+                  <div class="media-body">
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-certificate fa-stack-1x"></i>
+                    </span> Articles Posted:
+                  </div>
+                  <div class="media-right">
+                    <span class="item-right badge badge-default">{{user.articles.length || '0'}}</span>
+                  </div>
+                </div>
+                <div class="list-group-item ellipsis">
+                  <div class="media-body">
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-star fa-stack-1x"></i>
+                    </span> Author Rating:
+                  </div>
+                  <div class="media-right">
+                    <span class="item-right badge badge-default">{{user.authorRating || 'N/A'}}</span>
+                  </div>
+                </div>
+              </div>
+
               <div class="row row-horizon">
                 <div class="col-md-4 text-center" ng-repeat="article in user.articles track by $index">
                   <div class="info-card">
@@ -180,57 +248,38 @@
       <div class="col-sm-12">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            Your Questions
-            <span class="badge badge-default pull-right" style="margin-top:2px; line-height:1.4">{{user.questions.length}}</span>
+            <h4 class="panel-title">
+              <span class="pull-left">
+                <i class="form-fa fa fa-question-circle fa-fw"></i>
+              </span>
+              Your Questions
+            </h4>
           </div>
-          <div class="panel-footer panel-footer-header text-center hidden-lg hidden-md hidden-sm">
-            <div class="row text-center">
-              <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #ffffff">
-                  <span class="fa-stack fa-fw">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-university fa-stack-1x"></i>
-                  </span>
-                  <p class="ellipsis home-xs">
-                    Guru Rating: <br />{{user.rating || '0'}}
-                  </p>
-                </div>
-              </div>
-              <div class="col-xs-6">
-                <div class="well well-sm well-shadow" style="background-color: #ffffff">
-                  <span class="fa-stack fa-fw">
-                    <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-hashtag fa-stack-1x"></i>
-                  </span>
-                  <p class="ellipsis home-xs">
-                    Answered: <br />{{user.answers.length || '0'}}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel-footer .panel-foot-header text-center hidden-xs">
-            <div class="row text-center">
-              <div class="col-xs-6">
-                <div class="list-group-item">
+          <div class="panel-body" style="background-color: #ffffff;">
+            <div class="list-group list-group-shadow hidden-lg hidden-md hidden-sm">
+              <div class="list-group-item ellipsis">
+                <div class="media-body">
                   <span class="fa-stack fa-sm">
                     <i class="fa fa-square-o fa-stack-2x"></i>
-                    <i class="fa fa-university fa-stack-1x"></i>
-                  </span> Guru Rating: {{user.rating || 0}}
+                    <i class="fa fa-question-circle fa-stack-1x"></i>
+                  </span> Questions Posted:
+                </div>
+                <div class="media-right">
+                  <span class="item-right badge badge-default">{{user.questions.length}}</span>
                 </div>
               </div>
-              <div class="col-xs-6">
-                <div class="list-group-item">
+              <div class="list-group-item ellipsis">
+                <div class="media-body">
                   <span class="fa-stack fa-sm">
                     <i class="fa fa-square-o fa-stack-2x"></i>
                     <i class="fa fa-line-chart fa-stack-1x"></i>
-                  </span> Questions Answered: {{user.answers.length || 0}}
+                  </span> Questions Answered:
+                </div>
+                <div class="media-right">
+                  <span class="item-right badge badge-default">{{user.answers.length}}</span>
                 </div>
               </div>
-
-              </div>
             </div>
-          <div class="panel-body" style="background-color: #ffffff;">
             <div class="home-well well" ng-show="!user.questions.length">
               <strong>No questions to display.</strong>
             </div>
@@ -245,22 +294,28 @@
                       </a>
                     </h4>
                   </div>
-                  <div id="{{question._id}}" class="panel-collapse collapse in" role="tabpanel">
-                    <div class="panel-body card-shadow">
-                      <div class="list-group-item small">
-                        <span class="fa fa-calendar fa-fw"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                      </div>
-                      <div class="list-group-item small">
-                        <span class="fa fa-comments-o fa-fw"></span> Answers: {{question.answers.length}}
-                      </div>
-                      <div class="list-group-item small">
-                        <span class="fa fa-info-circle fa-fw"></span> You haven't rated any answers!
-                      </div>
-                      <div class="list-group-item small">
-                        <a ui-sref="question({id: question._id})" type="button" class="btn btn-block btn-primary">
-                          Access Question Page
-                          <span class="pull-right"><i class="form-fa fa fa-arrow-right"></i></span>
-                        </a>
+                  <div id="{{question._id}}" class="panel-collapse collapse" role="tabpanel">
+                    <div class="panel-body">
+                      <div class="list-group list-group-shadow">
+                        <div class="list-group-item small">
+                          <span class="fa fa-calendar fa-fw"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
+                        </div>
+                        <div class="list-group-item small">
+                          <span class="fa fa-comments-o fa-fw"></span> Answers: {{question.answers.length}}
+                        </div>
+                        <div class="list-group-item small">
+                          <span class="fa fa-info-circle fa-fw"></span> You haven't rated any answers!
+                        </div>
+                        <div class="list-group-item small">
+                          <a ui-sref="question({id: question._id})" type="button" class="btn btn-block btn-primary">
+                            <div class="media-body">
+                              Access Question Page
+                            </div>
+                            <div class="media-right">
+                              <i class="form-fa fa fa-chevron-circle-right"></i>
+                            </div>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>

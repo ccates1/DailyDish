@@ -26,10 +26,14 @@
         <div class="row" style="padding-top: 10px;">
           <div class="panel panel-primary">
             <div class="panel-heading">
-              Answers
-              <div class="pull-right">
-                <a type="button" class="btn btn-sm btn-default" ng-click="openAnswerModal()" style="margin-top: -5px;" ng-disabled="isAuthor">Add New</a>
-              </div>
+              <h3 class="panel-title">
+                Answers
+                <span class="pull-right">
+                  <a href="javascript:void(0)" ng-click="openAnswerModal()" class="btn-a" ng-disabled="isAuthor">
+                    <i class="form-fa fa fa-plus-square-o fa-fw"></i> Add New
+                  </a>
+                </span>
+              </h3>
             </div>
             <div class="panel-body">
               <div class="home-well well" ng-show="!question.answers.length">
@@ -57,11 +61,11 @@
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">
                             <span class="badge">{{answer.likes || 0}}</span>
-                            <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addLikeToAnswer(answer)"></span>
+                            <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addLikeToAnswer(answer)"></span>
                           </li>
                           <li>
                             <span class="badge">{{answer.dislikes || 0}}</span>
-                            <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addDislikeToAnswer(answer)"></span>
+                            <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addDislikeToAnswer(answer)"></span>
                           </li>
                         </ul>
                       </div>
@@ -101,11 +105,11 @@
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">
                             <span class="badge">{{answer.likes || 0}}</span>
-                            <span class="text-success fa fa-thumbs-o-up fa-lg glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addLikeToAnswer(answer)"></span>
+                            <span class="text-success fa fa-thumbs-o-up fa-lg glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addLikeToAnswer(answer)"></span>
                           </li>
                           <li>
                             <span class="badge">{{answer.dislikes || 0}}</span>
-                            <span class="text-danger fa fa-thumbs-o-down fa-lg glyphicon-align-right" style="vertical-align:middle; width:15.4375px" ng-click="addDislikeToAnswer(answer)"></span>
+                            <span class="text-danger fa fa-thumbs-o-down fa-lg glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addDislikeToAnswer(answer)"></span>
                           </li>
                         </ul>
                       </div>

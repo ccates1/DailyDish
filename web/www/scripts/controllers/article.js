@@ -171,7 +171,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the comment ERR
-        toastr.error('You can only like or dislike a comment once!', 'Error');
+        toastr.error('You can only like or dislike a comment once!', 'Warning');
         return;
       }
     } else if (comment.dislikes > 0) {
@@ -193,7 +193,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the comment ERR
-        toastr.error('You cant like a comment after disliking it!', 'Error');
+        toastr.error('You cant like a comment after disliking it!', 'Warning');
         return;
       }
     } else if (comment.likes > 0) {
@@ -215,7 +215,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the comment ERR
-        toastr.error('You cant like a comment more than once!', 'Error');
+        toastr.error('You cant like a comment more than once!', 'Warning');
         return;
       }
     } else {
@@ -257,7 +257,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the comment ERR
-        toastr.error('You can only like or dislike a comment once!', 'Error');
+        toastr.error('You can only like or dislike a comment once!', 'Warning');
         return;
       }
     } else if (comment.dislikes > 0) {
@@ -279,7 +279,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the comment ERR
-        toastr.error('You can only dislike a comment once!', 'Error');
+        toastr.error('You can only dislike a comment once!', 'Warning');
         return;
       }
     } else if (comment.likes > 0) {
@@ -301,7 +301,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the comment ERR
-        toastr.error('You cant dislike a comment after liking it!', 'Error');
+        toastr.error('You cant dislike a comment after liking it!', 'Warning');
         return;
       }
     } else {

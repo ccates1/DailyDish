@@ -69,7 +69,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the answer ERR
-        toastr.warning('You can only like or dislike a answer once!', 'Warning');
+        toastr.error('You can only like or dislike a answer once!', 'Warning');
         return;
       }
     } else if (answer.dislikes > 0) {
@@ -91,7 +91,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the answer ERR
-        toastr.warning("You can't like a answer after disliking it!", 'Warning');
+        toastr.error("You can't like a answer after disliking it!", 'Warning');
         return;
       }
     } else if (answer.likes > 0) {
@@ -113,7 +113,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the answer ERR
-        toastr.warning("You can't like a answer more than once!", 'Warning');
+        toastr.error("You can't like a answer more than once!", 'Warning');
         return;
       }
     } else {
@@ -155,7 +155,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked or disliked the answer ERR
-        toastr.warning('You can only like or dislike a answer once!', 'Warning');
+        toastr.error('You can only like or dislike a answer once!', 'Warning');
         return;
       }
     } else if (answer.dislikes > 0) {
@@ -177,7 +177,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has disliked the answer ERR
-        toastr.warning('You can only dislike a answer once!', 'Warning');
+        toastr.error('You can only dislike a answer once!', 'Warning');
         return;
       }
     } else if (answer.likes > 0) {
@@ -199,7 +199,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           });
       } else {
         // user has liked the answer ERR
-        toastr.warning("You can't dislike a answer after liking it!", 'Warning');
+        toastr.error("You can't dislike a answer after liking it!", 'Warning');
         return;
       }
     } else {
@@ -232,7 +232,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
 
   $scope.openAnswerModal = function () {
     if ($scope.isAuthor === true) {
-      toastr.warning("You can't answer your own question!", "Warning");
+      toastr.error("You can't answer your own question!", "Warning");
       return;
     } else {
       $uibModal.open({
@@ -304,10 +304,10 @@ app.controller('RatingModalInstanceCtrl', function ($scope, $uibModalInstance, $
 
   $scope.submitRating = function () {
     if ($scope.stars === "") {
-      toastr.warning('Please select a rating to give for the answer!', "Warning");
+      toastr.error('Please select a rating to give for the answer!', "Warning");
       return;
     } else if ($scope.ratingAnswer.rating !== 0) {
-      toastr.warning('You can only submit one rating per answer!', "Warning");
+      toastr.error('You can only submit one rating per answer!', "Warning");
       return;
     } else {
       $scope.ratingAnswer.rating = $scope.stars;

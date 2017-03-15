@@ -6,7 +6,66 @@ body {
     color: #2d2e2e;
     padding-bottom: 20px;
     background-color: #f36c00 !important;
+    height: 100% !important;
+    width: 100% !important;
 }
+.btn-a {
+  text-decoration: none;
+    color: #fff;
+    font-family: avenir, helvetica, arial, sans-serif;
+    border-radius: .3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+}
+.btn-a:active, .btn-a:focus {
+  text-decoration: none;
+    color: #fff;
+    font-family: avenir, helvetica, arial, sans-serif;
+    border-radius: .3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+}
+.btn-a:hover {
+  text-decoration: none;
+    color: #fff;
+    padding: .75em 0px;
+    font-family: avenir, helvetica, arial, sans-serif;
+    border-radius: .3em;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+    transition: all .4s;
+    -webkit-transition: all .4s;
+    cursor: pointer !important;
+}
+  .row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto !important;
+ }
+ .row-eq-height > [class^='col-'] {
+   padding: 0px !important;
+   margin-left: 10px;
+   margin-right: 10px;
+ }
+ .item-right {
+   font-size: 0.75em !important;
+   vertical-align: 3px !important;
+ }
+ .dash-panel {
+   background-image: url(/img/Sports.png) !important;
+ }
+ .dash-panel > .panel-body {
+   background-color: transparent;
+ }
 .p-format {
   line-height: 100%;
 text-align: center;
@@ -19,9 +78,6 @@ white-space: pre-line;
   -webkit-box-shadow: 0 8px 6px -6px black !important;
   -moz-box-shadow: 0 8px 6px -6px black !important;
   box-shadow: 0 8px 6px -6px black !important;
-}
-.panel-group .panel + .panel {
-  margin-top: 25px !important;
 }
 .panel-footer-header {
   border-bottom: 2px solid #2c3e50 !important;
@@ -100,7 +156,7 @@ text-align: left;
 
 .fancy-collapse-panel .panel-heading a:after {
 font-family: "FontAwesome";
-content: "\f147" !important;
+content: "\f13a" !important;
 position: absolute;
 right: 20px;
 font-size: 20px;
@@ -108,11 +164,6 @@ font-weight: 400;
 top: 50%;
 line-height: 1;
 margin-top: -10px;
-}
-
-.fancy-collapse-panel .panel-heading a.collapsed:after {
-  font-family: "FontAwesome";
-  content: "\f196" !important;
 }
 
 .offset-row-margin {
@@ -1596,7 +1647,7 @@ blockquote {
 }
 
 .badge {
-    vertical-align: middle !important;
+    vertical-align: middle;
 }
 
 .media .media-object {
@@ -1729,6 +1780,9 @@ label.star:before {
 .fa-university {
     margin-left: 0.5px !important;
 }
+h4.panel-title {
+  margin: 0px !important;
+}
 .box {
     border-radius: 3px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -1739,6 +1793,9 @@ label.star:before {
 #card-box {
   border: 1px dashed #ddd !important;
   box-shadow: 0 0 0 3px #fff, 0 0 0 5px #ddd, 0 0 0 10px #fff, 0 0 2px 10px #eee !important;
+}
+.list-group-shadow {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .box-icon {
     background-color: #f5f5f5 !important;

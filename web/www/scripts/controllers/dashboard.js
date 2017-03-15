@@ -1,5 +1,17 @@
 var app = angular.module('dailydish');
 
+app.directive('matchHeight', ['$timeout', function ($timeout) {
+    var linkFunction = function(scope, element) {
+      $timeout(function() {
+        angular.element(element).find('.equal').matchHeight();
+      });
+    };
+    return {
+      restrict: 'A',
+      link: linkFunction
+    };
+}]);
+
 app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $uibModal,
   toastr, $state) {
   $scope.userArticles = [];
