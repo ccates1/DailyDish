@@ -20,7 +20,7 @@
               </label>
             </div>
             <div class="col-lg-6 col-sm-6 col-xs-7">
-              <div isteven-multi-select input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" on-item-click="clicked(data)" id="select" required>
+              <div isteven-multi-select input-model="categories" output-model="tagOutput" helper-elements="" button-label="icon name" item-label="icon name maker" tick-property="ticked" on-item-click="clicked(data)" id="select" required>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
                   <strong class="article-label">{{a.main}} Teams:</strong>
                 </div>
                 <div class="text-center center-block">
-                  <div isteven-multi-select input-model="a.teams" output-model="teamOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" on-item-click="teamClicked(data, a)" required>
+                  <div isteven-multi-select selection-mode="single" input-model="a.teams" output-model="teamOutput" helper-elements="all filter" button-label="icon name" item-label="icon name maker" tick-property="ticked" on-item-click="teamClicked(data, a)" required>
                   </div>
                 </div>
               </div>

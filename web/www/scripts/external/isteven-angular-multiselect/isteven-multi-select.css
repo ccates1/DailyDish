@@ -95,6 +95,8 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     min-width:278px;
     display: none !important;
+    max-height: 300px;
+    overflow: auto;
 }
 
 /* container of helper elements */
@@ -196,7 +198,7 @@
 
 /* item labels */
 .multiSelect .multiSelectItem {
-    display: block;
+    display: inline-flex;
     padding: 3px;
     color: #444;
     white-space: nowrap;
