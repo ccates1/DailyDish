@@ -665,8 +665,6 @@ legend {
   vertical-align: middle !important;
 }
 .activated {
-  border-bottom: 3px solid #2c3e50;
-  border-radius: 100%;
     font-family: avenir, helvetica, arial, sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -680,9 +678,7 @@ legend {
   font-weight: bold !important;
   color: #2c3e50 !important;
 }
-.navbar-harvest .navbar-inner .nav li a {
-  margin-left: 5px;
-}
+
 @media (max-width: 768px) {
   .activated {
       border: 0px !important;
