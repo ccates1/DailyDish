@@ -40,7 +40,7 @@
                 <strong>No answers have been posted.</strong>
               </div>
               <ul class="media-list">
-                <li class="answer-media media" ng-repeat="answer in question.answers">
+                <li class="answer-media media list-group-shadow" ng-repeat="answer in question.answers">
                   <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                     <div class="row" style="margin-left: 0px; margin-right: 0px;">
                       <figure>
@@ -56,7 +56,8 @@
                           <i class="fa fa-university fa-fw"></i> Guru Rating: {{answer.author.rating || 0}}
                         </p>
                         <p class="">
-                          <i class="fa fa-star fa-fw"></i> Answer Rating: <span class="badge">{{answer.rating || 'N/A'}}</span>
+                          <i class="fa fa-star fa-fw"></i> Answer Rating: <span class="badge" style="vertical-align: middle;">
+                          <span ng-if="!isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></span>
                         </p>
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">
@@ -100,7 +101,8 @@
                           <i class="fa fa-university fa-lg"></i> Guru Rating: {{answer.author.rating || 0}}
                         </p>
                         <p class="">
-                          <i class="fa fa-star fa-lg"></i> Answer Rating: <span class="badge">{{answer.rating || 'N/A'}}</span>
+                          <i class="fa fa-star fa-lg"></i> Answer Rating: <span class="badge" style="vertical-align: middle;">
+                          <span ng-if="!isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></span>
                         </p>
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">

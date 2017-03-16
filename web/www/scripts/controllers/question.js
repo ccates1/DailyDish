@@ -6,6 +6,7 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   $scope.sportImg = '';
   $scope.loading = true;
   $scope.isAuthor = false;
+  $scope.isEmpty = false;
   var getUser = function () {
     $service.getUser()
       .then(function (res) {
@@ -222,12 +223,15 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   };
 
   $scope.checkIfRated = function (answer) {
-    console.log(answer);
     if (answer.rating === 0) {
       return true;
     } else {
       return false;
     }
+  };
+
+  $scope.getNumber = function (rating) {
+    return new Array(rating);
   };
 
   $scope.openAnswerModal = function () {

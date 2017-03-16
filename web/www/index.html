@@ -5,17 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Daily Dish</title>
-    <link rel="icon" href="img/logo2.png">
-    <link href="css/test.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.css" rel="stylesheet">
-    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" rel="stylesheet">
-    <link href="lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
-    <link href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" rel="stylesheet">
-    <link href="css/buttons.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" media="all" href="img/logo2.png" rel="icon">
+    <link type="text/css" rel="stylesheet" media="all" href="css/style.css">
+    <link type="text/css" rel="stylesheet" media="all" href="bootstrap/dist/css/bootstrap.css" >
+    <link type="text/css" rel="stylesheet" media="all" href="lib/font-awesome/css/font-awesome.min.css" >
+    <link type="text/css" rel="stylesheet" media="all" href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" >
+    <link type="text/css" rel="stylesheet" media="all" href="lib/angular-toastr/dist/angular-toastr.min.css" >
+    <link type="text/css" rel="stylesheet" media="all" href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" >
+    <link type="text/css" rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css"  />
   </head>
   <body ng-app="dailydish" ng-controller="NavCtrl" ng-cloak>
     <div class="navbar navbar-harvest navbar-fixed-top">
@@ -37,36 +34,26 @@
           <ul class="nav navbar-nav">
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">
-                <span class="main-nav-fa fa-stack fa-fw">
-                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
-                 <i class="main-nav-fa fa fa-home fa-stack-1x"></i>
-               </span> Dashboard</a>
+                <i class="main-nav-fa fa fa-home">
+               </i> Dashboard</a>
             </li>
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('questions')" id="questions">
-                <span class="fa-stack fa-fw">
-                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
-                 <i class="main-nav-fa fa fa-question fa-stack-1x"></i>
-               </span> Fantasy Questions</a>
+                <i class="main-nav-fa fa fa-question-circle">
+               </i> Fantasy Questions</a>
             </li>
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('articles')" id="articles">
-                <span class="main-nav-fa fa-stack fa-fw">
-                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
-                 <i class="main-nav-fa fa fa-newspaper-o fa-stack-1x" style="margin-top:2.25px;"></i>
-               </span> Articles</a>
+                <i class="main-nav-fa fa fa-newspaper-o">
+               </i> Articles</a>
             </li>
             <li class="nav-custom">
               <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="login" id="login" ng-show="!isAuthenticated()">
-                <span class="main-nav-fa fa-stack fa-fw">
-                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
-                 <i class="main-nav-fa fa fa-sign-in fa-stack-1x" style="margin-top:2.25px;"></i>
-               </span> Login/Register</a>
+                <i class="main-nav-fa fa fa-sign-in">
+               </i> Login/Register</a>
               <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="logout" ng-show="isAuthenticated()">
-                <span class="main-nav-fa fa-stack fa-fw">
-                 <i class="main-nav-fa fa fa-circle-o fa-stack-2x"></i>
-                 <i class="main-nav-fa fa fa-sign-out fa-stack-1x" style="margin-top:2.25px;"></i>
-               </span> Logout</a>
+                <i class="main-nav-fa fa fa-sign-out">
+               </i> Logout</a>
             </li>
           </ul>
         </div>
@@ -74,32 +61,31 @@
     </div>
     <div ui-view></div>
 
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="lib/satellizer/dist/satellizer.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="lib/angular-animate/angular-animate.min.js"></script>
-    <script src="scripts/external/isteven-angular-multiselect/isteven-multi-select.js"></script>
-    <script src="lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="lib/satellizer/dist/satellizer.min.js"></script>
+    <script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="scripts/external/isteven-angular-multiselect/isteven-multi-select.js"></script>
+    <script type="text/javascript" src="lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script type="text/javascript" src="//api.filestackapi.com/filestack.js"></script>
-    <script src="lib/angular-filepicker/dist/angular_filepicker.min.js"></script>
-    <script src="lib/moment/moment.js"></script>
-    <script src="lib/angular-moment/angular-moment.min.js"></script>
-    <script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="lib/matchHeight/dist/jquery.matchHeight-min.js"></script>
-    <script src="lib/angularUtils-pagination/dirPagination.js"></script>
-    <script src="app.js"></script>
-    <script src="scripts/controllers/articles.js"></script>
-    <script src="scripts/controllers/articleTemplate.js"></script>
-    <script src="scripts/controllers/dashboard.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/logout.js"></script>
-    <script src="scripts/controllers/nav.js"></script>
-    <script src="scripts/controllers/questions.js"></script>
-    <script src="scripts/controllers/article.js"></script>
-    <script src="scripts/controllers/question.js"></script>
-
-    <script src="scripts/services.js"></script>
+    <script type="text/javascript" src="lib/angular-filepicker/dist/angular_filepicker.min.js"></script>
+    <script type="text/javascript" src="lib/moment/moment.js"></script>
+    <script type="text/javascript" src="lib/angular-moment/angular-moment.min.js"></script>
+    <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="lib/matchHeight/dist/jquery.matchHeight-min.js"></script>
+    <script type="text/javascript" src="lib/angularUtils-pagination/dirPagination.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="scripts/controllers/articles.js"></script>
+    <script type="text/javascript" src="scripts/controllers/articleTemplate.js"></script>
+    <script type="text/javascript" src="scripts/controllers/dashboard.js"></script>
+    <script type="text/javascript" src="scripts/controllers/login.js"></script>
+    <script type="text/javascript" src="scripts/controllers/logout.js"></script>
+    <script type="text/javascript" src="scripts/controllers/nav.js"></script>
+    <script type="text/javascript" src="scripts/controllers/questions.js"></script>
+    <script type="text/javascript" src="scripts/controllers/article.js"></script>
+    <script type="text/javascript" src="scripts/controllers/question.js"></script>
+    <script type="text/javascript" src="scripts/services.js"></script>
   </body>
 </html>

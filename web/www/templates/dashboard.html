@@ -130,7 +130,7 @@
           <div class="">
             <div class="list-group text-center list-group-shadow " style="margin-bottom: 0px;">
               <div class="list-group-item" >
-                <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" />
+                <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" style="max-width: 200px; max-height: 150px;" />
               </div>
               <div class="list-group-item ellipsis" >
                 <span class="fa-stack fa-sm">
@@ -158,13 +158,39 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <span class="pull-left">
-                <i class="form-fa fa fa-archive fa-fw"></i>
+                <i class="form-fa fa fa-newspaper-o fa-fw"></i>
               </span>
               Your Articles
             </h4>
           </div>
-          <div class="panel-body" style="padding: 0px;">
-            <div class="home-well well" ng-show="!user.articles.length">
+          <div class="panel-body" style="padding: 0px; background-color: #fff;">
+            <div ng-show="!user.articles.length" class="hidden-lg hidden-md hidden-sm">
+              <div class="list-group list-group-shadow " style="margin: 15px 15px;">
+                <div class="list-group-item ellipsis">
+                  <div class="media-body">
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-certificate fa-stack-1x"></i>
+                    </span> Articles Posted:
+                  </div>
+                  <div class="media-right">
+                    <span class="item-right badge badge-default">{{user.articles.length || '0'}}</span>
+                  </div>
+                </div>
+                <div class="list-group-item ellipsis">
+                  <div class="media-body">
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-star fa-stack-1x"></i>
+                    </span> Author Rating:
+                  </div>
+                  <div class="media-right">
+                    <span class="item-right badge badge-default">{{user.authorRating || 'N/A'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="question-no-well well" ng-show="!user.articles.length" style="margin: 15px;">
               <strong>No articles to display.</strong>
             </div>
             <div class="home-well well" ng-show="user.articles.length" id="article-dashboard" style="border: 0px; border-radius: 0px;">
@@ -257,6 +283,17 @@
           </div>
           <div class="panel-body" style="background-color: #ffffff;">
             <div class="list-group list-group-shadow hidden-lg hidden-md hidden-sm">
+              <div class="list-group-item ellipsis">
+                <div class="media-body">
+                  <span class="fa-stack fa-sm">
+                    <i class="fa fa-square-o fa-stack-2x"></i>
+                    <i class="fa fa-university fa-stack-1x"></i>
+                  </span> Guru Rating:
+                </div>
+                <div class="media-right">
+                  <span class="item-right badge badge-default">{{user.rating || 'N/A'}}</span>
+                </div>
+              </div>
               <div class="list-group-item ellipsis">
                 <div class="media-body">
                   <span class="fa-stack fa-sm">

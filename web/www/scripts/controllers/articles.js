@@ -43,7 +43,9 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
       .then(function (res) {
         $scope.articles = res.data;
         if ($scope.articles) {
-          $scope.articles.forEach(function (article) {
+          for(var i = 0; i < $scope.articles.length; i++) {
+            var article = $scope.articles[i];
+            console.log(article);
             article.totalStars = 0;
             if (!article.author.picture) {
               article.author.picture = '../img/default.png';
@@ -64,8 +66,7 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
               });
               article.averageStars = article.totalStars / article.articleRatings.length;
             }
-            console.log(article);
-          });
+          }
           $scope.loading = false;
         } else {
           $scope.loading = false;
@@ -82,7 +83,7 @@ app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   getArticles();
 
   $scope.getNumber = function (article) {
-    return new Array(article.averageStars);
+    return new Array(Math.round(article.averageStars));
   };
 });
 

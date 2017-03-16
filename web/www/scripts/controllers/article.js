@@ -54,7 +54,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   getUser();
 
   $scope.getNumber = function () {
-    return new Array($scope.averageRating);
+    return new Array(Math.round($scope.averageRating));
   };
 
   $scope.openCommentModal = function () {
@@ -103,11 +103,12 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
     var data = {};
     var check = false;
     if ($scope.stars === '') {
-      toastr.error('No rating selected!');
+      toastr.error('No rating was selected!');
       return;
     }
     if ($scope.article.articleRatings.length > 0) {
       $scope.article.articleRatings.forEach(function (articleRating) {
+        console.log(articleRating.user);
         if (articleRating.user == $scope.user._id) {
           check = true;
         }
@@ -139,9 +140,7 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
       $service.submitArticleRating($scope.article, data)
         .then(function (res) {
           toastr.success('Rating was submitted!', 'Success');
-          $timeout(function () {
-            $scope.$apply();
-          });
+          $state.reload();
         })
         .catch(function (err) {
           console.log(err);
