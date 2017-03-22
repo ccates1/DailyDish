@@ -36,7 +36,7 @@
               </h3>
             </div>
             <div class="panel-body">
-              <div class="home-well well" ng-show="!question.answers.length">
+              <div class="list-group-shadow home-well well" ng-show="!question.answers.length">
                 <strong>No answers have been posted.</strong>
               </div>
               <ul class="media-list">
@@ -57,7 +57,7 @@
                         </p>
                         <p class="">
                           <i class="fa fa-star fa-fw"></i> Answer Rating: <span class="badge" style="vertical-align: middle;">
-                          <span ng-if="!isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></span>
+                          <span ng-if="!answer.isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="answer.isEmpty">N/A</span></span>
                         </p>
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">
@@ -76,6 +76,21 @@
                         </blockquote>
                         <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
                         <div class="chat text-center">
+                          <a href="javascript:void(0)" ng-click="answer.toggle = true" ><i class="fa fa-flag fa-fw"></i> Flag for inappropriate content</a> <br />
+                          <div class="alert alert-danger" ng-show="answer.toggle" role="alert" id="answer._id">
+                            <strong>Warning:</strong> You are about to flag an answer! Are you sure you want to flag this answer for inappropriate content?
+                            <br />
+                            <div class="text-center" style="padding-top: 10px;">
+                              <ul class="list-inline">
+                                <li>
+                                  <button type="button" class="btn btn-info" ng-click="flagAnswer(answer); answer.toggle = false">Submit</button>
+                                </li>
+                                <li>
+                                  <button type="button" class="btn btn-danger" ng-click="answer.toggle = false;">Cancel</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
                           <small class="text-muted">
                             <i class="fa fa-calendar fa-fw"></i> {{answer.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                           </small>
@@ -102,7 +117,7 @@
                         </p>
                         <p class="">
                           <i class="fa fa-star fa-lg"></i> Answer Rating: <span class="badge" style="vertical-align: middle;">
-                          <span ng-if="!isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></span>
+                          <span ng-if="!answer.isEmpty" ng-repeat="i in getNumber(answer.rating) track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="answer.isEmpty">N/A</span></span>
                         </p>
                         <ul class="list-inline" id="comment-list">
                           <li style="padding-right: 0px;">
@@ -121,6 +136,21 @@
                         </blockquote>
                         <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
                         <div class="chat text-center" style="background-color: #ffffff;">
+                          <a href="javascript:void(0)" ng-click="answer.toggle = true" ><i class="fa fa-flag fa-fw"></i> Flag for inappropriate content</a> <br />
+                          <div class="alert alert-danger" ng-show="answer.toggle" role="alert" id="answer._id">
+                            <strong>Warning:</strong> You are about to flag an answer! Are you sure you want to flag this answer for inappropriate content?
+                            <br />
+                            <div class="text-center" style="padding-top: 10px;">
+                              <ul class="list-inline">
+                                <li>
+                                  <button type="button" class="btn btn-info" ng-click="flagAnswer(answer); answer.toggle = false">Submit</button>
+                                </li>
+                                <li>
+                                  <button type="button" class="btn btn-danger" ng-click="answer.toggle = false;">Cancel</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
                           <small class="text-muted">
                             <i class="fa fa-calendar fa-fw"></i> {{answer.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                           </small>

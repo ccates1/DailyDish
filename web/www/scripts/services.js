@@ -45,4 +45,7 @@ angular.module('dailydish.services', [])
     this.rateAnswer = function(question, answer) {
       return $http.put('/questions/' + question._id + '/answers/' + answer._id + '/rate', answer);
     };
+    this.addFlagAns = function(question, answer) {
+      return $http.put('/questions/' + question._id + '/answers/' + answer._id + '/flag', answer);
+    };
   });

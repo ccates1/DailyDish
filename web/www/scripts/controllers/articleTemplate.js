@@ -2,6 +2,23 @@ var app = angular.module('dailydish');
 
 app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
   toastr, $state, filepickerService, moment) {
+    $scope.options = {
+      height: 300,
+      focus: true,
+      toolbar: [
+              ['edit',['undo','redo']],
+              ['headline', ['style']],
+              ['style', ['bold', 'italic', 'underline']],
+              ['fontface', ['fontname']],
+              ['textsize', ['fontsize']],
+              ['fontclr', ['color']],
+              ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+              ['height', ['height']],
+              ['insert', ['link']],
+              ['view', ['fullscreen']],
+              ['help', ['help']]
+          ]
+    };
   $scope.article = {
     sports: [],
     teams: [],
@@ -576,13 +593,13 @@ app.controller('ArticleTemplateCtrl', function ($scope, $timeout, $service,
 
   $scope.submit = function () {
     if ($scope.article.picture === '') {
-      toastr.warning('Must upload an image for your article!', 'Warning');
+      toastr.error('Must upload an image for your article!', 'Warning');
       return;
     } else if ($scope.tagOutput.length === 0) {
-      toastr.warning('Must select a sport for your article!', 'Warning');
+      toastr.error('Must select a sport for your article!', 'Warning');
       return;
     } else if ($scope.teamOutput.length === 0) {
-      toastr.warning('Must select a team for your article!', 'Warning');
+      toastr.error('Must select a team for your article!', 'Warning');
       return;
     } else {
       $scope.tagOutput.forEach(function (item) {

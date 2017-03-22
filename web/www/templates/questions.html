@@ -9,35 +9,35 @@
           <ul class="nav nav-tabs custom-nav well-shadow">
             <div class="liner"></div>
             <li class="active">
-              <a data-target="#all" data-toggle="tab" title="All Fantasy Sports">
+              <a data-target="#all" data-toggle="tab" rel="tooltip" title="All Fantasy Sports">
                 <span class="round-tabs primary">
                     ALL
                   </span>
               </a>
             </li>
             <li>
-              <a data-target="#nba" data-toggle="tab" title="Fantasy Basketball">
+              <a data-target="#nba" data-toggle="tab" rel="tooltip" title="Fantasy Basketball">
                 <span class="round-tabs primary">
                     <i class="fa ion-ios-basketball fa-2x nav-fa"></i>
                   </span>
               </a>
             </li>
             <li>
-              <a data-target="#mlb" data-toggle="tab" title="Fantasy Baseball">
+              <a data-target="#mlb" data-toggle="tab" rel="tooltip" title="Fantasy Baseball">
                 <span class="round-tabs primary">
                     <i class="fa ion-ios-baseball fa-2x nav-fa"></i>
                   </span>
               </a>
             </li>
             <li>
-              <a data-target="#nfl" data-toggle="tab" title="Fantasy Football">
+              <a data-target="#nfl" data-toggle="tab" rel="tooltip" title="Fantasy Football">
                 <span class="round-tabs primary">
                     <i class="fa ion-ios-americanfootball fa-2x nav-fa"></i>
                   </span>
               </a>
             </li>
             <li>
-              <a href="javascript:void(0)" data-toggle="tab" title="Post New Question" ng-click="openQuestionModal()">
+              <a href="javascript:void(0)" data-toggle="tab" rel="tooltip" title="Post New Question" ng-click="openQuestionModal()">
                 <span class="round-tabs primary">
                     <i class="fa fa-plus fa-2x nav-fa"></i>
                   </span>
@@ -53,6 +53,16 @@
           <legend style="border-bottom: 0px;">
             <h2 class="text-center question-header">All Fantasy Sports</h2>
           </legend>
+          <!--<div class="btn-group" role="group">
+            <button class="btn btn-primary question-header" type="button" id="dfs1" name="selection" ng-click="dfs=false">
+              General Fantasy
+              <i class="form-fa fa fa-check fa-right fa-fw" id="fa1"></i>
+            </button>
+            <button class="btn btn-outline-primary question-header" type="button" id="dfs2" name="selection" ng-click="dfs=true">
+              Daily Fantasy
+              <i class="form-fa fa fa-check fa-right fa-fw hide" id="fa2"></i>
+            </button>
+          </div>-->
         </div>
         <div ng-if="!questions.length">
           <div class="well" id="question-well">
@@ -221,15 +231,31 @@
     <div class="modal-body">
       <form class="form-horizontal" method="post" name="questionForm">
         <div class="form-group">
-          <label class="col-xs-12 text-left" style="font-size: 1.2em;"><i class="fa fa-question-circle"></i> Question:</label>
+          <label class="col-xs-12 text-left" style="font-size: 1.2em;"><i class="fa fa-question-circle"></i> Insert Your Question Below:</label>
           <div class="col-xs-12">
-            <textarea draggable="false" class="form-control" rows="4" id="question" ng-model="question.content" required></textarea>
+            <textarea draggable="false" class="form-control" rows="4" id="questionText" ng-model="question.content" required></textarea>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-xs-12 text-left" style="font-size: 1.2em;"><i class="fa ion-ios-baseball"></i> Sport:</label>
+          <label class="col-xs-12 text-left" style="font-size: 1.2em;"><i class="fa ion-ios-baseball"></i> Select a Sport:</label>
           <div class="col-xs-12">
-            <div isteven-multi-select selection-mode="single" input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" id="select" required>
+            <div isteven-multi-select selection-mode="single" input-model="categories" output-model="tagOutput" helper-elements="all" button-label="icon name" item-label="icon name maker" tick-property="ticked" id="select"
+            style="padding-left: 15px;" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 text-left" style="font-size: 1.2em;"><i class="fa ion-ios-baseball"></i> Select a Category:</label>
+          <div class="col-xs-12">
+            <div class="btn-group" role="group" style="padding-left: 15px;">
+              <button class="btn btn-primary" type="button" id="dfs1" ng-click="dfs=false">
+                General Fantasy
+                <i class="form-fa fa fa-check fa-right fa-fw" id="fa1"></i>
+              </button>
+              <button class="btn btn-outline-primary" type="button" id="dfs2" ng-click="dfs=true">
+                Daily Fantasy
+                <i class="form-fa fa fa-check fa-right fa-fw hide" id="fa2"></i>
+              </button>
             </div>
           </div>
         </div>

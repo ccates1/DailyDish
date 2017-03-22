@@ -85,7 +85,8 @@ var commentSchema = new mongoose.Schema({
   usersWhoDisliked: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }],
+  flags: Number
 });
 var Comment = mongoose.model('Comment', commentSchema);
 
@@ -127,7 +128,8 @@ var questionSchema = new mongoose.Schema({
     ref: 'Answer'
   }],
   sport: String,
-  date: String
+  date: String,
+  dailyFantasy: Boolean
 });
 var Question = mongoose.model('Question', questionSchema);
 
@@ -150,6 +152,11 @@ var answerSchema = new mongoose.Schema({
   }],
   dislikes: Number,
   usersWhoDisliked: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  flags: Number,
+  usersWhoFlagged: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }]
@@ -666,6 +673,22 @@ app.put('/questions/:question/answers/:answer/addDislike', function (req, res, n
     answer.dislikes++;
     answer.usersWhoDisliked.push(reqAnswer.userWhoDisliked);
     answer.save(function (err, ans) {
+      if (err) {
+        return next(err);
+      }
+      res.sendStatus(200);
+    });
+  });
+});
+app.put('/questions/:question/answers/:answer/flag', function (req, res, next) {
+  var reqAnswer = req.body;
+  Answer.findById(reqAnswer._id, function (err, answer) {
+    if (err) {
+      return next(err);
+    }
+    answer.flags++;
+    answer.usersWhoFlagged.push(reqAnswer.userWhoFlagged);
+    answer.save(function (err, next) {
       if (err) {
         return next(err);
       }

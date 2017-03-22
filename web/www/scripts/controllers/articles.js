@@ -2,6 +2,9 @@ var app = angular.module('dailydish');
 
 app.controller('ArticlesCtrl', function ($scope, $auth, $service, $timeout,
   toastr, $state, moment) {
+    $(function() {
+      $("[rel='tooltip']").tooltip();
+    });
   $scope.articles = [];
   $scope.nba = [];
   $scope.mlb = [];

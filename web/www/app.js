@@ -1,6 +1,6 @@
 angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.bootstrap',
         'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker', 'angularMoment',
-        'angularUtils.directives.dirPagination'
+        'angularUtils.directives.dirPagination', 'summernote'
     ])
     .config(function($stateProvider, $urlRouterProvider, $authProvider, toastrConfig, filepickerProvider, $qProvider) {
       $qProvider.errorOnUnhandledRejections(false);

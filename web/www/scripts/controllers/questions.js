@@ -2,23 +2,28 @@ var app = angular.module('dailydish');
 
 app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
   toastr, $state, $uibModal, moment) {
+    $(function() {
+      $("[rel='tooltip']").tooltip({
+        delay: { "show": 500, "hide": 100 }
+      });
+    });
   $scope.articles = [];
   $scope.nba = [];
   $scope.mlb = [];
   $scope.nfl = [];
   $scope.loading = true;
   $scope.categories = [{
-      icon: "<img src='./img/nba.png'>",
+      icon: "<img src='./img/icons/nba.ico'>",
       name: "NBA",
       ticked: false
             },
     {
-      icon: "<img src='./img/mlb.png'>",
+      icon: "<img src='./img/icons/mlb.ico'>",
       name: "MLB",
       ticked: false
             },
     {
-      icon: "<img src='./img/nfl.png'>",
+      icon: "<img src='./img/icons/nfl.ico'>",
       name: "NFL",
       ticked: false
             }
@@ -28,6 +33,14 @@ app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
     document.getElementById('questions').parentElement.className = 'activated';
     $timeout(function () {
       $scope.$apply();
+    });
+    $('#btn-q-2').on('click', function() {
+      $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+      $('#btn-q-1').removeClass('btn-primary').addClass('btn-outline-primary');
+    });
+    $('#btn-q-1').on('click', function() {
+      $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+      $('#btn-q-2').removeClass('btn-primary').addClass('btn-outline-primary');
     });
   });
   $scope.$on('$destroy', function () {
@@ -103,7 +116,22 @@ app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
 app.controller('QuestionModalInstanceCtrl', function ($scope, $uibModalInstance, $service, toastr, $state, moment) {
   $scope.tagOutput = [];
   $scope.error = false;
+  $scope.dfs = false;
 
+  $(function () {
+    $('#dfs1').on('click', function() {
+      $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+      $('#dfs2').removeClass('btn-primary').addClass('btn-outline-primary');
+      $('#fa1').removeClass('hide');
+      $('#fa2').addClass('hide');
+    });
+    $('#dfs2').on('click', function() {
+      $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+      $('#dfs1').removeClass('btn-primary').addClass('btn-outline-primary');
+      $('#fa2').removeClass('hide');
+      $('#fa1').addClass('hide');
+    });
+  });
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
@@ -112,6 +140,11 @@ app.controller('QuestionModalInstanceCtrl', function ($scope, $uibModalInstance,
       $scope.question.sport = $scope.tagOutput[0].name;
       $scope.question.author = $scope.user._id;
       $scope.question.date = moment.now();
+      if($scope.dfs === true) {
+        $scope.question.dailyFantasy = true;
+      } else {
+        $scope.question.dailyFantasy = false;
+      }
       $service.submitQuestion($scope.question)
         .then(function (res) {
           $uibModalInstance.dismiss('cancel');

@@ -11,8 +11,6 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
     $service.getUser()
       .then(function (res) {
         $scope.user = res.data;
-        console.log($scope.user);
-        console.log($scope.question);
         if ($scope.question.author._id === $scope.user._id) {
           $scope.isAuthor = true;
         }
@@ -32,8 +30,13 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   };
   var listQuestions = function () {
     $scope.question.answers.forEach(function (answer) {
+      answer.toggle=false;
+      answer.isEmpty = false;
       if (!answer.author.picture) {
         answer.author.picture = '../img/default.png';
+      }
+      if (answer.rating === 0) {
+        answer.isEmpty = true;
       }
     });
     if ($scope.question.sport === 'NBA') {
@@ -205,7 +208,6 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
       }
     } else {
       // both the usersWhoLiked and usersWhoDisliked lists are empty OK
-      $scope.answer.usersWhoLiked.push($scope.user._id);
       $scope.answer.usersWhoDisliked.push($scope.user._id);
       $scope.answer.dislikes++;
       answer.userWhoDisliked = $scope.user._id;
@@ -219,6 +221,27 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
           console.log(err);
           toastr.error('Please try again', 'Error');
         });
+    }
+  };
+
+  $scope.flagAnswer = function(answer) {
+    if(answer.usersWhoFlagged.indexOf($scope.user._id) === -1) {
+      answer.usersWhoFlagged.push($scope.user._id);
+      answer.flags++;
+      answer.userWhoFlagged = $scope.user._id;
+      $service.addFlagAns($scope.question, answer)
+        .then(function (res) {
+          toastr.success('Answer has been successfully flagged!', 'Thanks');
+          $timeout(function () {
+            $scope.$apply();
+          });
+        })
+        .catch(function (err) {
+          console.log(err);
+          toastr.error('Please try again', 'Error');
+        });
+    } else {
+      toastr.error('You can only flag an answer once!');
     }
   };
 
@@ -348,6 +371,7 @@ app.controller('AnswerModalInstanceCtrl', function ($scope, $uibModalInstance, $
       $scope.answer.date = moment.now();
       $scope.answer.likes = 0;
       $scope.answer.dislikes = 0;
+      $scope.answer.flags = 0;
       $scope.answer.usersWhoLiked = [];
       $scope.answer.usersWhoDisliked = [];
       $service.addAnswer($scope.question, $scope.answer)
