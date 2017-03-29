@@ -78,8 +78,54 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
       scope: $scope
     });
   };
+});
+
+app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance, filepickerService,
+    toastr, $timeout, $auth, $service) {
+  $scope.passwordActive = false;
+  $scope.socialActive = false;
+  $scope.buttonClicked = false;
+  $scope.pictureActive = false;
+  $scope.edit = {};
+  $scope.final = {};
+
+  $scope.editPassword = function() {
+    $scope.buttonClicked = true;
+    $scope.passwordActive = true;
+    $timeout(function() {
+      $scope.$apply();
+    });
+  };
+
+  $scope.submitPassword = function() {
+    toastr.warning('Feature is not available at this time');
+  };
+
+  $scope.editPicture = function() {
+    $scope.buttonClicked = true;
+    $scope.pictureActive = true;
+    $timeout(function() {
+      $scope.$apply();
+    });
+  };
+
+  $scope.submitPic = function() {
+    toastr.warning('Feature is not available at this time');
+  };
+
+  $scope.manageSocial = function() {
+    $scope.buttonClicked = true;
+    $scope.socialActive = true;
+    $timeout(function() {
+      $scope.$apply();
+    });
+  };
 
   $scope.link = function (provider) {
+    if(provider == 'twitter') {
+      toastr.warning('Links with Twitter accounts are not available at this time');
+      return;
+    }
     $auth.authenticate(provider)
       .then(function () {
         toastr.success('You have successfully signed in with ' + provider + '!');
@@ -108,15 +154,9 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
         toastr.error(response.data ? response.data.message : 'Could not unlink ' + provider + ' account', response.status);
       });
   };
-});
 
-app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance, filepickerService, toastr) {
-  $scope.showPicture = false;
-  $scope.showPassword = false;
-  $scope.showSocialAccounts = false;
-  $scope.edit = {};
-  $scope.final = {};
   $scope.cancel = function () {
+    console.log('test');
     $uibModalInstance.dismiss('cancel');
   };
 
