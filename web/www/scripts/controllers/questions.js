@@ -71,16 +71,16 @@ app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
       .then(function (res) {
         console.log(res);
         $scope.questions = res.data;
+
         if ($scope.questions) {
           $scope.questions.forEach(function (question) {
+            question.intdate = parseFloat(question.date);
             if (question.sport === 'NBA') {
               $scope.nba.push(question);
             } else if (question.sport === 'MLB') {
               $scope.mlb.push(question);
             } else if (question.sport === 'NFL') {
               $scope.nfl.push(question);
-            } else {
-              console.log('WTF?');
             }
             if (!question.author.picture) {
               question.author.picture = '../img/default.png';
@@ -160,4 +160,21 @@ app.controller('QuestionModalInstanceCtrl', function ($scope, $uibModalInstance,
       toastr.warning('Please select a sport for your question', 'Warning');
     }
   };
+});
+app.filter('orderObjectBy', function(){
+ return function(input, attribute) {
+    if (!angular.isObject(input)) return input;
+
+    var array = [];
+    for(var objectKey in input) {
+        array.push(input[objectKey]);
+    }
+
+    array.sort(function(a, b){
+        a = parseInt(a[attribute]);
+        b = parseInt(b[attribute]);
+        return a - b;
+    });
+    return array;
+ };
 });

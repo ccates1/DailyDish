@@ -74,7 +74,7 @@
         <div ng-if="questions.length">
           <div class="well" id="question-well">
             <ul class="chat list-group">
-              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in questions track by $index" id="question-list">
+              <a type="button" class="list-group-item" ui-sref="question({id: question._id})" ng-repeat="question in questions | orderBy:'-intdate' track by $index" id="question-list">
                 <li class="left clearfix " style="margin-right: 0px;">
                   <small class="text-date pull-right text-muted">
                       <i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
