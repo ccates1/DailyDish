@@ -40,7 +40,7 @@
                 <strong>No answers have been posted.</strong>
               </div>
               <ul class="media-list">
-                <li class="answer-media media list-group-shadow" ng-repeat="answer in question.answers">
+                <li class="answer-media media list-group-shadow" ng-repeat="answer in question.answers | orderBy: '-rating' track by $index">
                   <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
                     <div class="row" style="margin-left: 0px; margin-right: 0px;">
                       <figure>
