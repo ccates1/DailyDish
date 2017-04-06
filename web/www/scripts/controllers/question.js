@@ -127,7 +127,6 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
       answer.userWhoLiked = $scope.user._id;
       $service.addLikeAns($scope.question, answer)
         .then(function (res) {
-          console.log(res);
           $timeout(function () {
             $scope.$apply();
           });
@@ -275,7 +274,6 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
   };
 
   $scope.openRatingModal = function (answer) {
-    console.log('ratingAnswer');
     $scope.ratingAnswer = answer;
     $uibModal.open({
       ariaLabelledBy: 'modal-title',
@@ -293,7 +291,6 @@ app.controller('QuestionCtrl', function ($scope, $auth, $service, $timeout,
 app.controller('RatingModalInstanceCtrl', function ($scope, $uibModalInstance, $service, toastr, $state, moment) {
   $scope.stars = '';
   $scope.answer = {};
-  console.log($scope.ratingAnswer);
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');

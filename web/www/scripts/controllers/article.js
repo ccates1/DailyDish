@@ -3,7 +3,6 @@ var app = angular.module('dailydish');
 app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
   article, toastr, $state, $uibModal) {
   $scope.article = article;
-  console.log(article);
   $scope.loading = true;
   $scope.averageRating = 0;
   $scope.isRated = false;
@@ -108,13 +107,11 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
     }
     if ($scope.article.articleRatings.length > 0) {
       $scope.article.articleRatings.forEach(function (articleRating) {
-        console.log(articleRating.user);
         if (articleRating.user == $scope.user._id) {
           check = true;
         }
       });
       if (check === false) {
-        console.log('not rated by user');
         data.rating = $scope.stars;
         data.article = $scope.article._id;
         data.userWhoRated = $scope.user._id;
@@ -224,7 +221,6 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
       comment.userWhoLiked = $scope.user._id;
       $service.addLikeCom($scope.article, comment)
         .then(function (res) {
-          console.log(res);
           $timeout(function () {
             $scope.$apply();
           });

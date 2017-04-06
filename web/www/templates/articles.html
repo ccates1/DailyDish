@@ -1,4 +1,4 @@
-<div class="container">
+2<div class="container">
   <div ng-show="loading">
     <div class="loader"></div>
   </div>
@@ -65,7 +65,7 @@
           <div id="question-row-parent">
           </div>
           <div class="list-group">
-            <a type="button" class="hidden-lg hidden-md hidden-sm" dir-paginate="article in (articles | orderBy: '+article.date' |itemsPerPage:4)" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
+            <a type="button" class="hidden-lg hidden-md hidden-sm" dir-paginate="article in articles | orderBy: '-intdate' |itemsPerPage:4" pagination-id="article.id" ui-sref="article({id: article._id})" style="text-decoration: none; border-radius: 10px;">
               <div class="box well article-well well-shadow" id="box-articles">
                 <div class="box-icon" style="height:100%;">
                   <img class="img-circle" style="max-width: 100px;" ng-src="{{article.picture.url}}"></img>

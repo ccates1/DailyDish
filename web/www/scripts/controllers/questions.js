@@ -69,7 +69,6 @@ app.controller('QuestionsCtrl', function ($scope, $auth, $service, $timeout,
   var getQuestions = function () {
     $service.questionsList()
       .then(function (res) {
-        console.log(res);
         $scope.questions = res.data;
 
         if ($scope.questions) {

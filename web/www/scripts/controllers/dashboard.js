@@ -55,7 +55,6 @@ app.controller('DashboardCtrl', function ($scope, $auth, $service, $timeout, $ui
               }
             });
           }
-          console.log($scope.user);
           $scope.loading = false;
         }
       })
@@ -156,7 +155,6 @@ app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance
   };
 
   $scope.cancel = function () {
-    console.log('test');
     $uibModalInstance.dismiss('cancel');
   };
 
@@ -170,7 +168,6 @@ app.controller('DashboardModalInstanceCtrl', function ($scope, $uibModalInstance
         maxSize: '1048576'
       },
       function (Blob) {
-        console.log(JSON.stringify(Blob));
         $scope.edit.picture = Blob;
       }
     );

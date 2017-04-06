@@ -101,9 +101,8 @@
           </div>
             <div class="panel-q panel-q-white post panel-q-shadow" style="background-color: #FFFFFF; margin-top: 10px; margin-bottom: 10px;">
               <div class="post-description">
-                <p>
-                  {{article.content}}
-                </p>
+                <div ng-bind-html="article.content">
+                </div>
               </div>
             </div>
         </div>
