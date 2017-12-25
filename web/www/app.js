@@ -29,7 +29,7 @@ angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.b
                 controller: 'ArticlesCtrl'
             })
             .state('article', {
-              url: '/acticles/{id}',
+              url: '/articles/{id}',
               templateUrl: 'templates/article.html',
               controller: 'ArticleCtrl',
               resolve: {

@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Daily Dish</title>
-    <link type="text/css" rel="stylesheet" media="all" href="img/logo2.png" rel="icon">
-    <link type="text/css" rel="stylesheet" media="all" href="css/style.css">
+    <link href="img/logo2.png" rel="icon">
     <link type="text/css" rel="stylesheet" media="all" href="bootstrap/dist/css/bootstrap.css" >
     <link type="text/css" rel="stylesheet" media="all" href="lib/font-awesome/css/font-awesome.min.css" >
     <link type="text/css" rel="stylesheet" media="all" href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" >
@@ -14,49 +13,54 @@
     <link type="text/css" rel="stylesheet" media="all" href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" >
     <link type="text/css" rel="stylesheet" media="all" href="lib/summernote/dist/summernote.css" >
     <link type="text/css" rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css"  />
+    <link type="text/css" rel="stylesheet" media="all" href="css/style.css">
   </head>
   <body ng-app="dailydish" ng-controller="NavCtrl" ng-cloak>
-    <div class="navbar navbar-harvest navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="navbar-header">
-          <div class="navbar-brand">
-            <img src="img/logo2.png" class="logo" />
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-inner">
+          <div class="navbar-header">
+            <div class="navbar-brand">
+              <img src="img/logo2.png" class="logo" />
+            </div>
+            <button class="navbar-toggle btn btn-primary" id="nav-btn" type="button" data-toggle="collapse" data-target="#navbar-main">
+              <div id="navbar-hamburger">
+                MENU
+              </div>
+              <div id="navbar-close" class="hidden">
+                <i class="form-fa fa fa-times fa-lg"></i>
+              </div>
+            </button>
           </div>
-          <button class="navbar-toggle btn btn-primary" id="nav-btn" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <div id="navbar-hamburger">
-              MENU
-            </div>
-            <div id="navbar-close" class="hidden">
-              <i class="form-fa fa fa-times fa-lg"></i>
-            </div>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('dashboard')" id="dashboard">
-                <i class="main-nav-fa fa fa-home">
-               </i> Dashboard</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('questions')" id="questions">
-                <i class="main-nav-fa fa fa-question-circle">
-               </i> Fantasy Questions</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" href="javascript:void(0)" ng-click="check('articles')" id="articles">
-                <i class="main-nav-fa fa fa-newspaper-o">
-               </i> Articles</a>
-            </li>
-            <li class="nav-custom">
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="login" id="login" ng-show="!isAuthenticated()">
-                <i class="main-nav-fa fa fa-sign-in">
-               </i> Login/Register</a>
-              <a data-toggle="collapse" data-target=".navbar-collapse.in" ui-sref="logout" ng-show="isAuthenticated()">
-                <i class="main-nav-fa fa fa-sign-out">
-               </i> Logout</a>
-            </li>
-          </ul>
+          <div class="collapse navbar-collapse" id="navbar-main">
+            <ul class="nav navbar-nav">
+              <li>
+                <a ui-sref="dashboard">
+                  <i class="main-nav-fa fa fa-home"></i> Dashboard
+                </a>
+              </li>
+              <li>
+                <a ui-sref="questions">
+                  <i class="main-nav-fa fa fa-question-circle"></i> Questions
+                </a>
+              </li>
+              <li>
+                <a ui-sref="articles">
+                  <i class="main-nav-fa fa fa-newspaper-o"></i> Articles
+                </a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a ui-sref="login" ng-if="!isAuthenticated()">
+                  Login/Register
+                </a>
+                <a ui-sref="logout" ng-if="isAuthenticated()">
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +84,7 @@
     <script type="text/javascript" src="lib/summernote/dist/summernote.min.js"></script>
     <script type="text/javascript" src="lib/angular-summernote/dist/angular-summernote.min.js"></script>
     <script type="text/javascript" src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="lib/lodash/dist/lodash.core.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="scripts/controllers/articles.js"></script>
     <script type="text/javascript" src="scripts/controllers/articleTemplate.js"></script>

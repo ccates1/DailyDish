@@ -1,113 +1,108 @@
 <div class="container page-content-wrapper">
-  <div ng-show="loading">
+  <div ng-if="loading">
     <div class="loader"></div>
   </div>
-  <div ng-show="!loading">
-    <!-- Profile Dash View ---------------->
-    <!-- Desktop View -->
+  <div ng-if="!loading">
     <div class="row row-flex row-eq-height hidden-xs">
-      <div class="col-sm-6 panel panel-primary dash-panel">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <span class="pull-left">
-              <i class="form-fa fa fa-info-circle fa-fw"></i>
-            </span>
-            Profile
-            <span class="pull-right">
-              <a href="javascript:void(0)" ng-click="open()" id="edit">
-                <i class="fa fa-pencil-square-o fa-lg"></i>
-              </a>
-            </span>
-          </h4>
-        </div>
-        <div class="panel-body">
-          <div class="list-group list-group-shadow">
-            <div class="list-group-item">
-              <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" style="max-width: 200px; max-height: 150px;" />
-            </div>
-            <div class="list-group-item ellipsis">
-              <span class="fa-stack fa-sm">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-user fa-stack-1x"></i>
-              </span> Username: {{user.username}}
-            </div>
-            <div class="list-group-item ellipsis">
-              <span class="fa-stack fa-sm">
-                <i class="fa fa-square-o fa-stack-2x"></i>
-                <i class="fa fa-at fa-stack-1x"></i>
-              </span> Email: {{user.email}}
-            </div>
+      <div class="col-sm-6">
+          <div class="panel panel-primary dash-panel">
+              <div class="panel-heading">
+                  <h4 class="panel-title">
+                      <i class="pull-left form-fa fa fa-info-circle fa-fw"></i>
+                      Profile
+                      <a href="javascript:void(0)" ng-click="open()" class="pull-right">
+                          <i class="fa fa-pencil-square-o fa-lg"></i>
+                      </a>
+                  </h4>
+              </div>
+              <div class="panel-body">
+                  <div class="list-group ">
+                      <div class="list-group-item">
+                          <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" style="max-width: 200px; max-height: 150px;" />
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <span class="fa-stack fa-sm">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-user fa-stack-1x"></i>
+                          </span> Username: {{user.username}}
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <span class="fa-stack fa-sm">
+                            <i class="fa fa-square-o fa-stack-2x"></i>
+                            <i class="fa fa-at fa-stack-1x"></i>
+                          </span> Email: {{user.email}}
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-      <div class="col-sm-6 panel panel-primary dash-panel">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <span class="pull-left">
-              <i class="form-fa fa fa-bar-chart fa-fw"></i>
-            </span>
-            DailyDish Stats
-          </h4>
-        </div>
-        <div class="panel-body">
-          <div class="list-group list-group-shadow">
-            <div class="list-group-item ellipsis">
-              <div class="media-body">
-                <span class="fa-stack fa-sm">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-question-circle fa-stack-1x"></i>
-                </span> Questions Posted:
+      <div class="col-sm-6">
+          <div class="panel panel-primary dash-panel">
+              <div class="panel-heading">
+                  <h4 class="panel-title">
+                      <i class="pull-left form-fa fa fa-bar-chart fa-fw"></i> DailyDish Stats
+                  </h4>
               </div>
-              <div class="media-right">
-                <span class="item-right badge badge-default">{{user.questions.length}}</span>
+              <div class="panel-body">
+                  <div class="list-group ">
+                      <div class="list-group-item ellipsis">
+                          <div class="media-body">
+                    <span class="fa-stack fa-sm">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-question-circle fa-stack-1x"></i>
+                    </span> Questions Posted:
+                          </div>
+                          <div class="media-right">
+                              <span class="item-right badge badge-default">{{user.questions.length}}</span>
+                          </div>
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <div class="media-body">
+                            <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-line-chart fa-stack-1x"></i>
+                            </span> Questions Answered:
+                          </div>
+                          <div class="media-right">
+                              <span class="item-right badge badge-default">{{user.answers.length}}</span>
+                          </div>
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <div class="media-body">
+                            <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-university fa-stack-1x"></i>
+                            </span> Guru Rating:
+                          </div>
+                          <div class="media-right">
+                              <span class="item-right badge badge-default">{{user.rating || 'N/A'}}</span>
+                          </div>
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <div class="media-body">
+                            <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-certificate fa-stack-1x"></i>
+                            </span> Articles Posted:
+                          </div>
+                          <div class="media-right">
+                              <span class="item-right badge badge-default">{{user.articles.length || '0'}}</span>
+                          </div>
+                      </div>
+                      <div class="list-group-item ellipsis">
+                          <div class="media-body">
+                            <span class="fa-stack fa-sm">
+                              <i class="fa fa-square-o fa-stack-2x"></i>
+                              <i class="fa fa-star fa-stack-1x"></i>
+                            </span> Author Rating:
+                          </div>
+                          <div class="media-right">
+                              <span class="item-right badge badge-default">{{user.authorRating || 'N/A'}}</span>
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="list-group-item ellipsis">
-              <div class="media-body">
-                <span class="fa-stack fa-sm">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-line-chart fa-stack-1x"></i>
-                </span> Questions Answered:
-              </div>
-              <div class="media-right">
-                <span class="item-right badge badge-default">{{user.answers.length}}</span>
-              </div>
-            </div>
-            <div class="list-group-item ellipsis">
-              <div class="media-body">
-                <span class="fa-stack fa-sm">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-university fa-stack-1x"></i>
-                </span> Guru Rating:
-              </div>
-              <div class="media-right">
-                <span class="item-right badge badge-default">{{user.rating || 'N/A'}}</span>
-              </div>
-            </div>
-            <div class="list-group-item ellipsis">
-              <div class="media-body">
-                <span class="fa-stack fa-sm">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-certificate fa-stack-1x"></i>
-                </span> Articles Posted:
-              </div>
-              <div class="media-right">
-                <span class="item-right badge badge-default">{{user.articles.length || '0'}}</span>
-              </div>
-            </div>
-            <div class="list-group-item ellipsis">
-              <div class="media-body">
-                <span class="fa-stack fa-sm">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-star fa-stack-1x"></i>
-                </span> Author Rating:
-              </div>
-              <div class="media-right">
-                <span class="item-right badge badge-default">{{user.authorRating || 'N/A'}}</span>
-              </div>
-            </div>
           </div>
-        </div>
       </div>
     </div>
     <!-- Mobile View -->
@@ -128,7 +123,7 @@
             </h4>
           </div>
           <div class="">
-            <div class="list-group text-center list-group-shadow " style="margin-bottom: 0px;">
+            <div class="list-group text-center  " style="margin-bottom: 0px;">
               <div class="list-group-item" >
                 <img class="img-circle img-responsive center-block" ng-src="{{user.picture}}" alt="{{user.username}}" style="max-width: 200px; max-height: 150px;" />
               </div>
@@ -165,7 +160,7 @@
           </div>
           <div class="panel-body" style="padding: 0px; background-color: #fff;">
             <div ng-show="!user.articles.length" class="hidden-lg hidden-md hidden-sm">
-              <div class="list-group list-group-shadow " style="margin: 15px 15px;">
+              <div class="list-group  " style="margin: 15px 15px;">
                 <div class="list-group-item ellipsis">
                   <div class="media-body">
                     <span class="fa-stack fa-sm">
@@ -194,7 +189,7 @@
               <strong>No articles to display.</strong>
             </div>
             <div class="home-well well" ng-show="user.articles.length" id="article-dashboard" style="border: 0px; border-radius: 0px;">
-              <div class="list-group list-group-shadow hidden-lg hidden-md hidden-sm">
+              <div class="list-group  hidden-lg hidden-md hidden-sm">
                 <div class="list-group-item ellipsis">
                   <div class="media-body">
                     <span class="fa-stack fa-sm">
@@ -282,7 +277,7 @@
             </h4>
           </div>
           <div class="panel-body" style="background-color: #ffffff;">
-            <div class="list-group list-group-shadow hidden-lg hidden-md hidden-sm">
+            <div class="list-group  hidden-lg hidden-md hidden-sm">
               <div class="list-group-item ellipsis">
                 <div class="media-body">
                   <span class="fa-stack fa-sm">
@@ -333,7 +328,7 @@
                   </div>
                   <div id="{{question._id}}" class="panel-collapse collapse" role="tabpanel">
                     <div class="panel-body">
-                      <div class="list-group list-group-shadow">
+                      <div class="list-group ">
                         <div class="list-group-item small">
                           <span class="fa fa-calendar fa-fw"></span> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                         </div>
@@ -370,26 +365,29 @@
 </div>
 
 <script type="text/ng-template" id="modalEdit.html">
-  <div close="cancel()">
+  <div class="modal-fade" tabindex="-1" role="dialog">
     <div class="modal-header">
-      <h3 class="modal-title text-center">Edit Profile:</h3>
+      <h3 style="display: inline;" class="modal-title text-center">Edit Profile</h3>
+      <a href="javascript:void(0)" style="color: #fff;" ng-click="cancel()" class="pull-right">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
     </div>
     <div class="modal-body">
       <div class="container-fluid">
         <div class="text-center" ng-show="!buttonClicked">
           <ul class="list-inline">
             <li>
-              <button type="button" class="btn3d btn btn-primary" ng-click="editPassword()">
+              <button type="button" class="btn btn-primary" ng-click="editPassword()">
                 <i class="btn3d-fa fa fa-lock fa-fw"></i> Change Password
               </button>
             </li>
             <li>
-              <button type="button" class="btn3d btn btn-primary" ng-click="editPicture()">
+              <button type="button" class="btn btn-primary" ng-click="editPicture()">
                 <i class="btn3d-fa fa fa-camera fa-fw"></i> Change Picture
               </button>
             </li>
             <li>
-              <button type="button" class="btn3d btn btn-primary" ng-click="manageSocial()">
+              <button type="button" class=" btn btn-primary" ng-click="manageSocial()">
                 <i class="btn3d-fa fa fa-facebook-square fa-fw"></i> Manage Social Accounts
               </button>
             </li>
@@ -442,7 +440,6 @@
               </button>
             </li>
           </ul>
-          <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
         </div>
         <div class="text-center" ng-hide="!pictureActive">
           <img ng-src="{{user.picture}}" class="edit-picture avatar img-circle" alt="">
@@ -450,9 +447,6 @@
           <ul class="list-inline">
             <li>
               <button type="button" class="btn btn-primary" ng-click="submitPic()" id="filePickerBtn">Upload</button>
-            </li>
-            <li>
-              <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
             </li>
           </ul>
         </div>

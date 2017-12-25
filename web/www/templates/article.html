@@ -1,252 +1,178 @@
 <div class="container">
-  <div ng-show="loading">
-    <div class="loader"></div>
-  </div>
-  <div ng-show="!loading">
-    <div class="text-left" style="padding-bottom: 10px;">
-      <a type="button" class="btn btn-sm btn-primary" ui-sref="articles"><i class="form-fa fa fa-chevron-circle-left fa-fw"></i> Back</a>
-    </div>
-    <div class="box" id="card-box">
-      <div class="box-icon">
-        <img class="img-circle" style="height: 100px; width: 100px;" ng-src="{{article.author.picture}}"></img>
-      </div>
-      <div class="info text-center">
-        <h4 style="font-size: 22px;">By: {{article.author.username}}</h4>
-        <h4 class="page-header">{{article.title}}</h4>
-        <div class="col-xs-12">
-          <div class="col-xs-4 well well-sm well-shadow">
-            <span class="fa-stack fa-sm">
-              <i class="fa fa-square-o fa-stack-2x"></i>
-              <i class="fa fa-university fa-stack-1x" style="margin-left: 0.5px;"></i>
-            </span>
-            <p class="no-margin well-xs-p">Guru Rating:</p>{{article.author.rating || 0}}
-          </div>
-          <div class="col-xs-4 well well-sm well-shadow">
-            <span class="fa-stack fa-sm">
-              <i class="fa fa-square-o fa-stack-2x"></i>
-              <i class="fa fa-fire fa-stack-1x" style="margin-left: 0.5px;"></i>
-            </span>
-            <p class="no-margin well-xs-p">Article Rating:</p><span ng-if="!isEmpty" ng-repeat="i in getNumber() track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span>
-          </div>
-          <div class="col-xs-4 well well-sm well-shadow">
-            <span class="fa-stack fa-sm">
-              <i class="fa fa-square-o fa-stack-2x"></i>
-              <i class="fa fa-star fa-stack-1x" style="margin-left: 0.5px;"></i>
-            </span>
-            <p class="no-margin well-xs-p">Author Rating:</p>{{article.author.authorRating || 'N/A'}}
-          </div>
-        </div>
-        <p class="text-muted" style="text-align: center"><i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}</p>
-        <div class="content">
-          <div class="well ">
-            <div class="row">
-              <img class="center-block card-image img-rounded" ng-src="{{article.picture.url}}" alt="{{article.title}}" style="max-width: 200px; max-height: 200px"/>
-            </div>
-            <div class="list-group card-shadow hidden-lg hidden-md hidden-sm" style="margin-top: 10px;" id="article-xs">
-              <div class="list-group-item">
-                <ul class="list-inline text-left">
-                  <li>
-                    <span class="fa-stack fa-sm">
-                      <i class="fa fa-square-o fa-stack-2x"></i>
-                      <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                    </span> Sports:
-                  </li>
-                  <li ng-repeat="sport in article.sports">
-                    <span class="label label-primary">{{sport}}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="list-group-item">
-                <ul class="list-inline text-left">
-                  <li>
-                    <span class="fa-stack fa-sm">
-                      <i class="fa fa-square-o fa-stack-2x"></i>
-                      <i class="fa fa-users fa-stack-1x"></i>
-                    </span> Teams:
-                  </li>
-                  <li ng-repeat="team in article.teams">
-                    <span class="label label-primary">{{team}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="list-group card-shadow hidden-xs" style="margin-top: 10px;">
-              <div class="list-group-item">
-                <ul class="list-inline text-left">
-                  <li>
-                    <span class="fa-stack fa-sm">
-                      <i class="fa fa-square-o fa-stack-2x"></i>
-                      <i class="fa ion-ios-basketball fa-stack-1x"></i>
-                    </span> Sports:
-                  </li>
-                  <li ng-repeat="sport in article.sports">
-                    <span class="label label-primary">{{sport}}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="list-group-item">
-                <ul class="list-inline text-left">
-                  <li>
-                    <span class="fa-stack fa-sm">
-                      <i class="fa fa-square-o fa-stack-2x"></i>
-                      <i class="fa fa-users fa-stack-1x"></i>
-                    </span> Teams:
-                  </li>
-                  <li ng-repeat="team in article.teams">
-                    <span class="label label-primary">{{team}}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-            <div class="panel-q panel-q-white post panel-q-shadow" style="background-color: #FFFFFF; margin-top: 10px; margin-bottom: 10px;">
-              <div class="post-description">
-                <div ng-bind-html="article.content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="well well-sm content-shadow">
+                <div class="media-left">
+                    <img class="img-circle" ng-src="{{article.author.picture}}" style="max-height: 75px; border: 1px solid #eee;">
                 </div>
-              </div>
+                <div class="media-body">
+                    <h4 class="media-heading media-heading-title">{{article.author.username}}</h4>
+                    <p><i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}</p>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="row offset-row-margin" style="padding-top:10px;">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            Article Rating
-          </div>
-          <div class="panel-body text-center">
-            <legend ng-show="!isRated">
-              Rate This Article
-            </legend>
-            <legend ng-show="isRated">
-              Your Article Rating
-            </legend>
-            <div class="stars">
-              <form>
-                <input class="star star-5" ng-model="stars" ng-value="5" ng-change="changeStar()" id="star-5" type="radio" name="star" ng-disabled="isRated" />
-                <label class="star star-5" for="star-5"></label>
-                <input class="star star-4" ng-model="stars" ng-value="4" ng-change="changeStar()" id="star-4" type="radio" name="star" ng-disabled="isRated" />
-                <label class="star star-4" for="star-4"></label>
-                <input class="star star-3" ng-model="stars" ng-value="3" ng-change="changeStar()" id="star-3" type="radio" name="star" ng-disabled="isRated" />
-                <label class="star star-3" for="star-3"></label>
-                <input class="star star-2" ng-model="stars" ng-value="2" ng-change="changeStar()" id="star-2" type="radio" name="star" ng-disabled="isRated" />
-                <label class="star star-2" for="star-2"></label>
-                <input class="star star-1" ng-model="stars" ng-value="1" ng-change="changeStar()" id="star-1" type="radio" name="star" ng-disabled="isRated" />
-                <label class="star star-1" for="star-1"></label>
-              </form>
-              <div id="starContext">
-
-              </div>
-              <button type="button" class="btn btn-primary" ng-click="rateArticle()" ng-disabled="isRated">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row offset-row-margin" style="padding-top: 10px;">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            Comments
-            <div class="pull-right">
-              <a type="button" class="btn btn-sm btn-default" ng-click="openCommentModal()" style="margin-top: -5px;">Add New</a>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="home-well well" ng-show="!article.comments.length">
-              <strong>No comments have been posted.</strong>
-            </div>
-            <ul class="media-list">
-              <li class="answer-media media" ng-repeat="comment in article.comments">
-                <div class="well hidden-lg hidden-md hidden-sm" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
-                  <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                    <figure>
-                      <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
-                        <img class="thumbnail-q img-circle" ng-src="{{comment.author.picture}}" alt="profile">
-                        <figcaption class="text-center">
-                          <strong class="text-q">{{comment.author.username}}</strong>
-                        </figcaption>
-                      </div>
-                    </figure>
-                    <div class="pull-left" id="fish">
-                      <p class="">
-                        <i class="fa fa-university fa-fw"></i> Guru Rating: {{comment.author.rating || 0}}
-                      </p>
-                      <p class="">
-                        <i class="fa fa-fire fa-lg"></i> Author Rating:
-                        <span class="label label-primary">{{comment.author.authorRating || 'N/A'}}</span>
-                      </p>
-                      <ul class="list-inline" id="comment-list">
-                        <li style="padding-right: 0px;">
-                          <span class="badge">{{comment.likes || 0}}</span>
-                          <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addLikeToComment(comment)"></span>
+        <div class="col-xs-12 col-sm-6">
+            <ul class="list-group content-shadow">
+                <li class="list-group-item">
+                    <label class="media-heading-title">Sports: </label>
+                    <ul class="list-inline" style="display:inline;">
+                        <li ng-repeat="s in article.sports">
+                            <span class="badge badge-list-inline-lg">{{s}}</span>
                         </li>
-                        <li>
-                          <span class="badge">{{comment.dislikes || 0}}</span>
-                          <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addDislikeToComment(comment)"></span>
+                    </ul>
+                </li>
+                <li class="list-group-item">
+                    <label class="media-heading-title">Teams: </label>
+                    <ul class="list-inline" style="display:inline;">
+                        <li ng-repeat="s in article.teams">
+                            <span class="badge badge-list-inline-lg">{{s}}</span>
                         </li>
-                      </ul>
-                    </div>
-                    <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
-                      <blockquote>
-                        {{comment.content}}
-                      </blockquote>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
-                      <div class="chat text-center">
-                        <small class="text-muted">
-                          <i class="fa fa-calendar fa-fw"></i> {{comment.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="well hidden-xs" style="padding: 5px 10px; margin-bottom: 0px; background-color: #ffffff;">
-                  <div class="row offset-row-margin">
-                    <figure>
-                      <div class="pull-left" style="margin-right: 10px;" href="javascript:void(0)">
-                        <img class="thumbnail-q img-circle" ng-src="{{comment.author.picture}}" alt="profile">
-                        <figcaption class="text-center">
-                          <strong class="text-q">{{comment.author.username}}</strong>
-                        </figcaption>
-                      </div>
-                    </figure>
-                    <div class="pull-left" id="fish-lg">
-                      <p class="">
-                        <i class="fa fa-university fa-lg"></i> Guru Rating:
-                        <span class="label label-primary">{{comment.author.rating || 0}}</span>
-                      </p>
-                      <p class="">
-                        <i class="fa fa-fire fa-lg"></i> Author Rating:
-                        <span class="label label-primary">{{comment.author.authorRating || 'N/A'}}</span>
-                      </p>
-                      <ul class="list-inline" id="comment-list">
-                        <li style="padding-right: 0px;">
-                          <span class="badge">{{comment.likes || 0}}</span>
-                          <span class="text-success fa fa-thumbs-o-up fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addLikeToComment(comment)"></span>
-                        </li>
-                        <li>
-                          <span class="badge">{{comment.dislikes || 0}}</span>
-                          <span class="text-danger fa fa-thumbs-o-down fa-fw glyphicon-align-right" style="vertical-align:baseline; width:15.4375px" ng-click="addDislikeToComment(comment)"></span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;">
-                      <blockquote>
-                        {{comment.content}}
-                      </blockquote>
-                      <div class="col-xs-12 panel-footer" style="padding: 0px; background-color: #ffffff;"></div>
-                      <div class="chat text-center">
-                        <small class="text-muted">
-                          <i class="fa fa-calendar fa-fw"></i> {{comment.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+                    </ul>
+                </li>
             </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="well well-sm content-shadow">
+                <div class="media-left">
+                    <span class="fa-stack fa-sm" style="vertical-align: inherit;">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-university fa-stack-1x" style="margin-left: 0.5px;"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading media-heading-title">Guru Rating: {{article.author.rating || 0}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="well well-sm content-shadow">
+                <div class="media-left">
+                    <span class="fa-stack fa-sm" style="vertical-align: inherit;">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-fire fa-stack-1x" style="margin-left: 0.5px;"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading media-heading-title">Article Rating: <span ng-if="!isEmpty" ng-repeat="i in getNumber() track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="well well-sm content-shadow">
+                <div class="media-left">
+                    <span class="fa-stack fa-sm" style="vertical-align: inherit;">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fa fa-star fa-stack-1x" style="margin-left: 0.5px;"></i>
+                    </span>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading media-heading-title">Author Rating: {{article.authorRating || 'N/A'}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="jumbotron content-shadow" style="background-color: #fff;">
+        <div class="media-left">
+          <img class="img-rounded" style="max-height:150px;" ng-src="{{article.picture.url}}">
+        </div>
+        <div class="media-body" style="vertical-align: bottom;">
+          <h1>{{article.title}}</h1>
+        </div>
+        <hr>
+        <p style="font-size: 18px;">
+        <div ng-bind-html="article.content">
+        </div>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Article Rating
+        </div>
+        <div class="panel-body text-center">
+          <legend ng-show="!isRated">
+            Rate This Article
+          </legend>
+          <legend ng-show="isRated">
+            Your Article Rating
+          </legend>
+          <div class="stars">
+            <form class="starRating">
+              <input class="star star-5" ng-model="stars" ng-value="5" ng-change="changeStar()" id="star-5" type="radio" name="star" ng-disabled="isRated" />
+              <label class="star star-5" for="star-5"></label>
+              <input class="star star-4" ng-model="stars" ng-value="4" ng-change="changeStar()" id="star-4" type="radio" name="star" ng-disabled="isRated" />
+              <label class="star star-4" for="star-4"></label>
+              <input class="star star-3" ng-model="stars" ng-value="3" ng-change="changeStar()" id="star-3" type="radio" name="star" ng-disabled="isRated" />
+              <label class="star star-3" for="star-3"></label>
+              <input class="star star-2" ng-model="stars" ng-value="2" ng-change="changeStar()" id="star-2" type="radio" name="star" ng-disabled="isRated" />
+              <label class="star star-2" for="star-2"></label>
+              <input class="star star-1" ng-model="stars" ng-value="1" ng-change="changeStar()" id="star-1" type="radio" name="star" ng-disabled="isRated" />
+              <label class="star star-1" for="star-1"></label>
+            </form>
+            <div id="starContext">
+
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="rateArticle()" ng-disabled="isRated">Submit</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h4 style="display: inline;" class="panel-title">
+            Comments
+          </h4>
+          <span style="float:right;">
+            <button type="button" class="btn btn-default btn-sm" ng-click="openCommentModal()">Add New</button>
+          </span>
+        </div>
+        <div class="panel-body">
+          <ul class="media-list">
+            <li class="media well well-sm content-shadow" ng-repeat="comment in article.comments track by $index">
+                <span ng-include="'commentMediaList.html'"></span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="commentMediaList.html">
+    <div class="media-left">
+        <img class="img-circle" style="max-height:50px; border:1px solid #eee" ng-src="{{comment.author.picture}}">
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading media-heading-title">{{comment.author.username}}</h4>
+        <ul class="list-inline">
+            <li>
+                <span class="badge">{{comment.likes || 0}}</span>
+                <span ng-click="addLikeToComment(comment)" class="text-success fa fa-thumbs-o-up fa-fw" style="cursor: pointer;"></span>
+            </li>
+            <li>
+                <span class="badge">{{comment.dislikes || 0}}</span>
+                <span ng-click="addDislikeToComment(comment)" class="text-success fa fa-thumbs-o-down fa-fw" style="cursor: pointer;"></span>
+            </li>
+        </ul>
+        <hr>
+        <p style="font-size: 1.5rem; color: #000;">
+            {{comment.content}}
+        </p>
+    </div>
+</script>
+
+
 <script type="text/ng-template" id="commentModal.html">
   <div class="modal-header" style="border: 0">
     <h3 class="modal-title text-center">Add Comment:</h3>

@@ -1,11 +1,14 @@
-var app = angular.module('dailydish');
+(function() {
+    "use strict";
+    var app = angular.module('dailydish');
 
-app.controller('LogoutCtrl', function ($scope, $auth, $timeout, $state) {
-  $auth.logout()
-    .then(function () {
-      $state.go('login');
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-});
+    app.controller('LogoutCtrl', ['$scope', '$auth', '$timeout', '$state', function ($scope, $auth, $timeout, $state) {
+        $auth.logout()
+            .then(function () {
+                $state.go('login');
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }]);
+})();

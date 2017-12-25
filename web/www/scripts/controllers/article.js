@@ -1,7 +1,6 @@
 var app = angular.module('dailydish');
 
-app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
-  article, toastr, $state, $uibModal) {
+app.controller('ArticleCtrl', ['$scope', '$auth', '$service', '$timeout', 'toastr', '$state', '$uibModal', 'article', function ($scope, $auth, $service, $timeout, toastr, $state, $uibModal, article) {
   $scope.article = article;
   $scope.loading = true;
   $scope.averageRating = 0;
@@ -318,9 +317,9 @@ app.controller('ArticleCtrl', function ($scope, $auth, $service, $timeout,
     }
   };
 
-});
+}]);
 
-app.controller('CommentModalInstanceCtrl', function ($scope, $uibModalInstance, $service, toastr, $state, moment) {
+app.controller('CommentModalInstanceCtrl', ['$scope', '$uibModalInstance', '$service', 'toastr', '$state', 'moment', function ($scope, $uibModalInstance, $service, toastr, $state, moment) {
   $scope.comment = {};
 
   $scope.cancel = function () {
@@ -350,4 +349,4 @@ app.controller('CommentModalInstanceCtrl', function ($scope, $uibModalInstance, 
         });
     }
   };
-});
+}]);
