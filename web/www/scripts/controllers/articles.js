@@ -18,16 +18,12 @@
         var getUser = function () {
             $service.getUser()
                 .then(function (res) {
-                    if (res.data === "") {
-                        $auth.logout();
-                        $state.go('login');
-                    } else {
-                        $scope.user = res.data;
-                        getArticles();
-                    }
+                    $scope.user = res.data;
+                    getArticles();
                 })
                 .catch(function (err) {
-                    $state.go('login');
+                    $scope.user = {}
+                    getArticles();
                 });
         };
 

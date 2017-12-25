@@ -2543,6 +2543,7 @@ span.round-tabs {
     left: 0;
     text-align: center;
     font-size: 25px;
+    border: 1px solid #eee;
 }
 
 span.round-tabs.one {

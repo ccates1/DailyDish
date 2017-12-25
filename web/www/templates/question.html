@@ -14,7 +14,9 @@
                     <p><i class="fa fa-calendar fa-fw"></i> {{question.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}
                 </div>
                 <hr>
-                <p class="text-center" style="font-size: 1.75rem; color: #000;">{{question.content}}</p>
+                <div style="background-color: #eee;" class="well">
+                    <p style="font-size: 1.75rem; color: #000; font-weight: 600; text-align: center;">{{question.content}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -23,7 +25,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 style="display: inline;" class="panel-title">
-                        Comments
+                        Answers
                     </h4>
                     <span style="float:right;">
                         <button type="button" class="btn btn-default btn-sm" ng-click="openAnswerModal()" ng-disabled="isAuthor">Add New</button>
@@ -49,7 +51,7 @@
                                     </li>
                                 </ul>
                                 <hr>
-                                <p style="font-size: 1.5rem; color: #000;">
+                                <p style="font-size: 1.5rem; color: #000; font-weight: 600;">
                                     {{answer.content}}
                                 </p>
                             </div>

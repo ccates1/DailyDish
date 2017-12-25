@@ -33,42 +33,47 @@
         ];
 
         var getUser = function () {
+            debugger;
             $service.getUser()
                 .then(function (res) {
-                    if (res.data === "") {
-                        $auth.logout();
-                        $state.go('login');
-                    } else {
-                        $scope.user = res.data;
-                        getQuestions();
-                    }
+
+                    // if (res.data === "") {
+                    //     $auth.logout();
+                    //     $state.go('login');
+                    // } else {
+                    //     $scope.user = res.data;
+                    //     getQuestions();
+                    // }
+
+                    $scope.user = res.data || {};
+                    getQuestions();
                 })
                 .catch(function (err) {
-                    $state.go('login');
+                    $scope.user = {};
+                    getQuestions();
                 });
         };
 
         var getQuestions = function () {
             $service.questionsList()
                 .then(function (res) {
-                    $scope.questions = res.data;
+                    var questions = $scope.questions = res.data;
 
-                    if ($scope.questions) {
-                        $scope.questions.forEach(function (question) {
-                            question.intdate = parseFloat(question.date);
-                            if (question.sport === 'NBA') {
-                                $scope.nba.push(question);
-                            } else if (question.sport === 'MLB') {
-                                $scope.mlb.push(question);
-                            } else if (question.sport === 'NFL') {
-                                $scope.nfl.push(question);
-                            }
-                            if (!question.author.picture) {
-                                question.author.picture = '../img/default.png';
-                            }
-                        });
-                        $scope.loading = false;
-                    }
+                    _.each(questions, function (question) {
+                        question.intdate = parseFloat(question.date);
+                        if (question.sport === 'NBA') {
+                            $scope.nba.push(question);
+                        } else if (question.sport === 'MLB') {
+                            $scope.mlb.push(question);
+                        } else if (question.sport === 'NFL') {
+                            $scope.nfl.push(question);
+                        }
+                        if (!question.author.picture) {
+                            question.author.picture = '../img/default.png';
+                        }
+                    })
+
+                    $scope.loading = false;
                 })
                 .catch(function (err) {
                     $scope.loading = false;
@@ -78,6 +83,10 @@
         getUser();
 
         $scope.openQuestionModal = function () {
+            if(!$scope.user || _.isEmpty($scope.user)) {
+                toastr.error('Please login to perform this action!');
+                return;
+            }
             $uibModal.open({
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'mobal-body',
@@ -112,17 +121,19 @@
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-        $scope.submit = function (question) {
+        $scope.submit = function (q) {
+            var question = $scope.question || q || {};
+
             if ($scope.tagOutput.length > 0) {
-                $scope.question.sport = $scope.tagOutput[0].name;
-                $scope.question.author = $scope.user._id;
-                $scope.question.date = moment.now();
+                question.sport = $scope.tagOutput[0].name;
+                question.author = $scope.user._id;
+                question.date = moment.now();
                 if ($scope.dfs === true) {
-                    $scope.question.dailyFantasy = true;
+                    question.dailyFantasy = true;
                 } else {
-                    $scope.question.dailyFantasy = false;
+                    question.dailyFantasy = false;
                 }
-                $service.submitQuestion($scope.question)
+                $service.submitQuestion(question)
                     .then(function (res) {
                         $uibModalInstance.dismiss('cancel');
                         toastr.success('Your question has been posted!', 'Success');
@@ -137,7 +148,7 @@
                 toastr.warning('Please select a sport for your question', 'Warning');
             }
         };
-    }])
+    }]);
 
     app.filter('orderObjectBy', function () {
         return function (input, attribute) {
@@ -156,4 +167,4 @@
             return array;
         };
     });
-})()
+})();
