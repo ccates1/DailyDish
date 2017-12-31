@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    var app = angular.module('dailydish', ['dailydish.services', 'isteven-multi-select', 'ui.bootstrap', 'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker', 'angularMoment', 'angularUtils.directives.dirPagination', 'summernote', 'ngSanitize'])
+    var app = angular.module('dailydish', ['dailydish.services', 'dailydish.directives', 'isteven-multi-select', 'ui.bootstrap', 'ui.router', 'satellizer', 'ngAnimate', 'toastr', 'angular-filepicker', 'angularMoment', 'angularUtils.directives.dirPagination', 'summernote', 'ngSanitize'])
 
     app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', 'toastrConfig', 'filepickerProvider', '$qProvider', function ($stateProvider, $urlRouterProvider, $authProvider, toastrConfig, filepickerProvider, $qProvider) {
         $qProvider.errorOnUnhandledRejections(false);

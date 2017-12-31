@@ -1,31 +1,33 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
-            <div class="well well-sm content-shadow">
+            <div class="well well-sm content-shadow inline-media-listitem">
                 <div class="media-left">
-                    <img class="img-circle" ng-src="{{article.author.picture}}" style="max-height: 75px; border: 1px solid #eee;">
+                    <img class="media-object media-object-sm img-circle" ng-src="{{article.author.picture}}">
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading media-heading-title">{{article.author.username}}</h4>
-                    <p><i class="fa fa-calendar fa-fw"></i> {{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}</p>
+                    <p style="margin:0; font-weight:600;"><i class="fa fa-calendar fa-fw"></i> {{article.date |
+                        amDateFormat: 'dddd, MMMM Do, h:mm a'}}</p>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <ul class="list-group content-shadow">
-                <li class="list-group-item">
+                <li class="list-group-item" ng-if="article.sports && article.sports.length > 0">
                     <label class="media-heading-title">Sports: </label>
                     <ul class="list-inline" style="display:inline;">
-                        <li ng-repeat="s in article.sports">
+                        <li ng-repeat="s in article.sports track by $index">
                             <span class="badge badge-list-inline-lg">{{s}}</span>
                         </li>
                     </ul>
                 </li>
-                <li class="list-group-item">
+
+                <li class="list-group-item" ng-if="article.teams && article.teams.length > 0">
                     <label class="media-heading-title">Teams: </label>
                     <ul class="list-inline" style="display:inline;">
-                        <li ng-repeat="s in article.teams">
-                            <span class="badge badge-list-inline-lg">{{s}}</span>
+                        <li ng-repeat="t in article.teams track by $index">
+                            <span class="badge badge-list-inline-lg">{{t}}</span>
                         </li>
                     </ul>
                 </li>
@@ -33,7 +35,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
             <div class="well well-sm content-shadow">
                 <div class="media-left">
                     <span class="fa-stack fa-sm" style="vertical-align: inherit;">
@@ -46,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
             <div class="well well-sm content-shadow">
                 <div class="media-left">
                     <span class="fa-stack fa-sm" style="vertical-align: inherit;">
@@ -55,11 +57,13 @@
                     </span>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading media-heading-title">Article Rating: <span ng-if="!isEmpty" ng-repeat="i in getNumber() track by $index"><i class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></h4>
+                    <h4 class="media-heading media-heading-title">Article Rating: <span ng-if="!isEmpty"
+                                                                                        ng-repeat="i in getNumber() track by $index"><i
+                            class="fa fa-star star-fa"></i></span><span ng-if="isEmpty">N/A</span></h4>
                 </div>
             </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-12 col-md-4">
             <div class="well well-sm content-shadow">
                 <div class="media-left">
                     <span class="fa-stack fa-sm" style="vertical-align: inherit;">
@@ -73,80 +77,81 @@
             </div>
         </div>
     </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="jumbotron content-shadow" style="background-color: #fff;">
-        <div class="media-left">
-          <img class="img-rounded" style="max-height:150px;" ng-src="{{article.picture.url}}">
-        </div>
-        <div class="media-body" style="vertical-align: bottom;">
-          <h1>{{article.title}}</h1>
-        </div>
-        <hr>
-        <p style="font-size: 18px;">
-        <div ng-bind-html="article.content">
-        </div>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Article Rating
-        </div>
-        <div class="panel-body text-center">
-          <legend ng-show="!isRated">
-            Rate This Article
-          </legend>
-          <legend ng-show="isRated">
-            Your Article Rating
-          </legend>
-          <div class="stars">
-            <form class="starRating">
-              <input class="star star-5" ng-model="stars" ng-value="5" ng-change="changeStar()" id="star-5" type="radio" name="star" ng-disabled="isRated" />
-              <label class="star star-5" for="star-5"></label>
-              <input class="star star-4" ng-model="stars" ng-value="4" ng-change="changeStar()" id="star-4" type="radio" name="star" ng-disabled="isRated" />
-              <label class="star star-4" for="star-4"></label>
-              <input class="star star-3" ng-model="stars" ng-value="3" ng-change="changeStar()" id="star-3" type="radio" name="star" ng-disabled="isRated" />
-              <label class="star star-3" for="star-3"></label>
-              <input class="star star-2" ng-model="stars" ng-value="2" ng-change="changeStar()" id="star-2" type="radio" name="star" ng-disabled="isRated" />
-              <label class="star star-2" for="star-2"></label>
-              <input class="star star-1" ng-model="stars" ng-value="1" ng-change="changeStar()" id="star-1" type="radio" name="star" ng-disabled="isRated" />
-              <label class="star star-1" for="star-1"></label>
-            </form>
-            <div id="starContext">
-
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron content-shadow" style="background-color: #fff;">
+                <div class="text-center">
+                    <img class="img-rounded center-block" style="max-height:150px;" ng-src="{{article.picture.url}}">
+                    <h2>{{article.title}}</h2>
+                </div>
+                <hr>
+                <p style="font-size: 18px;">
+                    <span ng-bind-html="article.content"></span>
+                </p>
             </div>
-            <button type="button" class="btn btn-primary" ng-click="rateArticle()" ng-disabled="isRated">Submit</button>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Article Rating
+                </div>
+                <div class="panel-body text-center">
+                    <h3 class="text-center" ng-if="isRated">Your Article Rating</h3>
+                    <h3 class="text-center" ng-if="!isRated">Rate This Article</h3>
+                    <div class="stars">
+                        <form class="starRating">
+                            <input class="star star-5" ng-model="stars" ng-value="5" ng-change="changeStar()"
+                                   id="star-5" type="radio" name="star" ng-disabled="isRated"/>
+                            <label class="star star-5" for="star-5"></label>
+                            <input class="star star-4" ng-model="stars" ng-value="4" ng-change="changeStar()"
+                                   id="star-4" type="radio" name="star" ng-disabled="isRated"/>
+                            <label class="star star-4" for="star-4"></label>
+                            <input class="star star-3" ng-model="stars" ng-value="3" ng-change="changeStar()"
+                                   id="star-3" type="radio" name="star" ng-disabled="isRated"/>
+                            <label class="star star-3" for="star-3"></label>
+                            <input class="star star-2" ng-model="stars" ng-value="2" ng-change="changeStar()"
+                                   id="star-2" type="radio" name="star" ng-disabled="isRated"/>
+                            <label class="star star-2" for="star-2"></label>
+                            <input class="star star-1" ng-model="stars" ng-value="1" ng-change="changeStar()"
+                                   id="star-1" type="radio" name="star" ng-disabled="isRated"/>
+                            <label class="star star-1" for="star-1"></label>
+                        </form>
+                        <div id="starContext">
 
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h4 style="display: inline;" class="panel-title">
-            Comments
-          </h4>
-          <span style="float:right;">
+                        </div>
+                        <button type="button" class="btn btn-primary" ng-click="rateArticle()" ng-disabled="!stars" ng-if="!isRated">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 style="display: inline;" class="panel-title">
+                        Comments
+                    </h4>
+                    <span style="float:right;">
             <button type="button" class="btn btn-default btn-sm" ng-click="openCommentModal()">Add New</button>
           </span>
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list">
+                        <li class="media well well-sm content-shadow"
+                            ng-repeat="comment in article.comments track by $index">
+                            <span ng-include="'commentMediaList.html'"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-          <ul class="media-list">
-            <li class="media well well-sm content-shadow" ng-repeat="comment in article.comments track by $index">
-                <span ng-include="'commentMediaList.html'"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <script type="text/ng-template" id="commentMediaList.html">
@@ -158,11 +163,13 @@
         <ul class="list-inline">
             <li>
                 <span class="badge">{{comment.likes || 0}}</span>
-                <span ng-click="addLikeToComment(comment)" class="text-success fa fa-thumbs-o-up fa-fw" style="cursor: pointer;"></span>
+                <span ng-click="addLikeToComment(comment)" class="text-success fa fa-thumbs-o-up fa-fw"
+                      style="cursor: pointer;"></span>
             </li>
             <li>
                 <span class="badge">{{comment.dislikes || 0}}</span>
-                <span ng-click="addDislikeToComment(comment)" class="text-success fa fa-thumbs-o-down fa-fw" style="cursor: pointer;"></span>
+                <span ng-click="addDislikeToComment(comment)" class="text-success fa fa-thumbs-o-down fa-fw"
+                      style="cursor: pointer;"></span>
             </li>
         </ul>
         <hr>
@@ -174,59 +181,84 @@
 
 
 <script type="text/ng-template" id="commentModal.html">
-  <div class="modal-header" style="border: 0">
-    <h3 class="modal-title text-center">Add Comment:</h3>
-  </div>
-  <div class="modal-body" style="background-color: #2c3e50">
-    <div class="container-fluid">
-      <form method="post" name="commentForm">
-        <div class="col-xs-12">
-          <div class="well well-shadow hidden-xs">
-            <div class="media">
-              <div class="col-xs-2">
-                <figure>
-                  <div class="pull-left">
-                    <img class="img-circle img-q" ng-src="{{user.picture}}" style="margin-right: 0px;" />
-                    <figcaption class="text-center">
-                      <strong class="text-success ">{{user.username}}</strong>
-                    </figcaption>
-                  </div>
-                </figure>
-              </div>
-              <div class="col-xs-10">
-                <textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="well well-shadow hidden-lg hidden-md hidden-sm">
-            <div class="media hidden-lg hidden-md hidden-sm">
-              <div class="col-xs-12">
-                <figure>
-                  <div class="text-center">
-                    <img class="img-circle img-q" ng-src="{{user.picture}}" style="margin-right: 0px;" />
-                    <figcaption class="text-center">
-                      <strong class="text-success ">{{user.username}}</strong>
-                    </figcaption>
-                  </div>
-                </figure>
-              </div>
-              <div class="col-xs-12">
-                <textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>
-              </div>
-            </div>
-          </div>
+    <div class="modal-header">
+        <h4 style="display:inline;" class="modal-title text-center">Add Comment</h4>
+        <a href="javascript:void(0)" style="color: inherit;" ng-click="cancel()" class="pull-right">
+            <span class="fa fa-times fa-lg"></span>
+        </a>
+    </div>
+    <div class="modal-body modal-content-lg">
+        <div class="form-group">
+            <label>Comment</label>
+            <textarea draggable="false" class="form-control" rows="4" ng-model="comment.content" required></textarea>
         </div>
-      </form>
     </div>
-  </div>
-  <div class="modal-footer">
-    <div class="col-xs-12">
-      <div class="col-xs-6">
-        <button type="button" ng-click="submitComment()" ng-disabled="commentForm.$invalid" class="btn btn-info btn-block">Submit</button>
-      </div>
-      <div class="col-xs-6">
-        <button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>
-      </div>
+    <div class="modal-footer">
+        <div class="text-center">
+            <button type="button" ng-click="submitComment()" ng-disabled="!comment.content"
+                    class="btn btn-primary">Submit
+            </button>
+        </div>
     </div>
-  </div>
+
+
+    <!--<div class="modal-header" style="border: 0">-->
+        <!--<h3 class="modal-title text-center">Add Comment:</h3>-->
+    <!--</div>-->
+    <!--<div class="modal-body" style="background-color: #2c3e50">-->
+        <!--<div class="container-fluid">-->
+            <!--<form method="post" name="commentForm">-->
+                <!--<div class="col-xs-12">-->
+                    <!--<div class="well well-shadow hidden-xs">-->
+                        <!--<div class="media">-->
+                            <!--<div class="col-xs-2">-->
+                                <!--<figure>-->
+                                    <!--<div class="pull-left">-->
+                                        <!--<img class="img-circle img-q" ng-src="{{user.picture}}"-->
+                                             <!--style="margin-right: 0px;"/>-->
+                                        <!--<figcaption class="text-center">-->
+                                            <!--<strong class="text-success ">{{user.username}}</strong>-->
+                                        <!--</figcaption>-->
+                                    <!--</div>-->
+                                <!--</figure>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-10">-->
+                                <!--<textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="well well-shadow hidden-lg hidden-md hidden-sm">-->
+                        <!--<div class="media hidden-lg hidden-md hidden-sm">-->
+                            <!--<div class="col-xs-12">-->
+                                <!--<figure>-->
+                                    <!--<div class="text-center">-->
+                                        <!--<img class="img-circle img-q" ng-src="{{user.picture}}"-->
+                                             <!--style="margin-right: 0px;"/>-->
+                                        <!--<figcaption class="text-center">-->
+                                            <!--<strong class="text-success ">{{user.username}}</strong>-->
+                                        <!--</figcaption>-->
+                                    <!--</div>-->
+                                <!--</figure>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-12">-->
+                                <!--<textarea class="form-control" rows="3" ng-model="comment.content" required></textarea>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+        <!--<div class="col-xs-12">-->
+            <!--<div class="col-xs-6">-->
+                <!--<button type="button" ng-click="submitComment()" ng-disabled="commentForm.$invalid"-->
+                        <!--class="btn btn-info btn-block">Submit-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<div class="col-xs-6">-->
+                <!--<button class="btn btn-danger btn-block" ng-click="cancel()">Cancel</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </script>

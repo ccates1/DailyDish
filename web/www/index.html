@@ -6,52 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Daily Dish</title>
     <link href="img/logo2.png" rel="icon">
-    <link type="text/css" rel="stylesheet" media="all" href="bootstrap/dist/css/bootstrap.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="lib/font-awesome/css/font-awesome.min.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="lib/angular-toastr/dist/angular-toastr.min.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="lib/summernote/dist/summernote.css" >
-    <link type="text/css" rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css"  />
-    <link type="text/css" rel="stylesheet" media="all" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="bootstrap/dist/css/bootstrap.css" >
+    <link type="text/css" rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" >
+    <link type="text/css" rel="stylesheet" href="scripts/external/isteven-angular-multiselect/isteven-multi-select.css" >
+    <link type="text/css" rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.min.css" >
+    <!--<link type="text/css" rel="stylesheet" href="css/external/bootstrap-social-gh-pages/bootstrap-social.css" >-->
+    <link type="text/css" rel="stylesheet" href="lib/summernote/dist/summernote.css" >
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css"  />
+    <link type="text/css" rel="stylesheet" href="css/style.css">
   </head>
-  <body ng-app="dailydish" ng-controller="NavCtrl" ng-cloak>
-    <div class="navbar navbar-default navbar-fixed-top">
+  <body ng-app="dailydish" ng-cloak>
+    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavCtrl">
       <div class="container">
         <div class="navbar-inner">
           <div class="navbar-header">
             <div class="navbar-brand">
               <img src="img/logo2.png" class="logo" />
             </div>
-            <button class="navbar-toggle btn btn-primary" id="nav-btn" type="button" data-toggle="collapse" data-target="#navbar-main">
-              <div id="navbar-hamburger">
-                MENU
-              </div>
-              <div id="navbar-close" class="hidden">
-                <i class="form-fa fa fa-times fa-lg"></i>
-              </div>
+            <button class="navbar-toggle collapsed btn btn-primary" id="nav-btn" nav-btn-directive type="button" data-toggle="collapse" data-target="#navbar-main">
+              MENU
+              <!--<div id="navbar-hamburger">-->
+                <!--MENU-->
+              <!--</div>-->
+              <!--<div id="navbar-close" class="hidden">-->
+                <!--<i class="form-fa fa fa-times fa-lg"></i>-->
+              <!--</div>-->
             </button>
           </div>
-          <div class="collapse navbar-collapse" id="navbar-main">
+          <div class="collapse navbar-collapse" nav-directive id="navbar-main" >
             <ul class="nav navbar-nav">
-              <li>
+              <li class="nav-item"  data-toggle="collapse" data-target="#navbar-main">
                 <a ui-sref="dashboard">
                   <i class="main-nav-fa fa fa-home"></i> Dashboard
                 </a>
               </li>
-              <li>
+              <li class="nav-item" data-toggle="collapse" data-target="#navbar-main">
                 <a ui-sref="questions">
                   <i class="main-nav-fa fa fa-question-circle"></i> Questions
                 </a>
               </li>
-              <li>
+              <li class="nav-item" data-toggle="collapse" data-target="#navbar-main">
                 <a ui-sref="articles">
                   <i class="main-nav-fa fa fa-newspaper-o"></i> Articles
                 </a>
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li>
+              <li class="nav-item" data-toggle="collapse" data-target="#navbar-main">
                 <a ui-sref="login" ng-if="!isAuthenticated()">
                   Login/Register
                 </a>
@@ -63,7 +64,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </nav>
     <div ui-view></div>
 
     <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
@@ -96,5 +97,6 @@
     <script type="text/javascript" src="scripts/controllers/article.js"></script>
     <script type="text/javascript" src="scripts/controllers/question.js"></script>
     <script type="text/javascript" src="scripts/services.js"></script>
+    <script type="text/javascript" src="scripts/Directives.js"></script>
   </body>
 </html>

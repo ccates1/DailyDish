@@ -104,20 +104,7 @@
         $scope.error = false;
         $scope.dfs = false;
 
-        $(function () {
-            $('#dfs1').on('click', function () {
-                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
-                $('#dfs2').removeClass('btn-primary').addClass('btn-outline-primary');
-                $('#fa1').removeClass('hide');
-                $('#fa2').addClass('hide');
-            });
-            $('#dfs2').on('click', function () {
-                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
-                $('#dfs1').removeClass('btn-primary').addClass('btn-outline-primary');
-                $('#fa2').removeClass('hide');
-                $('#fa1').addClass('hide');
-            });
-        });
+
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };

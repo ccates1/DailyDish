@@ -1,52 +1,62 @@
 <script type="text/ng-template" id="articleMediaList.html">
-  <div class="media list-group-item" style="background-color:#fff; padding: 10px;" id="question-list">
+  <div class="media list-group-item content-shadow" style="margin-top: 15px;">
     <div class="media-left">
-      <img class="img-rounded" style="width:100px; height:100px;" ng-src="{{article.picture.url}}">
+      <img class="img-thumbnail" style="max-height: 75px; max-width: 75px;" ng-src="{{article.picture.url}}">
     </div>
     <div class="media-body">
       <h4 class="media-heading" style="text-transform: capitalize; font-size: 19px; display:inline">{{article.title}}</h4>
-      <span class="pull-right" style="font-size: 1.35rem; font-weight: 700;">{{article.date | amDateFormat: 'dddd, MMMM Do, h:mm a'}}</span>
-      <div style="min-height:20px;">
-        <span ng-if="!isEmpty" ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star"></i></span><span ng-if="isEmpty">N/A</span>
+      <span class="date-content"><span am-time-ago="article.date"></span></span>
+      <div style="min-height:20px;" ng-if="article.averageStars">
+        <span ng-repeat="i in getNumber(article) track by $index"><i class="fa fa-star"></i></span>
       </div>
-      <table class="table" style="margin-bottom:0px; font-size: 1.75rem; font-weight: 600;">
-        <tr>
-          <td style="width: 20%">
-            <div class="media-left">
-              <img ng-src="{{article.author.picture}}" style="max-width: 25px; max-height: 25px;" class="img-circle">
-            </div>
-            <div class="media-body">
-              {{article.author.username}}
-            </div>
-          </td>
-          <td style="width: 40%;">
-            <ul class="list-inline">
-              <li>
-                <label>Sports</label>
-                <ul style="display:inline-block;" class="list-inline">
-                  <li ng-repeat="sport in article.sports track by $index">
-                    <span class="badge">{{sport}}</span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </td>
-          <td style="width: 40%;">
-            <ul class="list-inline">
-              <li>
-                <label>Teams</label>
-                <ul style="display:inline-block;" class="list-inline">
-                  <li ng-repeat="team in article.teams track by $index">
-                    <span class="badge">{{team}}</span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      </table>
-      <a ui-sref="article({id: article._id})" class="btn btn-primary btn-sm pull-right">View</a>
     </div>
+    <hr class="small-hr">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 hidden-xs">
+        <div class="media-left">
+          <img ng-src="{{article.author.picture}}" style="max-width: 25px; max-height: 25px;" class="img-circle">
+        </div>
+        <div class="media-body">
+          {{article.author.username}}
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4" style="padding-right:0">
+        <ul class="list-inline">
+          <li>
+            <label>Sports</label>
+            <ul style="display:inline-block;" class="list-inline">
+              <li ng-repeat="sport in article.sports track by $index">
+                <span class="badge">{{sport}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col-sm-4" style="padding-left:0">
+        <ul class="list-inline">
+          <li>
+            <label>Teams</label>
+            <ul style="display:inline-block;" class="list-inline">
+              <li ng-repeat="team in article.teams track by $index">
+                <span class="badge">{{team}}</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="visible-xs" style="display:inline-block">
+      <div class="media-left">
+        <img ng-src="{{article.author.picture}}" style="max-width: 25px; max-height: 25px;" class="img-circle">
+      </div>
+      <div class="media-body">
+        {{article.author.username}}
+      </div>
+      <div class="media-right text-center">
+        <a ui-sref="article({id: article._id})" class=" btn btn-primary btn-sm">View</a>
+      </div>
+    </div>
+    <a ui-sref="article({id: article._id})" class="hidden-xs btn btn-primary btn-sm pull-right">View</a>
   </div>
 </script>
 

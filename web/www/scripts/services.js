@@ -1,7 +1,10 @@
 (function () {
     "use strict";
-    angular.module('dailydish.services', [])
-        .service('$service', function ($q, $http) {
+
+    var app = angular.module('dailydish.services', [])
+
+
+        app.service('$service', function ($q, $http) {
             this.submitArticle = function (article) {
                 return $http.post('/articles', article);
             };

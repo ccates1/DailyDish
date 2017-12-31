@@ -3,7 +3,7 @@
 
     var app = angular.module('dailydish');
 
-    app.controller('ArticleTemplateCtrl', ['$scope', '$timeout', '$service', 'toastr', '$state', 'filePickerService', 'moment', function ($scope, $timeout, $service, toastr, $state, filepickerService, moment) {
+    app.controller('ArticleTemplateCtrl', ['$scope', '$timeout', '$service', 'toastr', '$state', 'filepickerService', 'moment', function ($scope, $timeout, $service, toastr, $state, filepickerService, moment) {
         $scope.content = '';
         $scope.options = {
             height: 300,

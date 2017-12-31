@@ -73,7 +73,7 @@
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'commentModal.html',
                 controller: 'CommentModalInstanceCtrl',
-                size: 'lg',
+                size: 'md',
                 scope: $scope,
                 backdrop: 'static'
             });
