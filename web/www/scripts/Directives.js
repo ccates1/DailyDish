@@ -3,52 +3,23 @@
 
     var app = angular.module('dailydish.directives', []);
 
-    app.directive('navBtnDirective', [function () {
-        return {
-            scope: false,
-            restrict: 'A',
-            link: function (scope, element, attrs) {
-
-
-
-                scope.isToggled = false;
-                element.bind('click', function () {
-
-                    // nav.toggle('show');
-
-                    var nav = angular.element(document.querySelector('#navbar-main'));
-
-
-                    var isToggled = scope.isToggled = !scope.isToggled;
-
-                    if(!isToggled) {
-                        element.html('MENU');
-                    }
-                    else {
-                        element.html('<i class="form-fa fa fa-times"></i>');
-                    }
-                });
-            }
-        };
-    }]);
-
     app.directive('navDirective', [function () {
         return {
             scope: false,
-            restrict: 'A',
             link: function (scope, element, attrs) {
 
                 element.on('hide.bs.collapse', function () {
+                    // debugger;
                     var btn = angular.element(document.querySelector('#nav-btn'));
 
-                    btn.html('MENU');
-                })
+                    btn.text('MENU');
+                });
 
-                element.on('shown.bs.collapse', function () {
+                element.on('show.bs.collapse', function () {
                     var btn = angular.element(document.querySelector('#nav-btn'));
 
-                    btn.html('<i class="form-fa fa fa-times"></i>')
-                })
+                    btn.html('<i class="form-fa fa fa-times"></i>');
+                });
 
             }
         };
