@@ -1227,10 +1227,39 @@ legend {
     border-color: #1CB94A;
 }
 
+.list-icon-content-item {
+    text-decoration: none !important;
+}
+
+.list-icon-content-item > .media-left, .list-icon-content-item > .media-right {
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.list-icon-content-item > .media-body {
+    overflow: hidden;
+}
+.well > .panel-collapse > .panel-body {
+    background-color: inherit;
+}
+a.accordion-toggle {
+    text-decoration: none !important;
+}
+
+.well.content-shadow {
+    border-color: transparent !important;
+}
+
 .btn-register:hover, .btn-register:focus {
     color: #fff;
     background-color: #1CA347;
     border-color: #1CA347;
+}
+
+.text-ellipsis {
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
